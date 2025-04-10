@@ -1,0 +1,29 @@
+# This file tells the VHDL LS linter where libraries and the working folder files are.
+# In its current form this works for Windows and Linux simultaneously as long as:
+# There is a Python virtual environment with VUnit installed in the main folder. The folder name of the virtual environment has to contain 'venv' 
+
+[libraries]
+
+vunit_lib.files = [
+  '*venv*/Lib/site-packages/vunit/vhdl/**/*.vhd',
+]
+
+osvvm.files = [
+  '*venv*/Lib/site-packages/vunit/vhdl/osvvm/*.vhd',
+]
+
+defaultlib.files = [
+  './ip/**/*.vhd',
+]
+
+UNISIM.files = [
+  'C:\Xilinx\Vivado\*\data\vhdl\src\unisims\*.vhd',
+  'C:\Xilinx\Vivado\*\data\vhdl\src\unisims\**\*.vhd',
+]
+UNISIM.is_third_party = true
+
+xpm.files = [
+  'C:\Xilinx\Vivado\*\data\ip\xpm\*.vhd',
+  'C:\Xilinx\Vivado\*\data\ip\xpm\**\*.vhd',
+]
+xpm.is_third_party = true
