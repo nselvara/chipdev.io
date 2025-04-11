@@ -256,32 +256,40 @@ setx /m VUNIT_MODELSIM_PATH C:\modelsim_dlx64_2020.4\win64pe\
 setx /m VUNIT_MODELSIM_PATH C:\intelFPGA_pro\21.4\questa_fe\win64\
 ```
 
-### Run simulation locally
+### Run Simulation Locally
 
-- Open VSCode
-- Open [`run.py`](ip/run.py) file
-- Files and/or folders that you don't want to simulate, write into `exclude_files` or `exclude_folders` list(s)
-  - For example, if you don't want to simulate `tb_foo.vhd` file, write `"tb_foo.vhd"` into the list
-- Set the file you want to simulate in the `tb_file_name` variable
-  - If you want to simulate `tb_foo.vhd` file, set `tb_file_name` to `"tb_foo"`
-  - If you want to simulate all testbenches, set `tb_file_name` to `""`
-- Then just press the play button in the top right corner  
-  **Or**
-- Open terminal and run:
+This project uses **VUnit** for automated VHDL testbench simulation.  
+The script [`run.py`](ip/run.py) acts as a wrapper, so you don’t need to deal with VUnit internals.
 
-```bash
-./.venv/Scripts/python.exe ./ip/run.py
-```
+#### ⚙️ How to Run
 
-- If the argument `enable_gui_simulation` in [run.py](ip/run.py) file was set to `true`, the simulation will open in the ModelSim/Questasim GUI
-  - In GUI you can run the simulation by writing `vunit_restart` in the console
-- If the argument `enable_gui_simulation` in [run.py](ip/run.py) file was set to `false`, the simulation will run in the terminal automatically
+1. **Open VSCode** (or any editor/terminal).
+2. To run **all testbenches**, simply execute:
+
+   ```bash
+   ./.venv/Scripts/python.exe ./ip/run.py
+   ```
+
+##### What the script does
+
+- Uses run_all_testbenches_lib internally.
+- Looks for testbenches in the ./ip/ folder.
+- Runs all files matching tb_*.vhd (recursive pattern **).
+- GUI can be enabled via gui=True in run.py.
+
+##### Optional Customization
+You can change the following arguments in run.py:
 
 ```python
-vunit_project = create_vunit_project(
-    clean=False,
-    compile_only=False,
-    enable_gui_simulation=False,
-    selected_simulation="**"
+run_all_testbenches_lib(
+    path="./ip/",
+    tb_pattern="**",              # Match all testbenches
+    timeout_ms=1.0,               # Timeout in milliseconds
+    gui=False,                    # Set to True to open ModelSim/QuestaSim GUI
+    compile_only=False,           # Only compile, don’t run simulations
+    clean=False,                  # Clean before building
+    debug=False,                  # Enable debug logging
+    use_xilinx_libs=False,        # Add Xilinx simulation libraries
+    use_intel_altera_libs=False   # Add Intel/Altera simulation libraries
 )
 ```
