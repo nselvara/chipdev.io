@@ -69,13 +69,19 @@ begin
             variable expected_dout3: std_ulogic_vector(DATA_WIDTH - 1 downto 0) := (others => '0'); 
         begin
             if din_en then
-                case addr is
-                    when "00" => expected_dout0 := din;
-                    when "01" => expected_dout1 := din;
-                    when "10" => expected_dout2 := din;
-                    when "11" => expected_dout3 := din;
-                    when others => check_true(expr => false, msg => "Invalid address: " & to_string(addr));
-                end case;
+                -- when-else is much compacter but we use the style already in DuT,
+                -- thus, a different one is used here so we can see the difference
+                if addr = "00" then
+                    expected_dout0 := din;
+                elsif addr = "01" then
+                    expected_dout1 := din;
+                elsif addr = "10" then
+                    expected_dout2 := din;
+                elsif addr = "11" then
+                    expected_dout3 := din;
+                else
+                    check_true(expr => false, msg => "Invalid address: " & to_string(addr));
+                end if;
             end if;
 
             check_equal(got => dout0, expected => expected_dout0, msg => "dout0 should be zero for addr = " & to_string(addr));
