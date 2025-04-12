@@ -1,4 +1,4 @@
-vunit_hdl
+vunit_hdl>=5.0.0.dev5
 
 # packages for TerosHDL
 teroshdl

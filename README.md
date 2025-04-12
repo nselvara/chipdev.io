@@ -259,7 +259,7 @@ setx /m VUNIT_MODELSIM_PATH C:\intelFPGA_pro\21.4\questa_fe\win64\
 ### Run Simulation Locally
 
 This project uses **VUnit** for automated VHDL testbench simulation.  
-The script [`run.py`](ip/run.py) acts as a wrapper, so you don’t need to deal with VUnit internals.
+The script [`test_runner.py`](ip/test_runner.py) acts as a wrapper, so you don’t need to deal with VUnit internals.
 
 #### ⚙️ How to Run
 
@@ -267,7 +267,7 @@ The script [`run.py`](ip/run.py) acts as a wrapper, so you don’t need to deal 
 2. To run **all testbenches**, simply execute:
 
    ```bash
-   ./.venv/Scripts/python.exe ./ip/run.py
+   ./.venv/Scripts/python.exe ./ip/test_runner.py
    ```
 
 ##### What the script does
@@ -275,10 +275,10 @@ The script [`run.py`](ip/run.py) acts as a wrapper, so you don’t need to deal 
 - Uses run_all_testbenches_lib internally.
 - Looks for testbenches in the ./ip/ folder.
 - Runs all files matching tb_*.vhd (recursive pattern **).
-- GUI can be enabled via gui=True in run.py.
+- GUI can be enabled via gui=True in `test_runner.py`.
 
 ##### Optional Customization
-You can change the following arguments in run.py:
+You can change the following arguments in `test_runner.py`:
 
 ```python
 run_all_testbenches_lib(
