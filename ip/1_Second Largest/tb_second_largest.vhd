@@ -16,6 +16,7 @@ context vunit_lib.vunit_context;
 
 library osvvm;
 use osvvm.RandomPkg.RandomPType;
+use osvvm.RandomPkg.NaturalVSlType;
 
 entity tb_second_largest is
     generic (
@@ -26,8 +27,8 @@ end entity;
 architecture tb of tb_second_largest is
     constant DATA_WIDTH: natural := 8;
     constant SIM_TIMEOUT: time := 10 ms;
-    constant CLK_PERIOD: time := 10 ns;
-    constant SYS_RESET_TIME: time := 3 * CLK_PERIOD;
+    constant clk_PERIOD: time := 10 ns;
+    constant SYS_RESET_TIME: time := 3 * clk_PERIOD;
     constant PROPAGATION_TIME: time := 1 ns;
     constant ENABLE_DEBUG_PRINT: boolean := false;
 
@@ -42,9 +43,9 @@ begin
     begin
         while true loop
             clk <= '0';
-            wait for CLK_PERIOD / 2;
+            wait for clk_PERIOD / 2;
             clk <= '1';
-            wait for CLK_PERIOD / 2;
+            wait for clk_PERIOD / 2;
         end loop;
     end process;
     ------------------------------------------------------------
@@ -100,70 +101,84 @@ begin
             wait_clk_cycles(1);
         end procedure;
 
-        procedure set_initial_settings is begin
-            wait_clk_cycles(1);
-        end procedure;
-
         procedure test_example_1 is
             constant test_data_seqence: test_data_t := (16#2#, 16#6#, 16#0#, 16#E#, 16#C#, 16#0#, 16#1#, 16#2#);
-            constant expected_data: test_data_t := (16#00#, 16#00#, 16#02#, 16#02#, 16#06#, 16#0c#, 16#00#, 16#00#, 16#01#);
+            constant expected_data: test_data_t :=     (16#0#, 16#2#, 16#2#, 16#6#, 16#c#, 16#0#, 16#0#, 16#1#);
         begin
             info("1.0) example_1 - x2, x6, x0, xE, xC, x0, x1, x2");
 
+            apply(input => 0);
             reset_module;
             start_module;
         
             for i in test_data_seqence'range loop
-                log(to_string(i));
+                if i = 5 then -- According to the example, the reset is applied here
+                    rst_n <= '0';
+                end if;
+                debug(to_string(i));
                 apply(input => test_data_seqence(i));
                 check_equal(got => dout, expected => expected_data(i), msg => "dout");
+                rst_n <= '1';
             end loop;
         end procedure;
 
         procedure test_reset is begin
             info("2.0) reset");
 
+            apply(input => 0);
             reset_module;
             check_equal(got => dout, expected => to_unsigned(0, DATA_WIDTH), msg => "dout");
             wait_clk_cycles(1);
             check_equal(got => dout, expected => to_unsigned(0, DATA_WIDTH), msg => "dout");
-            start_module;
         end procedure;
 
         procedure test_example_2 is
-            constant test_data_seqence: test_data_t := (16#1#, 16#2#, 16#3#, 16#3#, 16#3#, 16#3#);
-            constant expected_data: test_data_t := (16#00#, 16#00#, 16#01#, 16#02#, 16#02#, 16#03#);
+            constant test_data_seqence: test_data_t := (16#1#, 16#2#, 16#3#, 16#3#, 16#3#);
+            constant expected_data: test_data_t :=     (16#0#, 16#1#, 16#2#, 16#3#, 16#3#);
         begin
             info("3.0) example_2 - x1, x2, x3, x3, x3");
+
+            apply(input => 0);
+            reset_module;
+            start_module;
         
             for i in test_data_seqence'range loop
+                debug(to_string(i));
                 apply(input => test_data_seqence(i));
                 check_equal(got => dout, expected => expected_data(i), msg => "dout");
             end loop;
+
+            apply(input => 0);
         end procedure;
 
         procedure test_random is
+            -- We want only 1% of the time to be reset
+            constant RESET_WEIGHT_SEQUENCE: NaturalVSlType(std_ulogic'('0') to '1') := ('0' => 1, '1' => 99);
             variable largest_value: din'subtype := to_unsigned(0, din'length);
             variable second_largest_value: din'subtype := to_unsigned(0, din'length);    
             variable random_value: natural;
         begin
             info("4.0) random test - 1000 random numbers");
 
+            apply(input => 0);
             reset_module;
             start_module;
 
             for i in 1 to 1000 loop
-                random_value := random.RandInt(Max => 2**DATA_WIDTH - 1);
+                debug(to_string(i));
+
+                random_value := random.RandInt(Min => 0, Max => 2**DATA_WIDTH - 1);
                 apply(input => random_value);
 
-                if din > largest_value then
-                    second_largest_value := largest_value;
-                    largest_value := din;
-                elsif din > second_largest_value and din /= largest_value then
-                    second_largest_value := din;
-                end if;
+                rst_n <= random.DistSl(RESET_WEIGHT_SEQUENCE);
 
-                wait_clk_cycles(1);
+                if din > second_largest_value then
+                    second_largest_value := din;
+                    if din > largest_value then
+                        second_largest_value := largest_value;
+                        largest_value := din;
+                    end if;
+                end if;
             end loop;
         end procedure;
     begin
@@ -179,6 +194,8 @@ begin
                 test_reset;
             elsif run("example_2") then
                 test_example_2;
+            elsif run("random") then
+                test_random;
             else
                 assert false report "No test has been run!" severity failure;
             end if;

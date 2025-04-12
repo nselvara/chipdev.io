@@ -32,10 +32,10 @@ begin
                 largest_value := to_unsigned(0, largest_value'length);
                 second_largest_value := to_unsigned(0, second_largest_value'length);
             else
-                if din > largest_value then
+                if din > largest_value and din > second_largest_value then
                     second_largest_value := largest_value;
                     largest_value := din;
-                elsif din > second_largest_value and din /= largest_value then
+                elsif din > second_largest_value then
                     second_largest_value := din;
                 end if;
             end if;
