@@ -1,8 +1,8 @@
--- ----------------------------------------------------------------------------
---  @author     N. Selvarajah
---  @brief      Based on chipdev.io question 1
---  @details    Simple router that directs input data to one of four outputs based on a 2-bit address
--- ----------------------------------------------------------------------------
+--! ----------------------------------------------------------------------------
+--!  @author     N. Selvarajah
+--!  @brief      Based on chipdev.io question 1
+--!  @details    Simple router that directs input data to one of four outputs based on a 2-bit address
+--! ----------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;

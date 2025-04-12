@@ -1,9 +1,9 @@
--- ----------------------------------------------------------------------------
---  @author     N. Selvarajah
---  @brief      Based chipdev.io question 2
---  @details    Displays the second largest number in a clocked sequence of numbers based on din
---  @details    If the input sequence stays the same, the output will be 0
--- -------------------------------------------------------------------------------
+--! ----------------------------------------------------------------------------
+--!  @author     N. Selvarajah
+--!  @brief      Based on chipdev.io question 2
+--!  @details    Displays the second largest number in a clocked sequence of numbers based on din
+--!  @details    If the input sequence stays the same, the output will be 0
+--! -------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;

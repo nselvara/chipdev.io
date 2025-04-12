@@ -1,8 +1,8 @@
--- ----------------------------------------------------------------------------
---  @author     N. Selvarajah
---  @brief      Based on chipdev.io question
---  @details    VHDL module for Simple Router
--- ----------------------------------------------------------------------------
+--! ----------------------------------------------------------------------------
+--!  @author     N. Selvarajah
+--!  @brief      Based on chipdev.io question 1
+--!  @details    VHDL module for Simple Router
+--! ----------------------------------------------------------------------------
 
 -- vunit: run_all_in_same_sim
 

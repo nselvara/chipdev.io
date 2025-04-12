@@ -1,9 +1,9 @@
--- ----------------------------------------------------------------------------
---  @author     N. Selvarajah
---  @brief      Based on chipdev.io question 2
---  @details    Testbench for "second_largest" that validates the correct output value
---              for a clocked input stream based on second-largest seen input so far
--- ----------------------------------------------------------------------------
+--! ----------------------------------------------------------------------------
+--!  @author     N. Selvarajah
+--!  @brief      Based on chipdev.io question 2
+--!  @details    Testbench for "second_largest" that validates the correct output value
+--!              for a clocked input stream based on second-largest seen input so far
+--! ----------------------------------------------------------------------------
 
 -- vunit: run_all_in_same_sim
 
@@ -27,8 +27,8 @@ end entity;
 architecture tb of tb_second_largest is
     constant DATA_WIDTH: natural := 8;
     constant SIM_TIMEOUT: time := 10 ms;
-    constant clk_PERIOD: time := 10 ns;
-    constant SYS_RESET_TIME: time := 3 * clk_PERIOD;
+    constant CLK_PERIOD: time := 10 ns;
+    constant SYS_RESET_TIME: time := 3 * CLK_PERIOD;
     constant PROPAGATION_TIME: time := 1 ns;
     constant ENABLE_DEBUG_PRINT: boolean := false;
 
@@ -43,9 +43,9 @@ begin
     begin
         while true loop
             clk <= '0';
-            wait for clk_PERIOD / 2;
+            wait for CLK_PERIOD / 2;
             clk <= '1';
-            wait for clk_PERIOD / 2;
+            wait for CLK_PERIOD / 2;
         end loop;
     end process;
     ------------------------------------------------------------
@@ -102,8 +102,8 @@ begin
         end procedure;
 
         procedure test_example_1 is
-            constant test_data_seqence: test_data_t := (16#2#, 16#6#, 16#0#, 16#E#, 16#C#, 16#0#, 16#1#, 16#2#);
-            constant expected_data: test_data_t :=     (16#0#, 16#2#, 16#2#, 16#6#, 16#c#, 16#0#, 16#0#, 16#1#);
+            constant TEST_DATA_SEQENCE: test_data_t := (16#2#, 16#6#, 16#0#, 16#E#, 16#C#, 16#0#, 16#1#, 16#2#);
+            constant EXPECTED_DATA: test_data_t :=     (16#0#, 16#2#, 16#2#, 16#6#, 16#c#, 16#0#, 16#0#, 16#1#);
         begin
             info("1.0) example_1 - x2, x6, x0, xE, xC, x0, x1, x2");
 
@@ -111,13 +111,13 @@ begin
             reset_module;
             start_module;
         
-            for i in test_data_seqence'range loop
+            for i in TEST_DATA_SEQENCE'range loop
                 if i = 5 then -- According to the example, the reset is applied here
                     rst_n <= '0';
                 end if;
                 debug(to_string(i));
-                apply(input => test_data_seqence(i));
-                check_equal(got => dout, expected => expected_data(i), msg => "dout");
+                apply(input => TEST_DATA_SEQENCE(i));
+                check_equal(got => dout, expected => EXPECTED_DATA(i), msg => "dout");
                 rst_n <= '1';
             end loop;
         end procedure;
@@ -133,8 +133,8 @@ begin
         end procedure;
 
         procedure test_example_2 is
-            constant test_data_seqence: test_data_t := (16#1#, 16#2#, 16#3#, 16#3#, 16#3#);
-            constant expected_data: test_data_t :=     (16#0#, 16#1#, 16#2#, 16#3#, 16#3#);
+            constant TEST_DATA_SEQENCE: test_data_t := (16#1#, 16#2#, 16#3#, 16#3#, 16#3#);
+            constant EXPECTED_DATA: test_data_t :=     (16#0#, 16#1#, 16#2#, 16#3#, 16#3#);
         begin
             info("3.0) example_2 - x1, x2, x3, x3, x3");
 
@@ -142,10 +142,10 @@ begin
             reset_module;
             start_module;
         
-            for i in test_data_seqence'range loop
+            for i in TEST_DATA_SEQENCE'range loop
                 debug(to_string(i));
-                apply(input => test_data_seqence(i));
-                check_equal(got => dout, expected => expected_data(i), msg => "dout");
+                apply(input => TEST_DATA_SEQENCE(i));
+                check_equal(got => dout, expected => EXPECTED_DATA(i), msg => "dout");
             end loop;
 
             apply(input => 0);
