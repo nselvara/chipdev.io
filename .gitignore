@@ -36,3 +36,6 @@
 
 #VUnit
 vunit_out
+
+# Python
+__pycache__
