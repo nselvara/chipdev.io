@@ -1,0 +1,75 @@
+--! 
+--! @author:    N. Selvarajah
+--! @brief:     This pkg contains utility functions and constants used in the project.
+--! @details:   
+--!
+--! @license    This project is released under the terms of the GNU GENERAL PUBLIC LICENSE v3. See LICENSE for more details.
+--! 
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.math_real.all;
+
+package util_pkg is
+    function to_bits(x: natural) return natural;
+    function to_bits(x: real) return natural;
+    function "??"(right: boolean) return std_ulogic;
+    ------------------------------------------------------------
+    -- Function to read a file and return the number of characters
+    -- usage: file_length_in_characters("filename.txt");
+    ------------------------------------------------------------
+    impure function file_length_in_characters(filename: string) return natural;
+
+    ------------------------------------------------------------
+    -- Function to get stats about a std_ulogic_vector
+    -- usage: get_amount_of_state(data, '1');
+    ------------------------------------------------------------
+    function get_amount_of_state(data: std_ulogic_vector; state: std_ulogic) return natural;
+end package;
+
+package body util_pkg is
+    function to_bits(x: real) return natural is begin
+        return natural(ceil(log2(x)));
+    end function;
+
+    function to_bits(x: natural) return natural is begin
+        return to_bits(real(x));
+    end function;
+
+    function "??"(right: boolean) return std_ulogic is begin
+        if right then
+            return '1';
+        else
+            return '0';
+        end if;
+    end function;
+
+    impure function file_length_in_characters(filename: string) return natural is
+        type char_file_t is file of character;
+        file char_file : char_file_t;
+        variable char_v : character;
+        variable res_v : natural;
+    begin
+        res_v := 0;
+        file_open(char_file, filename, read_mode);
+
+        while not endfile(char_file) loop
+            read(char_file, char_v);
+            res_v := res_v + 1;
+        end loop;
+
+        file_close(char_file);
+        return res_v;
+    end function;
+
+    function get_amount_of_state(data: std_ulogic_vector; state: std_ulogic) return natural is
+        variable res_v : natural := 0;
+    begin
+        for i in data'range loop
+            if data(i) = state then
+                res_v := res_v + 1;
+            end if;
+        end loop;
+        return res_v;
+    end function;
+end package body;
