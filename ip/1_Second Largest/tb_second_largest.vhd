@@ -16,7 +16,8 @@ context vunit_lib.vunit_context;
 
 library osvvm;
 use osvvm.RandomPkg.RandomPType;
-use osvvm.RandomPkg.NaturalVSlType;
+
+use work.tb_utils.all;
 
 entity tb_second_largest is
     generic (
@@ -39,16 +40,7 @@ architecture tb of tb_second_largest is
 
     signal simulation_done: boolean := false;
 begin
-    clk_gen : process
-    begin
-        while true loop
-            clk <= '0';
-            wait for CLK_PERIOD / 2;
-            clk <= '1';
-            wait for CLK_PERIOD / 2;
-        end loop;
-    end process;
-    ------------------------------------------------------------
+    generate_clock(clk => clk, FREQ => real(1 sec / CLK_PERIOD));
 
     ------------------------------------------------------------
     -- VUnit
@@ -152,10 +144,8 @@ begin
         end procedure;
 
         procedure test_random is
-            -- We want only 1% of the time to be reset
-            constant RESET_WEIGHT_SEQUENCE: NaturalVSlType(std_ulogic'('0') to '1') := ('0' => 1, '1' => 99);
-            variable largest_value: din'subtype := to_unsigned(0, din'length);
-            variable second_largest_value: din'subtype := to_unsigned(0, din'length);    
+            variable expected_largest_value: din'subtype := to_unsigned(0, din'length);
+            variable expected_second_largest_value: din'subtype := to_unsigned(0, din'length);    
             variable random_value: natural;
         begin
             info("4.0) random test - 1000 random numbers");
@@ -168,17 +158,21 @@ begin
                 debug(to_string(i));
 
                 random_value := random.RandInt(Min => 0, Max => 2**DATA_WIDTH - 1);
+                rst_n <= random.DistSl(RESET_WEIGHT_SEQUENCE);
                 apply(input => random_value);
 
-                rst_n <= random.DistSl(RESET_WEIGHT_SEQUENCE);
-
-                if din > second_largest_value then
-                    second_largest_value := din;
-                    if din > largest_value then
-                        second_largest_value := largest_value;
-                        largest_value := din;
+                if rst_n = '0' then
+                    expected_largest_value := to_unsigned(0, din'length);
+                    expected_second_largest_value := to_unsigned(0, din'length);
+                elsif din > expected_second_largest_value then
+                    expected_second_largest_value := din;
+                    if din > expected_largest_value then
+                        expected_second_largest_value := expected_largest_value;
+                        expected_largest_value := din;
                     end if;
                 end if;
+
+                check_equal(got => dout, expected => expected_second_largest_value, msg => "dout");
             end loop;
         end procedure;
     begin
