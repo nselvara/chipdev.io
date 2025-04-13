@@ -27,7 +27,6 @@ end entity;
 architecture tb of tb_bit_reverser is
     constant SIM_TIMEOUT: time := 10 ms;
     constant CLK_PERIOD: time := 10 ns;
-    constant SYS_RESET_TIME: time := 3 * CLK_PERIOD;
     constant PROPAGATION_TIME: time := 1 ns;
     constant ENABLE_DEBUG_PRINT: boolean := false;
 
