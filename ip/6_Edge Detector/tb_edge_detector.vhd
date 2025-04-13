@@ -199,7 +199,7 @@ begin
         wait;
     end process;
 
-    edge_detector_inst : entity work.edge_detector
+    edge_detector_inst: entity work.edge_detector
         port map (
             clk => clk,
             rst_n => rst_n,

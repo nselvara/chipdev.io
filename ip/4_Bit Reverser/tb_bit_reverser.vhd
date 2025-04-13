@@ -102,7 +102,7 @@ begin
         wait;
     end process;
 
-    bit_reverser_inst : entity work.bit_reverser
+    bit_reverser_inst: entity work.bit_reverser
         generic map (
             DATA_WIDTH => DATA_WIDTH
         )

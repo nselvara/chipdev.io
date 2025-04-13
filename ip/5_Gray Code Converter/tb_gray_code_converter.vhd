@@ -183,7 +183,7 @@ begin
         wait;
     end process;
 
-    gray_code_converter_inst : entity work.gray_code_converter
+    gray_code_converter_inst: entity work.gray_code_converter
         generic map (
             DATA_WIDTH => DATA_WIDTH
         )

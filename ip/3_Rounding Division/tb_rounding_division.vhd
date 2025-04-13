@@ -109,7 +109,7 @@ begin
         wait;
     end process;
 
-    rounding_division_inst : entity work.rounding_division
+    rounding_division_inst: entity work.rounding_division
         generic map (
             DIV_LOG2 => DIV_LOG2,
             OUT_WIDTH => OUT_WIDTH,
