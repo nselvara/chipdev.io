@@ -59,7 +59,7 @@ begin
 
     checker: process
         constant PROPAGATION_TIME: time := 1 ns;
-        variable random : RandomPType;
+        variable random: RandomPType;
 
         function calculate_quotient(din: unsigned) return unsigned is
             variable quotient: real;
