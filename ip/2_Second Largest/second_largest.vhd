@@ -23,7 +23,7 @@ end entity;
 
 architecture behavioural of second_largest is
 begin
-    filter: process(clk, rst_n)
+    filter: process(clk)
         variable largest_value: din'subtype;
         variable second_largest_value: din'subtype;
     begin

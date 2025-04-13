@@ -21,13 +21,15 @@ end entity;
 
 architecture behavioural of gray_code_converter is
 begin
-    gray_code_counter: process(clk, rst_n)
+    gray_code_counter: process(clk)
     variable count: dout'subtype := (others => '0');
     begin
-        if rst_n = '0' then
-            count := (others => '0');
-        elsif rising_edge(clk) then
-            count := count + 1;
+        if rising_edge(clk) then
+            if rst_n = '0' then
+                count := (others => '0');
+            else
+                count := count + 1;
+            end if;
         end if;
 
         dout <= count xor shift_right(count, 1);
