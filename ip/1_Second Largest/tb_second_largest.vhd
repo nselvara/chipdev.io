@@ -29,7 +29,6 @@ architecture tb of tb_second_largest is
     constant DATA_WIDTH: natural := 8;
     constant SIM_TIMEOUT: time := 10 ms;
     constant CLK_PERIOD: time := 10 ns;
-    constant SYS_RESET_TIME: time := 3 * CLK_PERIOD;
     constant PROPAGATION_TIME: time := 1 ns;
     constant ENABLE_DEBUG_PRINT: boolean := false;
 
