@@ -272,17 +272,18 @@ The script [`test_runner.py`](ip/test_runner.py) acts as a wrapper, so you donâ€
 
 ##### What the script does
 
-- Uses run_all_testbenches_lib internally.
-- Looks for testbenches in the ./ip/ folder.
-- Runs all files matching tb_*.vhd (recursive pattern **).
-- GUI can be enabled via gui=True in `test_runner.py`.
+- Uses `run_all_testbenches_lib` internally.
+  - This hides the VUnit implementation
+- Looks for testbenches in the `./ip/` folder.
+- Runs all files matching `tb_*.vhd` (recursive pattern `**`).
+- GUI can be enabled via `gui=True` in `test_runner.py`.
 
 ##### Optional Customization
 You can change the following arguments in `test_runner.py`:
 
 ```python
 run_all_testbenches_lib(
-    path="./ip/",
+    path="./ip/",                 # Path where the HDL & tb files are located
     tb_pattern="**",              # Match all testbenches
     timeout_ms=1.0,               # Timeout in milliseconds
     gui=False,                    # Set to True to open ModelSim/QuestaSim GUI
