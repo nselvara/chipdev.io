@@ -168,7 +168,7 @@ begin
             start_module;
 
             for i in 1 to 1000 loop
-                rst_n <= random.DistSl(RESET_WEIGHT_SEQUENCE);
+                rst_n <= random.DistSl(Weight => RESET_WEIGHT_SEQUENCE);
                 -- RandSl returns also other than '0' and '1'
                 din <= random.RandSlv(1)(1);
                 wait_clk_cycles(1);

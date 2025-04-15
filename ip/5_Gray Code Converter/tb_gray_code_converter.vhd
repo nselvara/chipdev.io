@@ -150,7 +150,7 @@ begin
                 random_wait_time := random.RandInt(Min => 1, Max => 10);
                 binary_counter := binary_counter + random_wait_time;
                 expected_gray_value := to_gray_code(value => binary_counter);
-                rst_n <= random.DistSl(RESET_WEIGHT_SEQUENCE);
+                rst_n <= random.DistSl(Weight => RESET_WEIGHT_SEQUENCE);
     
                 wait_clk_cycles(random_wait_time);
 
