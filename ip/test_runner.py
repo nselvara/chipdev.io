@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Run all testbenches in the project using VUnit.
-It functions as a wrappert to not bother the user with the details of VUnit.
+It functions as a wrapper to not bother the user with the details of VUnit.
 Author: N. Selvarajah
 """
 
