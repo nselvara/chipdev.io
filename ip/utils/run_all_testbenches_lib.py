@@ -10,7 +10,7 @@ from pathlib import Path
 from vunit import VUnit
 
 
-def discover_hdl_files(root_dir, extensions=(".vhd", ".vhdl"), ignore_pattern='~'):
+def discover_hdl_files(root_dir, extensions=(".vhd", ".vhdl", ".v"), ignore_pattern='~'):
     """
     Recursively find HDL source files, filtering out unwanted patterns.
     """
@@ -55,7 +55,7 @@ def configure_sim_options(vu, timeout_ms=0.5, use_xilinx_libs=False, use_intel_a
     if use_intel_altera_libs:
         sim_opts += ["-L altera_mf_ver", "-L altera_lnsim_ver", "-L lpm_ver"]
     if use_xilinx_libs:
-        sim_opts += ["-L unisims_ver", "-L unimacro_ver", "-L xpm", "-L secureip"]
+        sim_opts += ["-L unisims_ver", "-L unimacro_ver", "-L xpm", "-L secureip", "glbl"]
     if "questa_base" in getenv('VUNIT_MODELSIM_PATH'):
         # For Questa base optimization, enable simulation statistics, and print simulation statistics
         sim_opts += ["-qbase_tune", "-printsimstats", "-simstats"] 
