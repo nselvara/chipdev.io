@@ -22,7 +22,7 @@ end entity;
 architecture behavioural of gray_code_converter is
 begin
     gray_code_counter: process(clk)
-    variable count: dout'subtype := (others => '0');
+        variable count: dout'subtype := (others => '0');
     begin
         if rising_edge(clk) then
             if rst_n = '0' then
