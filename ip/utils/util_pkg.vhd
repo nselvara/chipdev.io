@@ -8,6 +8,7 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 use ieee.math_real.all;
 
 package util_pkg is
@@ -24,6 +25,7 @@ package util_pkg is
     -- Function to get stats about a std_ulogic_vector
     -- usage: get_amount_of_state(data, '1');
     ------------------------------------------------------------
+    function get_amount_of_state(data: std_ulogic_vector; state: std_ulogic) return unsigned;
     function get_amount_of_state(data: std_ulogic_vector; state: std_ulogic) return natural;
 end package;
 
@@ -61,9 +63,9 @@ package body util_pkg is
         file_close(char_file);
         return res_v;
     end function;
-
-    function get_amount_of_state(data: std_ulogic_vector; state: std_ulogic) return natural is
-        variable res_v : natural := 0;
+    
+    function get_amount_of_state(data: std_ulogic_vector; state: std_ulogic) return unsigned is
+        variable res_v : unsigned(to_bits(data'length) - 1 downto 0) := (others => '0');
     begin
         for i in data'range loop
             if data(i) = state then
@@ -71,5 +73,9 @@ package body util_pkg is
             end if;
         end loop;
         return res_v;
+    end function;
+
+    function get_amount_of_state(data: std_ulogic_vector; state: std_ulogic) return natural is begin
+        return to_integer(resize(get_amount_of_state(data => data, state => state), to_bits(natural'high)));
     end function;
 end package body;
