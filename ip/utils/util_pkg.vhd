@@ -27,6 +27,13 @@ package util_pkg is
     ------------------------------------------------------------
     function get_amount_of_state(data: std_ulogic_vector; state: std_ulogic) return unsigned;
     function get_amount_of_state(data: std_ulogic_vector; state: std_ulogic) return natural;
+
+    ------------------------------------------------------------
+    -- Function to get the amount of trailing state in a std_ulogic_vector
+    -- usage: get_amount_of_trailing_state(data, '1');
+    ------------------------------------------------------------
+    function get_amount_of_trailing_state(data: std_ulogic_vector; state: std_ulogic) return unsigned;
+    function get_amount_of_trailing_state(data: std_ulogic_vector; state: std_ulogic) return natural;
 end package;
 
 package body util_pkg is
@@ -77,5 +84,24 @@ package body util_pkg is
 
     function get_amount_of_state(data: std_ulogic_vector; state: std_ulogic) return natural is begin
         return to_integer(resize(get_amount_of_state(data => data, state => state), to_bits(natural'high)));
+    end function;
+
+    function get_amount_of_trailing_state(data: std_ulogic_vector; state: std_ulogic) return unsigned is
+        -- +1 for the maximum amount of trailing zeroes
+        variable trailing_state_amount: unsigned(to_bits(data'length) downto 0) := (others => '0');
+    begin
+        for i in data'low to data'high loop
+            if data(i) = state then 
+                trailing_state_amount := trailing_state_amount + 1;
+            else
+                exit;
+            end if;
+        end loop;
+
+        return trailing_state_amount;
+    end function;
+
+    function get_amount_of_trailing_state(data: std_ulogic_vector; state: std_ulogic) return natural is begin
+        return to_integer(resize(get_amount_of_trailing_state(data => data, state => state), to_bits(natural'high)));
     end function;
 end package body;
