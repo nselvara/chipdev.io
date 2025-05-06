@@ -34,6 +34,17 @@ package util_pkg is
     ------------------------------------------------------------
     function get_amount_of_trailing_state(data: std_ulogic_vector; state: std_ulogic) return unsigned;
     function get_amount_of_trailing_state(data: std_ulogic_vector; state: std_ulogic) return natural;
+
+    ------------------------------------------------------------
+    -- Function to check if a std_ulogic_vector is one state
+    -- usage: is_one_state(data, '1');
+    -- usage: is_one_state(data, '0');
+    -- Function to check if a std_ulogic_vector is one hot
+    ------------------------------------------------------------
+    function is_one_state(data: std_ulogic_vector; state: std_ulogic) return boolean;
+    function is_one_hot(data: std_ulogic_vector) return boolean;
+    function is_one_cold(data: std_ulogic_vector) return boolean;
+    ------------------------------------------------------------
 end package;
 
 package body util_pkg is
@@ -103,5 +114,28 @@ package body util_pkg is
 
     function get_amount_of_trailing_state(data: std_ulogic_vector; state: std_ulogic) return natural is begin
         return to_integer(resize(get_amount_of_trailing_state(data => data, state => state), to_bits(natural'high)));
+    end function;
+
+    function is_one_state(data: std_ulogic_vector; state: std_ulogic) return boolean is
+        variable state_counter: natural range 0 to data'length := 0;
+    begin
+        for i in data'range loop
+            if data(i) = state then
+                state_counter := state_counter + 1;
+            end if;
+            if state_counter > 1 then
+                return false;
+            end if;
+        end loop;
+
+        return (state_counter = 1);
+    end function;
+
+    function is_one_hot(data: std_ulogic_vector) return boolean is begin
+        return is_one_state(data => data, state => '1');
+    end function;
+
+    function is_one_cold(data: std_ulogic_vector) return boolean is begin
+        return is_one_state(data => data, state => '0');
     end function;
 end package body;
