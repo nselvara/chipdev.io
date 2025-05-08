@@ -228,7 +228,7 @@ begin
         
             for i in 1 to 1000 loop
                 din_en_old := din_en;
-                rst_n <= random.DistSl(Weight => RESET_WEIGHT_SEQUENCE);
+                rst_n <= random.DistSl(Weight => RESET_N_WEIGHT);
                 din_en <= random.DistSl(Weight => DIN_EN_WEIGHT_SEQUENCE);
                 wait_clk_cycles(1);
 

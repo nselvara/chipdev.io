@@ -122,7 +122,7 @@ begin
                 din_test := random.RandSlv(Size => dout'length);
 
                 for i in dout'low to dout'high loop
-                    rst_n <= random.DistSl(Weight => RESET_WEIGHT_SEQUENCE);
+                    rst_n <= random.DistSl(Weight => RESET_N_WEIGHT);
                     din <= din_test(i);
                     wait_clk_cycles(1);
                     check_equal(got => dout, expected => dout_expected, msg => "dout - Random check");

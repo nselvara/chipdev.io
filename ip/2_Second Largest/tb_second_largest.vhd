@@ -157,7 +157,7 @@ begin
                 debug(to_string(i));
 
                 random_value := random.RandInt(Min => 0, Max => 2**DATA_WIDTH - 1);
-                rst_n <= random.DistSl(Weight => RESET_WEIGHT_SEQUENCE);
+                rst_n <= random.DistSl(Weight => RESET_N_WEIGHT);
                 apply(input => random_value);
 
                 if rst_n = '0' then
