@@ -62,8 +62,21 @@ begin
         -- To see in the waveform
         variable expected_count: unsigned(dout'range);
 
+        procedure test_example_1 is
+            constant test_inputs  : integer_vector := (16#0B#, 16#00#); -- 0b1011 and 0b0000
+            constant expected_ones: integer_vector := (3, 0);          -- 3 ones in 1011, 0 ones in 0000
+        begin
+            info("1.0) test_example_1 - Count number of 1s in input vector");
+
+            for i in test_inputs'range loop
+                din <= to_unsigned(test_inputs(i), din'length);
+                wait for PROPAGATION_TIME;
+                check_equal(got => dout, expected => to_unsigned(expected_ones(i), dout'length), msg => "dout(" & to_string(i) & ")");
+            end loop;
+        end procedure;
+
         procedure test_all_zeroes is begin
-            info("1.0) test_all_zeroes");
+            info("2.0) test_all_zeroes");
 
             din <= (others => '0');
             wait for PROPAGATION_TIME;
@@ -72,7 +85,7 @@ begin
         end procedure;
 
         procedure test_all_ones is begin
-            info("2.0) test_all_ones");
+            info("3.0) test_all_ones");
 
             din <= (others => '1');
             wait for PROPAGATION_TIME;
@@ -82,7 +95,7 @@ begin
         end procedure;
 
         procedure test_random_values is begin
-            info("3.0) test_random_values");
+            info("4.0) test_random_values");
     
             for i in 1 to 1000 loop
                 din <= random.RandUnsigned(Size => din'length);
@@ -97,7 +110,9 @@ begin
         wait for PROPAGATION_TIME;
 
         while test_suite loop
-            if run("test_all_zeroes") then
+            if run("test_example_1") then
+                test_example_1;
+            elsif run("test_all_zeroes") then
                 test_all_zeroes;
             elsif run("test_all_ones") then
                 test_all_ones;

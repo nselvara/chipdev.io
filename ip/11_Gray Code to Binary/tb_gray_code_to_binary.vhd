@@ -85,10 +85,34 @@ begin
             check_equal(got => dout, expected => expected, msg => "dout - Binary code value mismatch!");
         end procedure;
 
+        procedure test_example_1 is
+            variable expected_binary_value: dout'subtype := (others => '0');
+
+            type gray_bin_pair_t is record
+                gray: unsigned(DATA_WIDTH - 1 downto 0);
+                bin: unsigned(DATA_WIDTH - 1 downto 0);
+            end record;
+
+            type test_data_t is array(natural range <>) of gray_bin_pair_t;
+
+            constant test_data: test_data_t := (
+                (gray => "00000110", bin => to_unsigned(4, DATA_WIDTH)),
+                (gray => "00001110", bin => to_unsigned(11, DATA_WIDTH))
+            );
+        begin
+            info("1.0) test_example_1 - Gray to binary index conversion");
+
+            for i in test_data'range loop
+                din <= test_data(i).gray;
+                wait for PROPAGATION_TIME;
+                check_binary_code(expected => test_data(i).bin);
+            end loop;
+        end procedure;
+
         procedure test_binary_code_with_all_possible_combinations is
             variable expected_binary_value: dout'subtype := (others => '0');
         begin
-            info("1.0) test_binary_dout_with_expected");
+            info("2.0) test_binary_dout_with_expected");
 
             for i in 0 to 2**dout'length - 1 loop
                 din <= to_unsigned(i, din'length);
@@ -102,7 +126,7 @@ begin
         procedure test_binary_code_randomly is
             variable expected_binary_value: dout'subtype := (others => '0');
         begin
-            info("1.0) test_binary_code_randomly");
+            info("3.0) test_binary_code_randomly");
 
             for i in 1 to 1000 loop
                 -- RandUnsigned returns full range of std_ulogic, thus, convert to '0' or '1'
@@ -119,7 +143,9 @@ begin
         wait for PROPAGATION_TIME;
 
         while test_suite loop
-            if run("test_binary_code_with_all_possible_combinations") then
+            if run("test_example_1") then
+                test_example_1;
+            elsif run("test_binary_code_with_all_possible_combinations") then
                 test_binary_code_with_all_possible_combinations;
             elsif run("test_binary_code_randomly") then
                 test_binary_code_randomly;

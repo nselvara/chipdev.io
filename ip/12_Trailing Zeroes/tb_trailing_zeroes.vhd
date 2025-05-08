@@ -87,8 +87,30 @@ begin
             return count;
         end function;
 
+        procedure test_example_1 is
+            type test_vector_t is record
+                din_val: std_ulogic_vector(DATA_WIDTH - 1 downto 0);
+                expected: unsigned(DATA_WIDTH - 1 downto 0);
+            end record;
+
+            type test_data_array_t is array(natural range <>) of test_vector_t;
+
+            constant test_data : test_data_array_t := (
+                (din_val => x"50", expected => to_unsigned(4, DATA_WIDTH)), -- 0b01010000
+                (din_val => x"00", expected => to_unsigned(8, DATA_WIDTH))  -- 0b00000000
+            );
+        begin
+            info("1.0) test_example_1 - Count trailing zeros");
+
+            for i in test_data'range loop
+                din <= test_data(i).din_val;
+                wait for PROPAGATION_TIME;
+                check_equal(got => dout, expected => test_data(i).expected, msg => "Trailing zero count failed");
+            end loop;
+        end procedure;
+
         procedure test_all_zeroes is begin
-            info("1.0) test_all_zeroes");
+            info("2.0) test_all_zeroes");
 
             din <= (others => '0');
             wait for PROPAGATION_TIME;
@@ -97,7 +119,7 @@ begin
         end procedure;
 
         procedure test_all_ones is begin
-            info("2.0) test_all_ones");
+            info("3.0) test_all_ones");
 
             din <= (others => '1');
             wait for PROPAGATION_TIME;
@@ -106,7 +128,7 @@ begin
         end procedure;
 
         procedure test_random_values is begin
-            info("3.0) test_random_values");
+            info("4.0) test_random_values");
 
             for i in 1 to 1000 loop
                 din <= random.RandSlv(Size => din'length);
@@ -121,7 +143,9 @@ begin
         wait for PROPAGATION_TIME;
 
         while test_suite loop
-            if run("test_all_zeroes") then
+            if run("test_example_1") then
+                test_example_1;
+            elsif run("test_all_zeroes") then
                 test_all_zeroes;
             elsif run("test_all_ones") then
                 test_all_ones;

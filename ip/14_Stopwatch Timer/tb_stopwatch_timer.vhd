@@ -159,10 +159,64 @@ begin
             end loop;
         end procedure;
 
+        procedure test_example_1 is begin
+            info("1.0) test_example_1 - start_in, then stop_in");
+
+            reset_module;
+            start_module;
+
+            start_in <= '1';
+            wait_clk_cycles(1);
+            start_in <= '0';
+
+            wait_clk_cycles(3);
+            stop_in <= '1';
+            wait_clk_cycles(1);
+            stop_in <= '0';
+
+            wait_clk_cycles(2);
+        end procedure;
+
+        procedure test_example_2 is begin
+            info("2.0) test_example_2 - Wrap around after MAX");
+
+            reset_module;
+            start_module;
+
+            start_in <= '1';
+            wait_clk_cycles(1);
+            start_in <= '0';
+
+            wait_clk_cycles(6); -- Should wrap from 4 to 0
+        end procedure;
+
+        procedure test_example_3 is begin
+            info("3.0) test_example_3 - Reset overrides start and stop");
+
+            reset_module;
+            start_module;
+
+            start_in <= '1';
+            wait_clk_cycles(1);
+            start_in <= '0';
+
+            wait_clk_cycles(3);
+
+            reset <= '1';
+            start_in <= '1';
+            stop_in <= '1';
+            wait_clk_cycles(1);
+            reset <= '0';
+            start_in <= '0';
+            stop_in <= '0';
+
+            wait_clk_cycles(3);
+        end procedure;
+
         procedure test_when_reset is
             variable random_wait_in_clk_cycles: natural := 0;    
         begin
-            info("1.0) test_when_reset");
+            info("4.0) test_when_reset");
 
             start_in <= '0';
             reset <= '1';
@@ -180,7 +234,7 @@ begin
 
             variable random_wait_in_clk_cycles: natural := 0;
         begin
-            info("2.0) test_start_stop");
+            info("5.0) test_start_stop");
 
             reset_module;
             start_module;
@@ -217,7 +271,7 @@ begin
         procedure test_until_overflow is
             variable random_wait_in_clk_cycles: natural := 0;
         begin
-            info("3.0) test_until_overflow");
+            info("6.0) test_until_overflow");
 
             reset_module;
             start_module;
@@ -249,7 +303,7 @@ begin
             constant WAIT_REPETITIONS: integer := 10;
             variable random_wait_in_clk_cycles: natural := 0;
         begin
-            info("4.0) test_random_overflow");
+            info("7.0) test_random_overflow");
 
             reset_module;
             start_module;
@@ -275,13 +329,13 @@ begin
         end procedure;
 
         procedure test_random_input_values is
-            --! 1% of the time reset, 30% of the time stop, 50% of the time start
+            --! 1% of the time reset, 30% of the time stop_in, 50% of the time start_in
             constant STOP_WEIGHT_SEQUENCE: NaturalVSlType(std_ulogic'('0') to '1') := ('0' => 70, '1' => 30);
             constant START_WEIGHT_SEQUENCE: NaturalVSlType(std_ulogic'('0') to '1') := ('0' => 50, '1' => 50);
 
             variable random_wait_in_clk_cycles: natural := 0;
         begin
-            info("5.0) test_random_input_values");
+            info("8.0) test_random_input_values");
 
             reset_module;
             start_module;
@@ -312,7 +366,13 @@ begin
         wait_clk_cycles(1);
 
         while test_suite loop
-            if run("test_when_reset") then
+            if run("test_example_1") then
+                test_example_1;
+            elsif run("test_example_2") then
+                test_example_2;
+            elsif run("test_example_3") then
+                test_example_3;
+            elsif run("test_when_reset") then
                 test_when_reset;
             elsif run("test_start_stop") then
                 test_start_stop;
