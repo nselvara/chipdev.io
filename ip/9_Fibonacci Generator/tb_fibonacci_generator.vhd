@@ -105,8 +105,8 @@ begin
         end procedure;
 
         procedure test_example_1 is
-            constant expected_values_1: integer_vector := (1, 1, 2, 3, 5, 8);
-            constant expected_values_2: integer_vector := (1, 1, 2, 3, 5);
+            constant EXPECTED_VALUES_1: integer_vector := (1, 1, 2, 3, 5, 8);
+            constant EXPECTED_VALUES_2: integer_vector := (1, 1, 2, 3, 5);
         begin
             info("1.0) test_example_1 - Fibonacci output before and after reset");
         
@@ -114,9 +114,9 @@ begin
             start_module;
         
             -- First 6 Fibonacci numbers
-            for i in expected_values_1'range loop
+            for i in EXPECTED_VALUES_1'range loop
                 wait_clk_cycles(1);
-                check_dout(index => i, expected => to_unsigned(expected_values_1(i), dout'length));
+                check_dout(index => i, expected => to_unsigned(EXPECTED_VALUES_1(i), dout'length));
             end loop;
         
             -- Apply reset
@@ -124,9 +124,9 @@ begin
             start_module;
         
             -- Next 5 Fibonacci numbers after reset
-            for i in expected_values_2'range loop
+            for i in EXPECTED_VALUES_2'range loop
                 wait_clk_cycles(1);
-                check_dout(index => i, expected => to_unsigned(expected_values_2(i), dout'length));
+                check_dout(index => i, expected => to_unsigned(EXPECTED_VALUES_2(i), dout'length));
             end loop;
         end procedure;
 

@@ -86,7 +86,7 @@ begin
         end procedure;
 
         procedure test_example_1 is
-            variable din_val : std_ulogic_vector(DATA_WIDTH - 1 downto 0) := std_ulogic_vector(to_unsigned(16#FB#, DATA_WIDTH));
+            variable din_val: std_ulogic_vector(DATA_WIDTH - 1 downto 0) := std_ulogic_vector(to_unsigned(16#FB#, DATA_WIDTH));
         begin
             info("1.0) test_example_1: shift 0xFB with enable pulse");
         
@@ -107,7 +107,7 @@ begin
         end procedure;
 
         procedure test_example_2 is
-            variable din_val : std_ulogic_vector(DATA_WIDTH - 1 downto 0) := std_ulogic_vector(to_unsigned(16#FD#, DATA_WIDTH));
+            variable din_val: std_ulogic_vector(DATA_WIDTH - 1 downto 0) := std_ulogic_vector(to_unsigned(16#FD#, DATA_WIDTH));
         begin
             info("2.0) test_example_2: hold enable for 3 cycles (restarts)");
         
@@ -146,7 +146,7 @@ begin
         end procedure;
             
         procedure test_example_4 is
-            variable din_val : std_ulogic_vector(DATA_WIDTH - 1 downto 0) := std_ulogic_vector(to_unsigned(16#FF#, DATA_WIDTH));
+            variable din_val: std_ulogic_vector(DATA_WIDTH - 1 downto 0) := std_ulogic_vector(to_unsigned(16#FF#, DATA_WIDTH));
         begin
             info("4.0) test_example_4: pad with 0 after all bits");
         

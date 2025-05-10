@@ -107,17 +107,17 @@ begin
 
             type test_data_array_t is array(natural range <>) of test_vector_t;
 
-            constant test_data : test_data_array_t := (
+            constant TEST_DATA: test_data_array_t := (
                 (din_val => x"40", expected => '1'), -- 0b1000000
                 (din_val => x"41", expected => '0')  -- 0b1000001
             );
         begin
             info("1.0) test_example_1 - One-hot detection");
 
-            for i in test_data'range loop
-                din <= test_data(i).din_val;
+            for i in TEST_DATA'range loop
+                din <= TEST_DATA(i).din_val;
                 wait for PROPAGATION_TIME;
-                check_equal(got => one_hot, expected => test_data(i).expected, msg => "One-hot check failed");
+                check_equal(got => one_hot, expected => TEST_DATA(i).expected, msg => "One-hot check failed");
             end loop;
         end procedure;
 

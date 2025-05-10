@@ -95,17 +95,17 @@ begin
 
             type test_data_array_t is array(natural range <>) of test_vector_t;
 
-            constant test_data : test_data_array_t := (
+            constant TEST_DATA: test_data_array_t := (
                 (din_val => x"50", expected => to_unsigned(4, DATA_WIDTH)), -- 0b01010000
                 (din_val => x"00", expected => to_unsigned(8, DATA_WIDTH))  -- 0b00000000
             );
         begin
             info("1.0) test_example_1 - Count trailing zeros");
 
-            for i in test_data'range loop
-                din <= test_data(i).din_val;
+            for i in TEST_DATA'range loop
+                din <= TEST_DATA(i).din_val;
                 wait for PROPAGATION_TIME;
-                check_equal(got => dout, expected => test_data(i).expected, msg => "Trailing zero count failed");
+                check_equal(got => dout, expected => TEST_DATA(i).expected, msg => "Trailing zero count failed");
             end loop;
         end procedure;
 

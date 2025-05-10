@@ -95,17 +95,17 @@ begin
 
             type test_data_t is array(natural range <>) of gray_bin_pair_t;
 
-            constant test_data: test_data_t := (
+            constant TEST_DATA: test_data_t := (
                 (gray => "00000110", bin => to_unsigned(4, DATA_WIDTH)),
                 (gray => "00001110", bin => to_unsigned(11, DATA_WIDTH))
             );
         begin
             info("1.0) test_example_1 - Gray to binary index conversion");
 
-            for i in test_data'range loop
-                din <= test_data(i).gray;
+            for i in TEST_DATA'range loop
+                din <= TEST_DATA(i).gray;
                 wait for PROPAGATION_TIME;
-                check_binary_code(expected => test_data(i).bin);
+                check_binary_code(expected => TEST_DATA(i).bin);
             end loop;
         end procedure;
 
