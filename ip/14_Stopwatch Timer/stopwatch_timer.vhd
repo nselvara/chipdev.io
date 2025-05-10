@@ -12,8 +12,8 @@ use ieee.numeric_std.all;
 
 entity stopwatch_timer is
     generic (
-        DATA_WIDTH : positive := 16;
-        MAX : integer := 99
+        DATA_WIDTH: positive := 16;
+        MAX: positive := 99
     );
     port (
         clk: in std_ulogic;

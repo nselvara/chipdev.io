@@ -31,14 +31,16 @@ architecture tb of tb_stopwatch_timer is
     constant SYS_RESET_TIME: time := 3 * CLK_PERIOD;
     constant ENABLE_DEBUG_PRINT: boolean := false;
 
-    constant DATA_WIDTH : positive := 16;
-    constant MAX : integer := 99;
+    constant DATA_WIDTH: positive := 16;
+    constant MAX: positive := 99;
+    constant MAX_EXAMPLE_2: positive := 4;
 
-    signal clk : std_ulogic := '0';
-    signal reset : std_ulogic := '0';
-    signal start_in : std_ulogic := '0';
-    signal stop_in : std_ulogic := '0';
-    signal count_out : unsigned(DATA_WIDTH - 1 downto 0);
+    signal clk: std_ulogic := '0';
+    signal reset: std_ulogic := '0';
+    signal start_in: std_ulogic := '0';
+    signal stop_in: std_ulogic := '0';
+    signal count_out: unsigned(DATA_WIDTH - 1 downto 0);
+    signal count_out_example_2: unsigned(DATA_WIDTH - 1 downto 0);
 
     signal start_reg: std_ulogic := '0';
     signal simulation_done: boolean := false;
@@ -159,58 +161,59 @@ begin
             end loop;
         end procedure;
 
-        procedure test_example_1 is begin
-            info("1.0) test_example_1 - start_in, then stop_in");
+        procedure test_example_1 is
+            constant EXPECTED_VALUES: integer_vector := (0, 1, 2, 3, 3, 3);
+            constant START_SEQUENCE: std_ulogic_vector := "100100";
+            constant STOP_SEQUENCE: std_ulogic_vector := "000100";
+        begin
+            info("1.0) test_example_1 - Start pulse, then stop pulse");
 
             reset_module;
-            start_module;
 
-            start_in <= '1';
-            wait_clk_cycles(1);
-            start_in <= '0';
-
-            wait_clk_cycles(3);
-            stop_in <= '1';
-            wait_clk_cycles(1);
-            stop_in <= '0';
-
-            wait_clk_cycles(2);
+            for i in START_SEQUENCE'range loop
+                start_in <= START_SEQUENCE(i);
+                stop_in <= STOP_SEQUENCE(i);
+                check_equal(got => count_out, expected => EXPECTED_VALUES(i), msg => "Count should increment when started.");
+                wait_clk_cycles(1);
+            end loop;
         end procedure;
 
-        procedure test_example_2 is begin
+        procedure test_example_2 is
+            constant EXPECTED_VALUES: integer_vector := (0, 1, 2, 3, 4, 0, 1);
+            constant START_SEQUENCE: std_ulogic_vector := "1010000";
+            constant STOP_SEQUENCE: std_ulogic_vector := "0000000";
+        begin
             info("2.0) test_example_2 - Wrap around after MAX");
 
             reset_module;
-            start_module;
 
-            start_in <= '1';
-            wait_clk_cycles(1);
-            start_in <= '0';
-
-            wait_clk_cycles(6); -- Should wrap from 4 to 0
+            for i in START_SEQUENCE'range loop
+                start_in <= START_SEQUENCE(i);
+                stop_in <= STOP_SEQUENCE(i);
+                check_equal(got => count_out_example_2, expected => EXPECTED_VALUES(i), msg => "Count should increment when started.");
+                wait_clk_cycles(1);
+            end loop;
         end procedure;
 
-        procedure test_example_3 is begin
+        procedure test_example_3 is
+            constant EXPECTED_VALUES: integer_vector := (0, 1, 2, 3, 0, 0, 0);
+            constant RESET_SEQUENCE: std_ulogic_vector := "0001000";  -- Reset active in cycles 4 and 5
+            constant START_SEQUENCE: std_ulogic_vector := "1001000";
+            constant STOP_SEQUENCE: std_ulogic_vector := "0001000";
+        begin
             info("3.0) test_example_3 - Reset overrides start and stop");
 
             reset_module;
-            start_module;
 
-            start_in <= '1';
-            wait_clk_cycles(1);
-            start_in <= '0';
+            for i in START_SEQUENCE'range loop
+                reset <= RESET_SEQUENCE(i);
+                start_in <= START_SEQUENCE(i);
+                stop_in <= STOP_SEQUENCE(i);
+                check_equal(got => count_out, expected => EXPECTED_VALUES(i), msg => "Count should increment when started.");
+                wait_clk_cycles(1);
+            end loop;
 
-            wait_clk_cycles(3);
-
-            reset <= '1';
-            start_in <= '1';
-            stop_in <= '1';
-            wait_clk_cycles(1);
-            reset <= '0';
-            start_in <= '0';
-            stop_in <= '0';
-
-            wait_clk_cycles(3);
+            reset <= '0'; -- ensure reset is cleared for future tests
         end procedure;
 
         procedure test_when_reset is
@@ -391,7 +394,7 @@ begin
         wait;
     end process;
 
-    stopwatch_timer_inst : entity work.stopwatch_timer
+    DuT: entity work.stopwatch_timer
         generic map (
             DATA_WIDTH => DATA_WIDTH,
             MAX => MAX
@@ -402,5 +405,18 @@ begin
             start_in => start_in,
             stop_in => stop_in,
             count_out => count_out
+        );
+
+    Dut_example_2: entity work.stopwatch_timer
+        generic map (
+            DATA_WIDTH => DATA_WIDTH,
+            MAX => MAX_EXAMPLE_2
+        )
+        port map (
+            clk => clk,
+            reset => reset,
+            start_in => start_in,
+            stop_in => stop_in,
+            count_out => count_out_example_2
         );
 end architecture;
