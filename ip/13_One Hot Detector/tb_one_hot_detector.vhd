@@ -80,7 +80,7 @@ begin
         end function;
 
         function create_integer_weight(percentage: natural range 0 to 100; length: positive) return integer_vector is
-            constant TOTAL_AMOUNT: integer := 2**length;
+            constant TOTAL_AMOUNT: positive := 2**length;
             constant PERCENTAGE_FOR_EACH_ONE: real := real(percentage) / real(length);
             variable result: integer_vector(TOTAL_AMOUNT - 1 downto 0) := (others => 0);
         begin
@@ -101,8 +101,8 @@ begin
 
         procedure test_example_1 is
             type test_vector_t is record
-                din_val  : std_ulogic_vector(DATA_WIDTH - 1 downto 0);
-                expected : std_ulogic;
+                din_val: std_ulogic_vector(DATA_WIDTH - 1 downto 0);
+                expected: std_ulogic;
             end record;
 
             type test_data_array_t is array(natural range <>) of test_vector_t;
