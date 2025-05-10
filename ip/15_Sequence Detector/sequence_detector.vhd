@@ -21,21 +21,24 @@ entity sequence_detector is
 end entity;
 
 architecture behavioural of sequence_detector is
-    signal shift_reg: SEQUENCE_PATTERN'subtype := (others => '0');
+    -- We've to use the reverse range to get the correct order of bits
+    signal shift_reg: std_ulogic_vector(SEQUENCE_PATTERN'reverse_range) := (others => '0');
 begin
     sequence_detector_process: process(clk, rst_n)
     begin
-        if rst_n = '0' then
-            shift_reg <= (others => '0');
-            dout <= '0';
-        elsif rising_edge(clk) then
-            -- During compilation, only one would be implemented
-            if shift_reg'ascending then
-                shift_reg <= din & shift_reg(0 to shift_reg'high - 1);
+        if rising_edge(clk) then
+            if rst_n = '0' then
+                shift_reg <= (others => '0');
             else
-                shift_reg <= shift_reg(shift_reg'high - 1 downto 0) & din;
+                -- During compilation, only one would be implemented
+                if shift_reg'ascending then
+                    shift_reg <= din & shift_reg(0 to shift_reg'high - 1);
+                else
+                    shift_reg <= shift_reg(shift_reg'high - 1 downto 0) & din;
+                end if;
             end if;
-            dout <= '1' when (shift_reg = SEQUENCE_PATTERN) else '0';
         end if;
-    end process sequence_detector_process;
+    end process;
+
+    dout <= '1' when (shift_reg = SEQUENCE_PATTERN) else '0';
 end architecture;

@@ -16,9 +16,11 @@ use osvvm.RandomPkg.RandomPType;
 use osvvm.RandomPkg.NaturalVSlType;
 
 package tb_utils is
-    -- We want only 1% of the time to be reset
+    -- Only 1% of the time is reset(_n) active
     constant RESET_N_WEIGHT: NaturalVSlType(std_ulogic'('0') to '1') := ('0' => 1, '1' => 99);
     constant RESET_WEIGHT: NaturalVSlType(std_ulogic'('0') to '1') := ('0' => 99, '1' => 1);
+    -- For 50% of the time, the signal is '0' or '1'
+    constant WEIGHT_50_PERCENT: NaturalVSlType(std_ulogic'('0') to '1') := ('0' => 50, '1' => 50);
 
     ------------------------------------------------------------
     -- Procedure for clock generation (less time resolution issues)
