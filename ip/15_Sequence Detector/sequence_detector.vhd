@@ -22,7 +22,7 @@ end entity;
 
 architecture behavioural of sequence_detector is
     -- We've to use the reverse range to get the correct order of bits
-    signal shift_reg: std_ulogic_vector(SEQUENCE_PATTERN'reverse_range) := (others => '0');
+    signal shift_reg: std_ulogic_vector(SEQUENCE_PATTERN'reverse_range);
 begin
     sequence_detector_process: process(clk, rst_n)
     begin
