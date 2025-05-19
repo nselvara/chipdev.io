@@ -90,6 +90,7 @@ begin
                 return '0';
             else
                 -- If it overflows, just wrap around
+                -- *2 is the same as << 1
                 remainder_counter := (remainder_counter * 2) mod 3;
                     
                 if din then
