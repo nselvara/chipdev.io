@@ -9,6 +9,7 @@ These examples serve as a learning resource or starting point for building, simu
 
 ## 🔍 Quests Implemented
 
+> [!NOTE]
 > All challenges are from [chipdev.io/question-list](https://chipdev.io/question-list)
 > Each challenge is solved in **VHDL-2008** with **VUnit** testbenches  
 > *(Difficulty and companies shown for reference)*
@@ -207,12 +208,14 @@ You can simulate this project on [EDA Playground](https://www.edaplayground.com/
 - **Top entity**: `tb_test_entity` (or whatever your testbench entity is called)
 - ✅ **Enable `VUnit`** (required to use VUnit checks like `check_equal`)
 
-  > ⚠️ Enabling **VUnit** will automatically create a `testbench.py` file.  
+  > [!WARNING]
+  > Enabling **VUnit** will automatically create a `testbench.py` file.  
   > **Do not delete this file**, as it is required for:
   > - Initializing the VUnit test runner
   > - Loading `vunit_lib` correctly
   > - Enabling procedures such as `check_equal`, `check_true`, etc.
 
+  > [!WARNING]
   > However, EDA Playground will **not create any VHDL testbench** for you.  
   > Therefore, you need to **manually create your own VHDL testbench file**:
   > - Click the ➕ symbol next to the file list
