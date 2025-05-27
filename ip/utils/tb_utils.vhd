@@ -29,12 +29,37 @@ package tb_utils is
     procedure generate_clock(signal clk: out std_ulogic; constant FREQ: real);
 
     ------------------------------------------------------------
+    -- Procedure for clock generation with reset control
+    -- Clock is forced to '0' during reset (rst_n='0')
+    -- usage: generate_clock_with_reset(sys_clk, rst_n, 66.67E6); -- 66.67MHz
+    ------------------------------------------------------------
+    procedure generate_clock(signal clk: out std_ulogic; signal rst_n: in std_ulogic; constant FREQ: real);
+
+    ------------------------------------------------------------
+    -- Procedure for generating a derived clock signal
+    -- from an input clock signal with a specified division factor.
+    -- usage: generate_derived_clock(clk_in, rst_n, clk_out, 4); -- Divide by 4
+    ------------------------------------------------------------
+    procedure generate_derived_clock(
+        signal clk_in: in std_ulogic; 
+        signal rst_n: in std_ulogic; 
+        signal clk_out: out std_ulogic; 
+        constant factor: in natural
+    );
+
+    ------------------------------------------------------------
     -- Advanced procedure for clock generation
     -- with period adjust to match frequency over time, and run control by signal
-    -- usage: generate_clock_advanced(sys_clk, 66.67E6, 0 fs, clock_run); -- 66.67MHz
+    -- usage: generate_clock_advanced(sys_clk, 66.67E6, 0 fs, enable, 50.0);
     ------------------------------------------------------------
-    procedure generate_clock_advanced(signal clk: out std_ulogic; constant FREQ: real; PHASE: time:= 0 fs; signal run: std_ulogic; constant duty_cycle_in_percent: real:= 50.0);
-end tb_utils;
+    procedure generate_clock_advanced(
+        signal clk_out: out std_ulogic; 
+        constant target_freq: real; 
+        constant initial_delay: time := 0 fs; 
+        signal enable: std_ulogic;
+        constant duty: real := 50.0
+    );
+end package;
 
 package body tb_utils is
     ------------------------------------------------------------
@@ -59,36 +84,130 @@ package body tb_utils is
     ------------------------------------------------------------
 
     ------------------------------------------------------------
-    -- Advanced procedure for clock generation
-    -- with period adjust to match frequency over time, and run control by signal
+    -- Procedure for clock generation with reset control
+    -- Clock is forced to '0' during reset (rst_n='0')
+    -- usage: generate_clock_with_reset(sys_clk, rst_n, 66.67E6); -- 66.67MHz
     ------------------------------------------------------------
-    procedure generate_clock_advanced(signal clk: out std_ulogic; FREQ: real; PHASE: time:= 0 fs; signal run: std_ulogic; duty_cycle_in_percent: real:= 50.0) is
-        constant HIGH_TIME: time := duty_cycle_in_percent * 0.01 sec / FREQ; -- High time as fixed value
-        variable low_time_v: time; -- Low time calculated per cycle; always >= HIGH_TIME
-        variable cycles_v: real := 0.0; -- Number of cycles
-        variable freq_time_v: time := 0 fs; -- Time used for generation of cycles
+    procedure generate_clock(signal clk: out std_ulogic; signal rst_n: in std_ulogic; constant FREQ: real) is
+        constant PERIOD: time:= 1 sec / FREQ; -- Full period
+        constant HIGH_TIME: time:= PERIOD / 2; -- High time
+        constant LOW_TIME: time:= PERIOD - HIGH_TIME; -- Low time; always >= HIGH_TIME
     begin
         -- Check the arguments
-        assert (HIGH_TIME /= 0 fs) report "generate_clock_advanced: High time is zero; time resolution to large for frequency" severity FAILURE;
+        assert (HIGH_TIME /= 0 fs) 
+            report "generate_clock_with_reset: High time is zero; time resolution too large for frequency" 
+            severity FAILURE;
 
-        -- Initial phase shift
-        clk <= '0';
-        wait for PHASE;
-        -- Generate cycles
         loop
-            if run then
-                clk <= run;
+            if rst_n = '0' then
+                -- During reset, force clock to '0'
+                clk <= '0';
+                wait until rst_n = '1';
+            else
+                -- Normal clock operation
+                clk <= '1';
+                wait for HIGH_TIME;
+                clk <= '0';
+                wait for LOW_TIME;
             end if;
-            wait for HIGH_TIME;
+        end loop;
+    end procedure;
+    ------------------------------------------------------------
 
-            -- Low part of cycle
-            clk <= '0';
-            low_time_v := 1 sec * ((cycles_v + 1.0) / FREQ) - freq_time_v - HIGH_TIME; -- + 1.0 for cycle after current
-            wait for low_time_v;
+    ------------------------------------------------------------
+    -- Procedure for generating a derived clock signal
+    -- from an input clock signal with a specified division factor.
+    -- usage: generate_derived_clock(clk_in, rst_n, clk_out, 4); -- Divide by 4
+    ------------------------------------------------------------
+    procedure generate_derived_clock(
+        signal clk_in: in std_ulogic; 
+        signal rst_n: in std_ulogic; 
+        signal clk_out: out std_ulogic; 
+        constant factor: in natural
+    ) is
+        constant HALF_FACTOR: natural := factor / 2; -- Half the factor for toggling
+        variable counter: natural range 0 to HALF_FACTOR - 1 := HALF_FACTOR - 1;
+        variable output: std_ulogic := '0';
+    begin
+        assert (factor mod 2 = 0) and (factor > 0)
+            report "Division factor must be a positive even number"
+            severity FAILURE;
 
-            -- Cycle counter and time passed update
-            cycles_v := cycles_v + 1.0;
-            freq_time_v := freq_time_v + HIGH_TIME + low_time_v;
+        while true loop
+            wait until rising_edge(clk_in);
+
+            if rst_n = '0' then
+                output := '0';
+                counter := counter'subtype'high;
+            elsif counter = counter'subtype'high then
+                counter := 0;
+                output := not output;
+            else
+                counter := counter + 1;
+            end if;
+
+            clk_out <= output;
+        end loop;
+    end procedure;
+    ------------------------------------------------------------
+
+    ------------------------------------------------------------
+    -- Enhanced clock generator with precise frequency control
+    -- Features: phase offset, duty cycle control, run/pause capability
+    -- usage: generate_clock_advanced(sys_clk, 66.67E6, 0 fs, enable, 50.0);
+    ------------------------------------------------------------
+    procedure generate_clock_advanced(
+        signal clk_out: out std_ulogic; 
+        constant target_freq: real; 
+        constant initial_delay: time := 0 fs; 
+        signal enable: std_ulogic;
+        constant duty: real := 50.0
+    ) is
+        -- Calculate time parameters
+        constant full_cycle_time: time := 1.0 sec / target_freq;
+        constant pulse_width: time := (duty/100.0) * full_cycle_time;
+        constant idle_width: time := full_cycle_time - pulse_width;
+        
+        -- Tracking variables
+        variable elapsed: time := 0 fs;
+        variable cycle_count: integer := 0;
+        variable timing_adjustment: time := 0 fs;
+        variable actual_low_time: time;
+    begin
+        -- Parameter validation
+        assert (pulse_width > 0 fs) 
+            report "Clock generation failed: resolution too low for requested frequency" 
+            severity FAILURE;
+        
+        -- Apply initial phase delay before starting
+        clk_out <= '0';
+        if initial_delay > 0 fs then
+            wait for initial_delay;
+        end if;
+
+        -- Main clock generation loop with drift correction
+        while true loop
+            if enable then
+                -- High portion of clock cycle
+                clk_out <= '1';
+                wait for pulse_width;
+
+                -- Low portion with timing correction
+                clk_out <= '0';
+
+                -- Calculate precise low time to maintain frequency accuracy
+                elapsed := elapsed + pulse_width;
+                cycle_count := cycle_count + 1;
+                timing_adjustment := (cycle_count * full_cycle_time) - elapsed;
+                actual_low_time := idle_width + timing_adjustment;
+
+                wait for actual_low_time;
+                elapsed := elapsed + actual_low_time;
+            else
+                -- Clock disabled - maintain low state and wait for enable
+                clk_out <= '0';
+                wait until enable;
+            end if;
         end loop;
     end procedure;
     ------------------------------------------------------------
