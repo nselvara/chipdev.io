@@ -17,7 +17,7 @@ library osvvm;
 use osvvm.RandomPkg.RandomPType;
 
 use work.tb_utils.all;
-use work.util_pkg.all;
+use work.utils_pkg.all;
 
 entity tb_gray_code_to_binary is
     generic (

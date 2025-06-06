@@ -11,7 +11,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 
-package util_pkg is
+package utils_pkg is
     function to_bits(x: natural) return natural;
     function to_bits(x: real) return natural;
     function "??"(right: boolean) return std_ulogic;
@@ -47,7 +47,7 @@ package util_pkg is
     ------------------------------------------------------------
 end package;
 
-package body util_pkg is
+package body utils_pkg is
     function to_bits(x: real) return natural is begin
         return natural(ceil(log2(x)));
     end function;

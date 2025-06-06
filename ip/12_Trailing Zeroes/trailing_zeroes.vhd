@@ -8,7 +8,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.util_pkg.all;
+use work.utils_pkg.all;
 
 entity trailing_zeroes is
     generic (

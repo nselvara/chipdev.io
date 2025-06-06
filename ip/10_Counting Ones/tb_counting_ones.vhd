@@ -16,7 +16,7 @@ context vunit_lib.vunit_context;
 library osvvm;
 use osvvm.RandomPkg.RandomPType;
 
-use work.util_pkg.all;
+use work.utils_pkg.all;
 use work.tb_utils.all;
 
 entity tb_counting_ones is
