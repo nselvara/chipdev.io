@@ -93,6 +93,7 @@ begin
     begin
         random.InitSeed(random'instance_name);
 
+        -- NOTE: Don't remove this line as VUnit will assert error.
         wait for PROPAGATION_TIME;
 
         while test_suite loop

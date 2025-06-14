@@ -130,7 +130,8 @@ begin
         end procedure;
     begin
         random.InitSeed(random'instance_name);
-        
+
+        -- NOTE: Don't remove this, or else VUnit won't be able to run the tests
         wait_clk_cycles(1);
 
         while test_suite loop
