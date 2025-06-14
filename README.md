@@ -4,6 +4,7 @@
 
 This repository contains synthesizable hardware design solutions for selected [ChipDev.io](https://chipdev.io/question-list) quests.  
 Each solution is implemented in **VHDL-2008**, includes a testbench using [VUnit](https://vunit.github.io/) for automation, and can be simulated both locally and on [EDA Playground](https://edaplayground.com/).
+A `tb_xy_wave.do` file is also provided to preload signals and variables for convenient waveform inspection in ModelSim.
 
 These examples serve as a learning resource or starting point for building, simulating, and verifying digital designs in a structured way.
 
