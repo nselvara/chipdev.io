@@ -59,6 +59,13 @@ package tb_utils is
         signal enable: std_ulogic;
         constant duty: real := 50.0
     );
+
+    ------------------------------------------------------------
+    -- Function to convert an integer vector to a string representation
+    -- usage: to_string(input_vector);
+    ------------------------------------------------------------
+    -- NOTE: There's no way to create a generic function with an array type in VHDL-2008
+    impure function to_string(input: integer_vector) return string;
 end package;
 
 package body tb_utils is
@@ -211,4 +218,20 @@ package body tb_utils is
         end loop;
     end procedure;
     ------------------------------------------------------------
+
+    ------------------------------------------------------------
+    -- Function to convert an integer vector to a string representation
+    -- usage: to_string(input_vector);
+    ------------------------------------------------------------
+    impure function to_string(input: integer_vector) return string is
+        impure function recursively_concatenate(input: integer_vector; index: natural) return string is begin
+            if index = input'subtype'high then
+                return to_string(input(index));
+            else
+                return to_string(input(index)) & ", " & recursively_concatenate(input, index + 1);
+            end if;
+        end function;
+    begin
+        return recursively_concatenate(input, index => input'subtype'low);
+    end function;
 end package body;
