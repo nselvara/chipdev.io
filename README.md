@@ -2,7 +2,7 @@
 
 # ChipDev.io Quest Solutions – in VHDL-2008
 
-This repository contains synthesizable hardware design solutions for selected [ChipDev.io](https://chipdev.io/question-list) quests.  
+This repository contains synthesizable hardware design solutions for selected [ChipDev.io](https://chipdev.io/question-list) quests.
 Each solution is implemented in **VHDL-2008**, includes a testbench using [VUnit](https://vunit.github.io/) for automation, and can be simulated both locally and on [EDA Playground](https://edaplayground.com/).
 A `tb_xy_wave.do` file is also provided to preload signals and variables for convenient waveform inspection in ModelSim.
 
@@ -12,112 +12,112 @@ These examples serve as a learning resource or starting point for building, simu
 
 > [!NOTE]
 > All challenges are from [chipdev.io/question-list](https://chipdev.io/question-list)
-> Each challenge is solved in **VHDL-2008** with **VUnit** testbenches  
+> Each challenge is solved in **VHDL-2008** with **VUnit** testbenches
 > *(Difficulty and companies shown for reference)*
 
 > [!NOTE]
 > Quest #27 is missing from the chipdev.io website's numbered sequence. In this repository, 28 is used as the 27th quest.
 
-1. **Simple Router** – 🟢 Easy – 🏢 Apple, Nvidia  
+1. **Simple Router** – 🟢 Easy – 🏢 Apple, Nvidia
    Design a router that directs packets to outputs based on destination.
 
-2. **Second Largest** – 🟢 Easy – 🏢 Nvidia, Intel  
+2. **Second Largest** – 🟢 Easy – 🏢 Nvidia, Intel
    Identify the second largest number from a set of inputs.
 
-3. **Rounding Division** – 🟠 Medium – 🏢 Apple  
+3. **Rounding Division** – 🟠 Medium – 🏢 Apple
    Perform integer division and round the result.
 
-4. **Gray Code Counter** – 🔴 Hard – 🏢 Google, Qualcomm  
+4. **Gray Code Counter** – 🔴 Hard – 🏢 Google, Qualcomm
    Implement a counter using Gray code sequence.
 
-5. **Reversing Bits** – 🟢 Easy – 🏢 AMD, Broadcom  
+5. **Reversing Bits** – 🟢 Easy – 🏢 AMD, Broadcom
    Reverse the bits of a binary input word.
 
-6. **Edge Detector** – 🟢 Easy – 🏢 Nvidia, Tesla  
+6. **Edge Detector** – 🟢 Easy – 🏢 Nvidia, Tesla
    Detect rising and falling edges on an input signal.
 
-7. **Parallel-in, Serial-out Shift Register** – 🟢 Easy – 🏢 Tesla, Apple  
+7. **Parallel-in, Serial-out Shift Register** – 🟢 Easy – 🏢 Tesla, Apple
    Load data in parallel and shift it out serially.
 
-8. **Serial-in, Parallel-out Shift Register** – 🟢 Easy – 🏢 Nvidia, AMD  
+8. **Serial-in, Parallel-out Shift Register** – 🟢 Easy – 🏢 Nvidia, AMD
    Shift data in serially and output it in parallel.
 
-9. **Fibonacci Generator** – 🟢 Easy – 🏢 Cadence, Synopsys  
+9. **Fibonacci Generator** – 🟢 Easy – 🏢 Cadence, Synopsys
    Generate numbers in the Fibonacci sequence.
 
-10. **Counting Ones** – 🟢 Easy – 🏢 Microsoft, ARM  
+10. **Counting Ones** – 🟢 Easy – 🏢 Microsoft, ARM
     Count the number of 1’s in a binary vector.
 
-11. **Gray Code to Binary** – 🟠 Medium – 🏢 Google, Synopsys  
+11. **Gray Code to Binary** – 🟠 Medium – 🏢 Google, Synopsys
     Convert Gray code to binary representation.
 
-12. **Trailing Zeroes** – 🟢 Easy – 🏢 Tesla, Microsoft  
+12. **Trailing Zeroes** – 🟢 Easy – 🏢 Tesla, Microsoft
     Count trailing 0s in a binary number.
 
-13. **One-Hot Detector** – 🟢 Easy – 🏢 Broadcom  
+13. **One-Hot Detector** – 🟢 Easy – 🏢 Broadcom
     Check if exactly one bit is set.
 
-14. **Stopwatch Timer** – 🟢 Easy – 🏢 Intel, Cadence  
+14. **Stopwatch Timer** – 🟢 Easy – 🏢 Intel, Cadence
     Create a stopwatch with start/stop/reset.
 
-15. **Sequence Detector** – 🟢 Easy – 🏢 Apple, AMD  
+15. **Sequence Detector** – 🟢 Easy – 🏢 Apple, AMD
     FSM to detect a specific binary pattern.
 
-16. **Divisible by 3** – 🟠 Medium – 🏢 Google, Broadcom  
+16. **Divisible by 3** – 🟠 Medium – 🏢 Google, Broadcom
     Check divisibility by 3 using binary logic.
 
-17. **Divisible by 5** – 🟠 Medium – 🏢 Nvidia, Cadence  
+17. **Divisible by 5** – 🟠 Medium – 🏢 Nvidia, Cadence
     Check divisibility by 5 using binary logic.
 
-18. **Palindrome Detector** – 🟢 Easy – 🏢 Tesla, Synopsys  
+18. **Palindrome Detector** – 🟢 Easy – 🏢 Tesla, Synopsys
     Determine if a binary string is a palindrome.
 
-19. **Programmable Sequence Detector** – 🟠 Medium – 🏢 AMD, ARM  
+19. **Programmable Sequence Detector** – 🟠 Medium – 🏢 AMD, ARM
     Detect a binary pattern defined at runtime.
 
-20. **Divide-by-Evens Clock Divider** – 🟢 Easy – 🏢 Intel, ARM  
+20. **Divide-by-Evens Clock Divider** – 🟢 Easy – 🏢 Intel, ARM
     Clock divider that supports even divisors only.
 
-21. **FizzBuzz** – 🟢 Easy – 🏢 Intel, Broadcom  
+21. **FizzBuzz** – 🟢 Easy – 🏢 Intel, Broadcom
     Hardware implementation of the FizzBuzz game.
 
-22. **Full Adder** – 🟢 Easy – 🏢 Tesla, AMD  
+22. **Full Adder** – 🟢 Easy – 🏢 Tesla, AMD
     1-bit full adder with carry-in and carry-out.
 
-23. **Basic ALU (Intro to Verilog)** – 🟢 Easy – 🏢 Microsoft  
+23. **Basic ALU (Intro to Verilog)** – 🟢 Easy – 🏢 Microsoft
     Simple ALU supporting arithmetic and logic ops.
 
-24. **Ripple Carry Adder** – 🟠 Medium – 🏢 Nvidia, Cadence  
+24. **Ripple Carry Adder** – 🟠 Medium – 🏢 Nvidia, Cadence
     Multi-bit adder using ripple carry full adders.
 
-25. **Flip-Flop Array** – 🟠 Medium – 🏢 Apple, AMD  
+25. **Flip-Flop Array** – 🟠 Medium – 🏢 Apple, AMD
     Array of D flip-flops for holding data.
 
-26. **Multi-Bit FIFO** – 🔴 Hard – 🏢 Tesla, Synopsys  
+26. **Multi-Bit FIFO** – 🔴 Hard – 🏢 Tesla, Synopsys
     FIFO with multi-bit enqueue/dequeue logic.
 
-27. **Dot Product** – 🟠 Medium – 🏢 Intel, Qualcomm  
+27. **Dot Product** – 🟠 Medium – 🏢 Intel, Qualcomm
     Compute the dot product of two binary vectors.
 
-28. **Binary to Thermometer Decoder** – 🟢 Easy – 🏢 Intel, Cadence  
+28. **Binary to Thermometer Decoder** – 🟢 Easy – 🏢 Intel, Cadence
     Convert binary input to thermometer code.
 
-29. **Thermometer Code Detector** – 🟢 Easy – 🏢 Google, Cadence  
+29. **Thermometer Code Detector** – 🟢 Easy – 🏢 Google, Cadence
     Check if input follows thermometer encoding.
 
-30. **2-Read 1-Write Register File** – 🔴 Hard – 🏢 Tesla, AMD  
+30. **2-Read 1-Write Register File** – 🔴 Hard – 🏢 Tesla, AMD
     Register file with two read ports and one write port.
 
-31. **Configurable 8-Bit LFSR** – 🟠 Medium – 🏢 Google, Synopsys  
+31. **Configurable 8-Bit LFSR** – 🟠 Medium – 🏢 Google, Synopsys
     LFSR with selectable seed and tap positions.
 
-32. **Carry-Select Adder** – 🟠 Medium – 🏢 Intel, ARM  
+32. **Carry-Select Adder** – 🟠 Medium – 🏢 Intel, ARM
     Adder optimized using carry-select structure.
 
-33. **Bubble Sort** – 🟠 Medium – 🏢 Tesla, Google  
+33. **Bubble Sort** – 🟠 Medium – 🏢 Tesla, Google
     Sort a vector of values using bubble sort.
 
-34. **Mealy Finite State Machine (FSM)** – 🟢 Easy – 🏢 Google, Microsoft  
+34. **Mealy Finite State Machine (FSM)** – 🟢 Easy – 🏢 Google, Microsoft
     FSM where outputs depend on both current state and input.
 
 ## Minimum System Requirements
@@ -175,17 +175,19 @@ For more info see page: [Python environments in VS Code](https://code.visualstud
 
 Make sure the environment variable for ModelSim or QuestaSim is set, if not:
 
-**_:memo:_**: Don't forget to write the correct path to the ModelSim/QuestaSim folder
+> [!Important]
+> Don't forget to write the correct path to the ModelSim/QuestaSim folder
 
 #### Linux
 
 Open terminal and run either of the following commands:
 
-**_:memo:_**: Don't forget to write `>>` instead of `>` if you want to append to the file else you will overwrite it.
+> [!Caution]
+> Don't forget to write `>>` instead of `>` if you want to append to the file else you will overwrite it.
 
 ```bash
 echo "export VUNIT_MODELSIM_PATH=/opt/modelsim/modelsim_dlx/linuxpe" >> ~/.bashrc
-# $questa_fe is the path to the folder where QuestaSim is installed, 
+# $questa_fe is the path to the folder where QuestaSim is installed,
 # as it doesn't have a default path, it's up to you where you install it
 # Provide the path to the folder where QuestaSim is installed
 echo "export VUNIT_MODELSIM_PATH=\"$questa_fe/21.4/questa_fe/win64/\"" >> ~/.bashrc
@@ -213,14 +215,14 @@ You can simulate this project on [EDA Playground](https://www.edaplayground.com/
 - ✅ **Enable `VUnit`** (required to use VUnit checks like `check_equal`)
 
 > [!WARNING]
-> Enabling **VUnit** will automatically create a `testbench.py` file.  
+> Enabling **VUnit** will automatically create a `testbench.py` file.
 > **Do not delete this file**, as it is required for:
 > - Initializing the VUnit test runner
 > - Loading `vunit_lib` correctly
 > - Enabling procedures such as `check_equal`, `check_true`, etc.
 
 > [!WARNING]
-> However, EDA Playground will **not create any VHDL testbench** for you.  
+> However, EDA Playground will **not create any VHDL testbench** for you.
 > Therefore, you need to **manually create your own VHDL testbench file**:
 > - Click the ➕ symbol next to the file list
 > - Name it `tb.vhd` (or your own testbench name)
@@ -240,7 +242,8 @@ These settings ensure compatibility with your VUnit-based testbenches and allow 
 
 Make sure the environment variable for ModelSim or QuestaSim is set, if not:
 
-**_:memo:_**: Don't forget to write the correct path to the ModelSim/QuestaSim folder
+> [!Important]
+> Don't forget to write the correct path to the ModelSim/QuestaSim folder
 
 ##### Linux
 
@@ -265,7 +268,7 @@ setx /m VUNIT_MODELSIM_PATH C:\intelFPGA_pro\21.4\questa_fe\win64\
 
 ### Run Simulation Locally
 
-This project uses **VUnit** for automated VHDL testbench simulation.  
+This project uses **VUnit** for automated VHDL testbench simulation.
 The script [`test_runner.py`](ip/test_runner.py) acts as a wrapper, so you don’t need to deal with VUnit internals.
 
 #### ⚙️ How to Run
