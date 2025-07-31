@@ -1,0 +1,78 @@
+name: VUnit Tests
+
+on:
+  push:
+    paths:
+      - 'ip/**'
+      - '.github/workflows/vunit.yml'
+  pull_request:
+
+permissions:
+  contents: read
+  actions: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30  # Prevent runaway jobs
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Set up NVC simulator
+        uses: nickg/setup-nvc@v1
+        with:
+          version: latest
+
+      - name: Install and configure NVC
+        run: |
+          nvc --version    # NVC binary added to path
+
+      - name: Install VUnit
+        run: |
+          pip install vunit-hdl
+
+      - name: Verify installations
+        run: |
+          nvc --version
+          python -c "import vunit; print('VUnit version:', vunit.__version__)"
+
+      - name: Create test reports directory
+        run: mkdir -p test-reports
+
+      - name: Run VUnit tests
+        run: |
+          python ./ip/test_runner_ci_cd.py --xunit-xml=test-reports/vunit_results.xml
+        env:
+          VUNIT_CI_MODE: "true"
+        timeout-minutes: 15  # Test execution timeout
+
+      - name: Generate XUnit Viewer Report  
+        uses: AutoModality/action-xunit-viewer@v1
+        if: always()
+        with:
+          results: test-reports/vunit_results.xml
+          title: HDL Core Library Test Results
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: test-reports/vunit_results.xml
+          check_name: VUnit Test Results
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: test-reports/

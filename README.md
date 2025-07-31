@@ -1,4 +1,5 @@
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+[![VUnit Tests](https://github.com/nselvara/chipdev.io/workflows/VUnit%20Tests/badge.svg)](https://github.com/nselvara/chipdev.io/actions)
 
 # ChipDev.io Quest Solutions – in VHDL-2008
 
@@ -171,41 +172,6 @@ For more info see page: [Python environments in VS Code](https://code.visualstud
 
 ## Running simulation
 
-### Environment variables
-
-Make sure the environment variable for ModelSim or QuestaSim is set, if not:
-
-> [!Important]
-> Don't forget to write the correct path to the ModelSim/QuestaSim folder
-
-#### Linux
-
-Open terminal and run either of the following commands:
-
-> [!Caution]
-> Don't forget to write `>>` instead of `>` if you want to append to the file else you will overwrite it.
-
-```bash
-echo "export VUNIT_MODELSIM_PATH=/opt/modelsim/modelsim_dlx/linuxpe" >> ~/.bashrc
-# $questa_fe is the path to the folder where QuestaSim is installed,
-# as it doesn't have a default path, it's up to you where you install it
-# Provide the path to the folder where QuestaSim is installed
-echo "export VUNIT_MODELSIM_PATH=\"$questa_fe/21.4/questa_fe/win64/\"" >> ~/.bashrc
-```
-
-Then restart the terminal or run `source ~/.bashrc` command.
-
-#### Windows
-
-Open PowerShell and run either of the following commands:
-
-```bat
-setx /m VUNIT_MODELSIM_PATH C:\modelsim_dlx64_2020.4\win64pe\
-setx /m VUNIT_MODELSIM_PATH C:\intelFPGA_pro\21.4\questa_fe\win64\
-```
-
-## Running simulation
-
 ### Option 1: EDA Playground (Web-Based)
 
 You can simulate this project on [EDA Playground](https://www.edaplayground.com/) without installing anything locally. Use the following settings:
@@ -217,6 +183,7 @@ You can simulate this project on [EDA Playground](https://www.edaplayground.com/
 > [!WARNING]
 > Enabling **VUnit** will automatically create a `testbench.py` file.
 > **Do not delete this file**, as it is required for:
+>
 > - Initializing the VUnit test runner
 > - Loading `vunit_lib` correctly
 > - Enabling procedures such as `check_equal`, `check_true`, etc.
@@ -224,9 +191,10 @@ You can simulate this project on [EDA Playground](https://www.edaplayground.com/
 > [!WARNING]
 > However, EDA Playground will **not create any VHDL testbench** for you.
 > Therefore, you need to **manually create your own VHDL testbench file**:
+>
 > - Click the ➕ symbol next to the file list
 > - Name it `tb.vhd` (or your own testbench name)
-  > - Paste your testbench VHDL code into it
+>   - Paste your testbench VHDL code into it
 
 - ✅ Select `OSVVM` under Libraries if your testbench uses OSVVM features
 - **Tools & Simulators**: `Aldec Riviera Pro 2022.04` or newer
@@ -248,6 +216,9 @@ Make sure the environment variable for ModelSim or QuestaSim is set, if not:
 ##### Linux
 
 Open terminal and run either of the following commands:
+
+> [!Caution]
+> Don't forget to write `>>` instead of `>` if you want to append to the file else you
 
 ```bash
 echo "export VUNIT_MODELSIM_PATH=/opt/modelsim/modelsim_dlx/linuxpe" >> ~/.bashrc
@@ -288,7 +259,8 @@ The script [`test_runner.py`](ip/test_runner.py) acts as a wrapper, so you don�
 - Runs all files matching `tb_*.vhd` (recursive pattern `**`).
 - GUI can be enabled via `gui=True` in `test_runner.py`.
 
-##### Optional Customization
+##### Optional Customisation
+
 You can change the following arguments in `test_runner.py`:
 
 ```python
@@ -301,6 +273,8 @@ run_all_testbenches_lib(
     clean=False,                  # Clean before building
     debug=False,                  # Enable debug logging
     use_xilinx_libs=False,        # Add Xilinx simulation libraries
-    use_intel_altera_libs=False   # Add Intel/Altera simulation libraries
+    use_intel_altera_libs=False,  # Add Intel/Altera simulation libraries
+    excluded_list=[],             # List of testbenches to exclude
+    xunit_xml="./test/res.xml"    # Output file for test results
 )
 ```

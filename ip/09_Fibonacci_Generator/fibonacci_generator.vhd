@@ -25,7 +25,7 @@ architecture behavioural of fibonacci_generator is
     signal fibonacci_pipeline: FIRST_2_FIBONACCI'subtype;
 begin
     fibonacci_calculation: process(clk)
-        variable sum: unsigned_array'element;
+        variable sum: FIRST_2_FIBONACCI'element;
     begin
         if rising_edge(clk) then
             if rst_n = '0' then
