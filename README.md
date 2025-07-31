@@ -17,7 +17,7 @@ These examples serve as a learning resource or starting point for building, simu
 > *(Difficulty and companies shown for reference)*
 
 > [!NOTE]
-> Quest #27 is missing from the chipdev.io website's numbered sequence. In this repository, 28 is used as the 27th quest.
+> Quest #27 is missing from the chipdev.io website's numbered sequence. In this repository, 28 is referred to as the 27th quest.
 
 1. **Simple Router** – 🟢 Easy – 🏢 Apple, Nvidia
    Design a router that directs packets to outputs based on destination.
