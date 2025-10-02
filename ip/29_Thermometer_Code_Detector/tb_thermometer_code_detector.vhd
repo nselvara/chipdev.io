@@ -45,14 +45,15 @@ begin
     main: process
     begin
         test_runner_setup(runner, runner_cfg);
-        info("Starting tb_thermometer_code_detector");
+        info("Starting tb_thermometer_code_detector" & LF);
 
         if ENABLE_DEBUG_PRINT then
             show(display_handler, debug);
         end if;
 
         wait until simulation_done;
-        log("Simulation done, all tests passed!");
+        info("Simulation done, all tests passed!");
+
         test_runner_cleanup(runner);
         wait;
     end process;
@@ -224,7 +225,6 @@ begin
             info("Coverage details:");
             coverage_model.WriteBin;
         end procedure;
-
     begin
         random.InitSeed(random'instance_name);
 
