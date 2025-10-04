@@ -224,15 +224,34 @@ begin
         begin
             info("5.0) test_random" & LF);
 
+            coverage_model.SetName("Random Test Coverage Model");
+
+            coverage_model.AddBins(Name => "Reset_Active", CovBin => GenBin(Min => 0, Max => 1, NumBin => 1));
+            coverage_model.AddBins(Name => "rst_n", CovBin => GenBin(Min => 0, Max => 1, NumBin => 1));
+            coverage_model.AddBins(Name => "din", CovBin => GenBin(Min => 0, Max => 2**DATA_WIDTH - 1, NumBin => 16));
+            coverage_model.AddBins(Name => "tap", CovBin => GenBin(Min => 0, Max => 2**DATA_WIDTH - 1, NumBin => 16));
+            coverage_model.AddBins(Name => "dout", CovBin => GenBin(Min => 0, Max => 2**DATA_WIDTH - 1, NumBin => 16));
+
             for i in 0 to TEST_REPETITIONS - 1 loop
                 rst_n <= random.DistSl(Weight => RESET_N_WEIGHT);
                 din <= random.RandSlv(Size => DATA_WIDTH);
                 tap <= random.RandSlv(Size => DATA_WIDTH);
 
                 wait_clk_cycles(1);
+                coverage_model.ICover(CovPoint => to_integer(unsigned'('0' & rst_n)));
+                coverage_model.ICover(CovPoint => to_integer(unsigned(din)));
+                coverage_model.ICover(CovPoint => to_integer(unsigned(tap)));
+                coverage_model.ICover(CovPoint => to_integer(unsigned(dout)));
 
                 check_equal(got => dout, expected => expected_dout, msg => "dout @ cycle " & to_string(i));
             end loop;
+
+            info(
+                "Coverage percentage: " & to_string(coverage_model.GetCov, "%.2f") & " %" &
+                " (bins covered: " & to_string(coverage_model.GetTotalCovCount) & "/" & to_string(coverage_model.GetNumBins) & ")" & LF
+            );
+            info("Coverage details:" & LF);
+            coverage_model.WriteBin;
 
             info("5.0) test_random passed" & LF);
         end procedure;
