@@ -28,9 +28,11 @@ begin
     fifo: process(clk, rst_n)
         constant FIFO_DEPTH: positive := 2;
 
-        -- NOTE: -1, is a bit dirty, but holds the empty state's zero value
-        -- This is a workaround for the limitation of VHDL doing math on write_count - 1 even if one would use if/when-else exclusion
-        -- For example: dout <= (others => '0') when empty else memory(write_count - 1);
+        -- NOTE: The range is extended to -1 to represent the empty state.
+        -- This avoids illegal indexing when evaluating expressions such as:
+        --   dout <= (others => '0') when empty else memory(write_count - 1);
+        -- Without the "-1" bound, VHDL would still attempt to compute "(write_count - 1)",
+        -- even if excluded by a conditional, leading to out-of-range errors.
         subtype fifo_depth_t is integer range -1 to FIFO_DEPTH - 1;
         type slv_array is array (fifo_depth_t) of din'subtype;
         variable memory: slv_array;
