@@ -87,13 +87,7 @@ begin
                     end if;
                 end loop;
 
-                if shift_reg'ascending then
-                    -- NOTE: NVC pre-processes the line below even though dout'ascending should be false
-                    -- shift_reg := feedback & shift_reg(shift_reg'low to shift_reg'high - 1);
-                else
-                    shift_reg := shift_reg(shift_reg'high - 1 downto shift_reg'low) & feedback;
-                end if;
-
+                shift_reg := shift_reg(shift_reg'high - 1 downto shift_reg'low) & feedback;
                 expected_dout <= shift_reg;
             end if;
         end if;
