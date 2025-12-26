@@ -2,6 +2,11 @@
 --!  @author     N. Selvarajah
 --!  @brief      Based on chipdev.io question 24
 --!  @details    VHDL module for Ripple Carry Adder
+--!  @note       The original quest didn't include c_in, however, the quest 32
+--!              Carry Select Adder requires a carry input to the ripple carry adder,
+--!              thus, to not duplicate code, I have added c_in here, but defaulted
+--!              it to '0' to maintain the original functionality resp. to fulfill
+--!              the original quest.
 --! ----------------------------------------------------------------------------
 
 library ieee;
@@ -15,20 +20,21 @@ entity ripple_carry_adder is
     port (
         a: in unsigned(DATA_WIDTH - 1 downto 0);
         b: in unsigned(DATA_WIDTH - 1 downto 0);
+        cin: in std_ulogic := '0';
         sum: out unsigned(DATA_WIDTH downto 0);
         cout_int: out unsigned(DATA_WIDTH - 1 downto 0)
     );
 end entity;
 
 architecture behavioural of ripple_carry_adder is
-    signal cin: cout_int'subtype;
+    signal c_in_internal: cout_int'subtype;
     signal sum_int: sum'subtype;
 begin
     full_adder_chain: for i in 0 to DATA_WIDTH - 1 generate
         cin_selection: if (i = 0) generate
-            cin(i) <= '0';
+            c_in_internal(i) <= cin;
         else generate
-            cin(i) <= cout_int(i - 1);
+            c_in_internal(i) <= cout_int(i - 1);
         end generate;
 
         sum(i) <= sum_int(i);
@@ -37,7 +43,7 @@ begin
             port map (
                 a => a(i),
                 b => b(i),
-                cin => cin(i),
+                cin => c_in_internal(i),
                 sum => sum_int(i),
                 cout => cout_int(i)
             );
