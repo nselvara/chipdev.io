@@ -58,7 +58,7 @@ begin
         stage_block_width_b(stage_idx) <= b((stage_idx + 1) * STAGE_BLOCK_WIDTH - 1 downto stage_idx * STAGE_BLOCK_WIDTH);
 
         -- For stage 0, use cin as carry in
-        carry_in_blocks: for carry_bit in unsigned_carry_bit_array'range generate
+        carry_in_blocks: for carry_bit in std_ulogic range '0' to '1' generate
             ripple_carry_adder_block: entity work.ripple_carry_adder
                 generic map (
                     DATA_WIDTH => STAGE_BLOCK_WIDTH
@@ -96,7 +96,7 @@ begin
         stage_remainder_width_a <= a(a'high downto a'high - STAGE_REMAINDER_WIDTH + 1);
         stage_remainder_width_b <= b(b'high downto b'high - STAGE_REMAINDER_WIDTH + 1);
 
-        carry_in_stages: for carry_bit in unsigned_carry_bit_array'range generate
+        carry_in_stages: for carry_bit in std_ulogic range '0' to '1' generate
             ripple_carry_adder_inst: entity work.ripple_carry_adder
                 generic map (
                     DATA_WIDTH => STAGE_REMAINDER_WIDTH
