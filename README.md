@@ -143,32 +143,13 @@ These examples serve as a learning resource or starting point for building, simu
 - Open terminal
 - Run `git clone git@github.com:nselvara/chipdev.io.git`
 - Run `cd "Project name"`
+- Run `git submodule update --init --recursive` to initialise and update submodules
 - Run `code .` to open VSCode in the current directory
 
-### Create Virtual Environment in VSCode
+### Install Dependencies
 
-#### Via GUI
-
-- Open VSCode
-- Press `CTRL + Shift + P`
-- Search for `Python: Create Environment` command
-- Select `Venv`
-- Select the latest Python version
-- Select [`requirements.txt`](./ip/requirements.txt) file
-- Wait till it creates and activates it automatically
-
-#### Via Terminal
-
-- Open VSCode
-- Press `CTRL + J` if it's **Windows** or ``CTRL+` `` for **Linux** to open the terminal
-- Run `python -m venv .venv` in Windows Terminal (CMD) or `python3 -m venv .venv` in Linux Terminal
-- Run `.\.venv\Scripts\activate` on Windows or `source .venv/bin/activate` on Linux
-- Run `pip install -r requirements.txt` to install all of the dependencies
-- Click on `Yes` when the prompt appears in the right bottom corner
-
-#### Additonal Info
-
-For more info see page: [Python environments in VS Code](https://code.visualstudio.com/docs/python/environments)
+- Open a terminal in the project directory
+- Run `pip install -r ip/requirements.txt` to install all dependencies
 
 ## Running simulation
 
@@ -244,11 +225,11 @@ The script [`test_runner.py`](ip/test_runner.py) acts as a wrapper, so you don�
 
 #### ⚙️ How to Run
 
-1. **Open VSCode** (or any editor/terminal).
+1. **Open a terminal** in the project directory.
 2. To run **all testbenches**, simply execute:
 
    ```bash
-   ./.venv/Scripts/python.exe ./ip/test_runner.py
+   python ip/test_runner.py
    ```
 
 ##### What the script does
