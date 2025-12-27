@@ -34,7 +34,7 @@ begin
     begin
         if rising_edge(clk) then
             if rst_n = '0' then
-                -- Duting reset, the outputs have to be set to '1', thus we set the counters to their maximum values
+                -- During reset, the outputs have to be set to '1', thus we set the counters to their maximum values
                 cycle_count <= cycle_count'subtype'high;
                 fizz_counter <= fizz_counter'subtype'high;
                 buzz_counter <= buzz_counter'subtype'high;
