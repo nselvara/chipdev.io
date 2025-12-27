@@ -1,7 +1,7 @@
 --! ----------------------------------------------------------------------------
 --!  @author     N. Selvarajah
 --!  @brief      Based on chipdev.io question 32
---!  @details    VHDL module for Carry Select Adder
+--!  @details    VHDL module for a generic Carry Select Adder
 --!  @details    The tricky part here is to evenly split the bits into stages.
 --!              If DATA_WIDTH is not perfectly divisible by STAGES, the remaining
 --!              bits are added to an additional stage at the end.

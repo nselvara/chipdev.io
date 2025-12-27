@@ -2,6 +2,7 @@
 --!  @author     N. Selvarajah
 --!  @brief      Based on chipdev.io question 32
 --!  @details    VHDL module for Carry Select Adder
+--!  @details    Tests both evenly and unevenly divisible DATA_WIDTH by STAGES
 --! ----------------------------------------------------------------------------
 
 -- vunit: run_all_in_same_sim
@@ -28,13 +29,17 @@ architecture tb of tb_carry_select_adder is
     constant SIM_TIMEOUT: time := 1 ms;
     constant ENABLE_DEBUG_PRINT: boolean := false;
 
-    constant DATA_WIDTH: positive := 24;
-    -- constant DATA_WIDTH: positive := 25;
+    -- NOTE: Make sure the constants adhere that these are evenly resp. unevenly divisible by STAGES
+    -- Also make sure that DATA_WIDTH_UNEVENLY_DIVISIBLE is greater than DATA_WIDTH_EVENLY_DIVISIBLE,
+    -- as we resize the *_SEQUENCE constants in the tests based on DATA_WIDTH_EVENLY_DIVISIBLE
+    constant DATA_WIDTH_EVENLY_DIVISIBLE: positive := 24;
+    constant DATA_WIDTH_UNEVENLY_DIVISIBLE: positive := 25;
     constant STAGES: positive := 4;
 
-    signal a: unsigned(DATA_WIDTH - 1 downto 0);
-    signal b: unsigned(DATA_WIDTH - 1 downto 0);
-    signal sum: unsigned(DATA_WIDTH downto 0);
+    signal a: unsigned(DATA_WIDTH_EVENLY_DIVISIBLE - 1 downto 0);
+    signal b: unsigned(DATA_WIDTH_EVENLY_DIVISIBLE - 1 downto 0);
+    signal sum_evenly_divisible_block: unsigned(DATA_WIDTH_EVENLY_DIVISIBLE downto 0);
+    signal sum_unevenly_divisible_block: unsigned(DATA_WIDTH_UNEVENLY_DIVISIBLE downto 0);
 
     signal simulation_done: boolean := false;
 begin
@@ -61,6 +66,9 @@ begin
     checker: process
         constant PROPAGATION_TIME: time := 1 ns;
         variable random: RandomPType;
+        -- Just to see in the waveform
+        variable expected_sum_evenly_divisible_block: sum_evenly_divisible_block'subtype;
+        variable expected_sum_unevenly_divisible_block: sum_unevenly_divisible_block'subtype;
 
         procedure print_debug_info(a, b, sum, expected_sum: unsigned) is begin
             debug("a = " & to_integer_string(a) & " (0x" & to_hstring(a) & "), " & to_nibble_string(a));
@@ -71,7 +79,7 @@ begin
 
         impure function return_error_msg(cycle: natural; a, b: unsigned) return string is begin
             return
-                "sum @ cycle " & to_string(cycle) & ":" & LF &
+                "sum_evenly_divisible_block @ cycle " & to_string(cycle) & ":" & LF &
                 "  a = " & to_integer_string(a) & " (0x" & to_hstring(a) & ", " & to_nibble_string(a) & ")" & LF &
                 "  b = " & to_integer_string(b) & " (0x" & to_hstring(b) & ", " & to_nibble_string(b) & ")" & LF
             ;
@@ -94,15 +102,13 @@ begin
                 3 => resize(x"3e7", b'length),
                 4 => resize(x"000", b'length)
             );
-            constant EXPECTED_SUM_SEQUENCE: unsigned_vector(open)(sum'range) := (
-                0 => resize(x"424", sum'length),
-                1 => resize(x"0e2", sum'length),
-                2 => resize(x"150", sum'length),
-                3 => resize(x"3f3", sum'length),
-                4 => resize(x"05b", sum'length)
+            constant EXPECTED_SUM_SEQUENCE: unsigned_vector(open)(sum_evenly_divisible_block'range) := (
+                0 => resize(x"424", sum_evenly_divisible_block'length),
+                1 => resize(x"0e2", sum_evenly_divisible_block'length),
+                2 => resize(x"150", sum_evenly_divisible_block'length),
+                3 => resize(x"3f3", sum_evenly_divisible_block'length),
+                4 => resize(x"05b", sum_evenly_divisible_block'length)
             );
-
-            variable expected_sum: sum'subtype;
         begin
             info("1.0) test_example_1" & LF);
 
@@ -113,11 +119,18 @@ begin
 
                 wait for PROPAGATION_TIME;
 
-                expected_sum := EXPECTED_SUM_SEQUENCE(i);
-                print_debug_info(a, b, sum, expected_sum);
+                expected_sum_evenly_divisible_block := EXPECTED_SUM_SEQUENCE(i);
+                expected_sum_unevenly_divisible_block := resize(expected_sum_evenly_divisible_block, sum_unevenly_divisible_block'length);
+                print_debug_info(a, b, sum => sum_evenly_divisible_block, expected_sum => expected_sum_evenly_divisible_block);
+                print_debug_info(a, b, sum => sum_unevenly_divisible_block, expected_sum => expected_sum_unevenly_divisible_block);
                 check_equal(
-                    got => sum,
-                    expected => expected_sum,
+                    got => sum_evenly_divisible_block,
+                    expected => expected_sum_evenly_divisible_block,
+                    msg => return_error_msg(cycle => i, a => a, b => b)
+                );
+                check_equal(
+                    got => sum_unevenly_divisible_block,
+                    expected => expected_sum_unevenly_divisible_block,
                     msg => return_error_msg(cycle => i, a => a, b => b)
                 );
             end loop;
@@ -127,8 +140,7 @@ begin
 
         procedure test_random is
             constant REPETITION_AMOUNT: natural := 1000;
-            variable a_v, b_v: unsigned(DATA_WIDTH - 1 downto 0);
-            variable expected_sum: sum'subtype;
+            variable a_v, b_v: unsigned(DATA_WIDTH_EVENLY_DIVISIBLE - 1 downto 0);
         begin
             info(
                 "2.0) test_random" & LF &
@@ -143,11 +155,18 @@ begin
 
                 wait for PROPAGATION_TIME;
 
-                expected_sum := resize(a_v, sum'length) + resize(b_v, sum'length);
-                print_debug_info(a, b, sum, expected_sum);
+                expected_sum_evenly_divisible_block := resize(a_v, sum_evenly_divisible_block'length) + resize(b_v, sum_evenly_divisible_block'length);
+                expected_sum_unevenly_divisible_block := resize(expected_sum_evenly_divisible_block, sum_unevenly_divisible_block'length);
+                print_debug_info(a, b, sum => sum_evenly_divisible_block, expected_sum => expected_sum_evenly_divisible_block);
+                print_debug_info(a, b, sum => sum_unevenly_divisible_block, expected_sum => expected_sum_unevenly_divisible_block);
                 check_equal(
-                    got => sum,
-                    expected => expected_sum,
+                    got => sum_evenly_divisible_block,
+                    expected => expected_sum_evenly_divisible_block,
+                    msg => return_error_msg(cycle => i, a => a, b => b)
+                );
+                check_equal(
+                    got => sum_unevenly_divisible_block,
+                    expected => expected_sum_unevenly_divisible_block,
                     msg => return_error_msg(cycle => i, a => a, b => b)
                 );
             end loop;
@@ -156,6 +175,10 @@ begin
         end procedure;
     begin
         random.InitSeed(random'instance_name);
+        check(
+            expr => DATA_WIDTH_UNEVENLY_DIVISIBLE > DATA_WIDTH_EVENLY_DIVISIBLE,
+            msg => "DATA_WIDTH_UNEVENLY_DIVISIBLE must be greater than DATA_WIDTH_EVENLY_DIVISIBLE"
+        );
 
         -- NOTE: Don't remove this, or else VUnit won't be able to run the tests
         wait for PROPAGATION_TIME;
@@ -174,15 +197,27 @@ begin
         wait;
     end process;
 
-    carry_select_adder_inst: entity work.carry_select_adder
+    carry_select_adder_evenly_divisible_inst: entity work.carry_select_adder
         generic map (
-            DATA_WIDTH => DATA_WIDTH,
+            DATA_WIDTH => DATA_WIDTH_EVENLY_DIVISIBLE,
             STAGES => STAGES
         )
         port map (
             a => a,
             b => b,
             cin => '0',
-            sum => sum
+            sum => sum_evenly_divisible_block
+        );
+
+    carry_select_adder_unevenly_divisible_inst: entity work.carry_select_adder
+        generic map (
+            DATA_WIDTH => DATA_WIDTH_UNEVENLY_DIVISIBLE,
+            STAGES => STAGES
+        )
+        port map (
+            a => resize(a, DATA_WIDTH_UNEVENLY_DIVISIBLE),
+            b => resize(b, DATA_WIDTH_UNEVENLY_DIVISIBLE),
+            cin => '0',
+            sum => sum_unevenly_divisible_block
         );
 end architecture;

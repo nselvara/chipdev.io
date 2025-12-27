@@ -4,20 +4,29 @@ add wave -noupdate -divider DuT
 add wave -noupdate -divider Interface
 add wave -noupdate /tb_carry_select_adder/a
 add wave -noupdate /tb_carry_select_adder/b
-add wave -noupdate /tb_carry_select_adder/sum
+add wave -noupdate /tb_carry_select_adder/sum_evenly_divisible_block
+add wave -noupdate /tb_carry_select_adder/sum_unevenly_divisible_block
 add wave -noupdate -divider Internal
-add wave -noupdate /tb_carry_select_adder/carry_select_adder_inst/stage_block_width_a
-add wave -noupdate /tb_carry_select_adder/carry_select_adder_inst/stage_block_width_b
-add wave -noupdate /tb_carry_select_adder/carry_select_adder_inst/stage_block_width_carry_out
-add wave -noupdate /tb_carry_select_adder/carry_select_adder_inst/stage_block_width_sum
-add wave -noupdate /tb_carry_select_adder/carry_select_adder_inst/stage_remainder_width_a
-add wave -noupdate /tb_carry_select_adder/carry_select_adder_inst/stage_remainder_width_b
-add wave -noupdate /tb_carry_select_adder/carry_select_adder_inst/stage_remainder_width_carry_out
-add wave -noupdate /tb_carry_select_adder/carry_select_adder_inst/stage_remainder_width_sum
+add wave -noupdate -expand -group evenly_divisible /tb_carry_select_adder/carry_select_adder_evenly_divisible_inst/stage_block_width_a
+add wave -noupdate -expand -group evenly_divisible /tb_carry_select_adder/carry_select_adder_evenly_divisible_inst/stage_block_width_b
+add wave -noupdate -expand -group evenly_divisible /tb_carry_select_adder/carry_select_adder_evenly_divisible_inst/stage_block_width_carry_out
+add wave -noupdate -expand -group evenly_divisible /tb_carry_select_adder/carry_select_adder_evenly_divisible_inst/stage_block_width_sum
+add wave -noupdate -expand -group evenly_divisible /tb_carry_select_adder/carry_select_adder_evenly_divisible_inst/stage_remainder_width_a
+add wave -noupdate -expand -group evenly_divisible /tb_carry_select_adder/carry_select_adder_evenly_divisible_inst/stage_remainder_width_b
+add wave -noupdate -expand -group evenly_divisible /tb_carry_select_adder/carry_select_adder_evenly_divisible_inst/stage_remainder_width_carry_out
+add wave -noupdate -expand -group evenly_divisible /tb_carry_select_adder/carry_select_adder_evenly_divisible_inst/stage_remainder_width_sum
+add wave -noupdate -expand -group unevenly_divisible /tb_carry_select_adder/carry_select_adder_unevenly_divisible_inst/stage_block_width_a
+add wave -noupdate -expand -group unevenly_divisible /tb_carry_select_adder/carry_select_adder_unevenly_divisible_inst/stage_block_width_b
+add wave -noupdate -expand -group unevenly_divisible /tb_carry_select_adder/carry_select_adder_unevenly_divisible_inst/stage_block_width_carry_out
+add wave -noupdate -expand -group unevenly_divisible /tb_carry_select_adder/carry_select_adder_unevenly_divisible_inst/stage_block_width_sum
+add wave -noupdate -expand -group unevenly_divisible /tb_carry_select_adder/carry_select_adder_unevenly_divisible_inst/stage_remainder_width_a
+add wave -noupdate -expand -group unevenly_divisible /tb_carry_select_adder/carry_select_adder_unevenly_divisible_inst/stage_remainder_width_b
+add wave -noupdate -expand -group unevenly_divisible /tb_carry_select_adder/carry_select_adder_unevenly_divisible_inst/stage_remainder_width_carry_out
+add wave -noupdate -expand -group unevenly_divisible /tb_carry_select_adder/carry_select_adder_unevenly_divisible_inst/stage_remainder_width_sum
 add wave -noupdate -divider {tb - Internal}
 add wave -noupdate /tb_carry_select_adder/simulation_done
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {1004746 ps} 0}
+WaveRestoreCursors {{Cursor 1} {505479 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 247
 configure wave -valuecolwidth 100
