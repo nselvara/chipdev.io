@@ -81,7 +81,6 @@ begin
     end process;
 
     checker: process
-        constant PROPAGATION_TIME: time := 1 ns;
         variable random: RandomPType;
 
         procedure wait_clk_cycles(n: positive) is begin

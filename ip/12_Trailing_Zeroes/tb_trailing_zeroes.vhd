@@ -60,7 +60,6 @@ begin
     ------------------------------------------------------------
 
     checker: process
-        constant PROPAGATION_TIME: time := 1 ns;
         variable random: RandomPType;
         -- To see in the waveform
         variable expected_count: unsigned(dout'range);
@@ -83,7 +82,7 @@ begin
                     exit;
                 end if;
             end loop;
-        
+
             return count;
         end function;
 

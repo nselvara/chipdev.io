@@ -60,7 +60,6 @@ begin
     ------------------------------------------------------------
 
     checker: process
-        constant PROPAGATION_TIME: time := 1 ns;
         variable random: RandomPType;
 
         function gray_to_binary(value: unsigned) return unsigned is

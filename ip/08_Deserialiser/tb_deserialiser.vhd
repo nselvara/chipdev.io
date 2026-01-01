@@ -38,7 +38,7 @@ architecture tb of tb_deserialiser is
     signal din: std_ulogic := '0';
     signal dout: std_ulogic_vector(DATA_WIDTH - 1 downto 0) := (others => '0');
 
-    signal dout_expected: dout'subtype := (others => '0');  
+    signal dout_expected: dout'subtype := (others => '0');
     signal simulation_done: boolean := false;
 begin
     generate_clock(clk => clk, FREQ => real(1 sec / CLK_PERIOD));
@@ -72,7 +72,6 @@ begin
     end process;
 
     checker: process
-        constant PROPAGATION_TIME: time := 1 ns;
         variable random: RandomPType;
 
         procedure wait_clk_cycles(n: positive) is begin

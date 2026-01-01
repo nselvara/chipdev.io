@@ -66,7 +66,6 @@ begin
     ------------------------------------------------------------
 
     checker: process
-        constant PROPAGATION_TIME: time := 1 ns;
         variable random: RandomPType;
 
         procedure wait_clk_cycles(n: positive) is begin
@@ -89,17 +88,17 @@ begin
             variable din_val: std_ulogic_vector(DATA_WIDTH - 1 downto 0) := std_ulogic_vector(to_unsigned(16#FB#, DATA_WIDTH));
         begin
             info("1.0) test_example_1: shift 0xFB with enable pulse");
-        
+
             din_en <= '0';
             reset_module;
             start_module;
-        
+
             din <= din_val;
             din_en <= '1';
             wait_clk_cycles(1);
             din_en <= '0';
             din <= (others => '0');
-        
+
             for i in din'low to din'high loop
                 wait_clk_cycles(1);
                 check_equal(got => dout, expected => din_val(i), msg => "dout");
@@ -110,17 +109,17 @@ begin
             variable din_val: std_ulogic_vector(DATA_WIDTH - 1 downto 0) := std_ulogic_vector(to_unsigned(16#FD#, DATA_WIDTH));
         begin
             info("2.0) test_example_2: hold enable for 3 cycles (restarts)");
-        
+
             din_en <= '0';
             reset_module;
             start_module;
-        
+
             din <= din_val;
             din_en <= '1';
             wait_clk_cycles(3);  -- will restart each time
-        
+
             din_en <= '0';
-        
+
             for i in din'low to din'high loop
                 wait_clk_cycles(1);
                 check_equal(got => dout, expected => din_val(i), msg => "dout");
@@ -129,47 +128,47 @@ begin
 
         procedure test_example_3 is begin
             info("3.0) test_example_3: reset overrides enable");
-        
+
             din <= std_ulogic_vector(to_unsigned(16#FF#, DATA_WIDTH));
             din_en <= '1';
-        
+
             reset_module;  -- Force all output to '0'
-        
+
             for i in 0 to 2 loop
                 wait_clk_cycles(1);
                 check_equal(got => dout, expected => '0', msg => "dout");
             end loop;
-        
+
             rst_n <= '1';  -- Release reset
             wait_clk_cycles(1);
             din_en <= '0';
         end procedure;
-            
+
         procedure test_example_4 is
             variable din_val: std_ulogic_vector(DATA_WIDTH - 1 downto 0) := std_ulogic_vector(to_unsigned(16#FF#, DATA_WIDTH));
         begin
             info("4.0) test_example_4: pad with 0 after all bits");
-        
+
             din <= din_val;
             din_en <= '1';
             wait_clk_cycles(1);
             din_en <= '0';
-        
+
             for i in din'low to din'high loop
                 wait_clk_cycles(1);
                 check_equal(got => dout, expected => din_val(i), msg => "dout");
             end loop;
-        
+
             for i in 0 to 3 loop -- 4 more cycles of zero padding
                 wait_clk_cycles(1);
                 check_equal(got => dout, expected => '0', msg => "dout");
             end loop;
         end procedure;
-    
+
         procedure test_random_pulse is
             variable din_val: std_ulogic_vector(DATA_WIDTH - 1 downto 0);
             variable dout_expected: std_ulogic;
-        
+
             impure function get_dout_expected(
                 din_val: std_ulogic_vector; index: natural; reset: std_ulogic
             ) return std_ulogic is
@@ -184,19 +183,19 @@ begin
             end function;
         begin
             info("5.0) test_random_pulse");
-        
+
             reset_module;
             start_module;
-        
+
             for i in 1 to 10 loop
                 din_val := random.RandSlv(Size => DATA_WIDTH);
                 din <= din_val;
-        
+
                 rst_n <= '1';
                 din_en <= '1';
                 wait_clk_cycles(1);
                 din_en <= '0';
-        
+
                 for j in 0 to DATA_WIDTH + 2 loop
                     dout_expected := get_dout_expected(din_val, j, rst_n);
                     wait_clk_cycles(1);
@@ -204,28 +203,28 @@ begin
                 end loop;
             end loop;
         end procedure;
-        
+
         procedure test_random_hold is
             constant DIN_EN_WEIGHT_SEQUENCE: NaturalVSlType(std_ulogic'('0') to '1') := ('1' => 99, '0' => 1);
-            
+
             variable din_en_old: std_ulogic := '0';
             variable din_old: din'subtype := (others => '0');
             variable din_expected: din'subtype := (others => '0');
             variable din_random: din'subtype := (others => '0');
 
             procedure calculate_expected_loaded_din is begin
-                din_expected := (others => '0') when not rst_n else 
-                                (others => '0') when not din_en and not din_en_old else 
-                                din_random      when din_en else 
+                din_expected := (others => '0') when not rst_n else
+                                (others => '0') when not din_en and not din_en_old else
+                                din_random      when din_en else
                                 din_old;
             end procedure;
         begin
             info("6.0) test_random_hold");
-        
+
             din <= (others => '0');
             reset_module;
             start_module;
-        
+
             for i in 1 to 1000 loop
                 din_en_old := din_en;
                 rst_n <= random.DistSl(Weight => RESET_N_WEIGHT);

@@ -63,7 +63,6 @@ begin
     ------------------------------------------------------------
 
     checker: process
-        constant PROPAGATION_TIME: time := 1 ns;
         variable random: RandomPType;
 
         procedure wait_clk_cycles(n: positive) is begin
@@ -109,20 +108,20 @@ begin
             constant EXPECTED_VALUES_2: integer_vector := (1, 1, 2, 3, 5);
         begin
             info("1.0) test_example_1 - Fibonacci output before and after reset");
-        
+
             reset_module;
             start_module;
-        
+
             -- First 6 Fibonacci numbers
             for i in EXPECTED_VALUES_1'range loop
                 wait_clk_cycles(1);
                 check_dout(index => i, expected => to_unsigned(EXPECTED_VALUES_1(i), dout'length));
             end loop;
-        
+
             -- Apply reset
             reset_module;
             start_module;
-        
+
             -- Next 5 Fibonacci numbers after reset
             for i in EXPECTED_VALUES_2'range loop
                 wait_clk_cycles(1);
@@ -134,7 +133,7 @@ begin
             variable expected_value: dout'subtype;
         begin
             info("2.0) test_multiple_sequence - Random Fibonacci output");
-        
+
             reset_module;
             start_module;
 
@@ -151,7 +150,7 @@ begin
             variable expected_value: dout'subtype;
         begin
             info("3.0) test_random_wait_and_reset - Random Fibonacci output with wait and reset");
-        
+
             reset_module;
             start_module;
             -- Jump straight into the first Fibonacci number
@@ -186,7 +185,7 @@ begin
         simulation_done <= true;
         wait;
     end process;
-    
+
     fibonacci_generator_inst: entity work.fibonacci_generator
         generic map (
             DATA_WIDTH => DATA_WIDTH
