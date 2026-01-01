@@ -117,7 +117,7 @@ begin
             reset_module;
             start_module;
 
-            for i in 1 to 1000 loop
+            for repetition in 1 to 1000 loop
                 din_test := random.RandSlv(Size => dout'length);
 
                 for i in dout'low to dout'high loop

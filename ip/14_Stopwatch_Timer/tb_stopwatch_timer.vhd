@@ -217,7 +217,7 @@ begin
         end procedure;
 
         procedure test_when_reset is
-            variable random_wait_in_clk_cycles: natural := 0;    
+            variable random_wait_in_clk_cycles: natural := 0;
         begin
             info("4.0) test_when_reset");
 
@@ -248,7 +248,7 @@ begin
             reset_start_in;
 
             for i in 1 to START_STOP_SEQUENCE loop
-                for i in 1 to WAIT_REPETITIONS loop
+                for j in 1 to WAIT_REPETITIONS loop
                     random_wait_in_clk_cycles := random.RandInt(1, 10);
                     wait_clk_cycles(random_wait_in_clk_cycles);
                     expected_count := get_expected_count_after_wait(current_count => expected_count, wait_time => random_wait_in_clk_cycles);
@@ -259,7 +259,7 @@ begin
                 wait_clk_cycles(1);
                 stop_in <= '0';
 
-                for i in 1 to WAIT_REPETITIONS loop
+                for j in 1 to WAIT_REPETITIONS loop
                     wait_clk_cycles(1);
                     check_stop(frozen_value => expected_count);
                 end loop;
@@ -352,10 +352,10 @@ begin
                 reset <= random.DistSl(Weight => RESET_WEIGHT);
                 start_in <= random.DistSl(Weight => START_WEIGHT_SEQUENCE);
                 stop_in <= random.DistSl(Weight => STOP_WEIGHT_SEQUENCE);
-    
+
                 random_wait_in_clk_cycles := random.RandInt(1, 10);
 
-                for i in 1 to random_wait_in_clk_cycles loop
+                for j in 1 to random_wait_in_clk_cycles loop
                     wait_clk_cycles(1);
                     expected_count := get_expected_count(current_count => expected_count);
                 end loop;
