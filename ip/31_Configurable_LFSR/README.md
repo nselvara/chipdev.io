@@ -10,15 +10,15 @@ In this question, implement a LFSR that can produce a pseudorandom sequence of `
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Synchronous, active low, reset signal
-`din` - Input data (initial data input value, e.g. 8'b0000_0001)
-`tap` - Input tap (feedback polynomial, e.g. 8'b1011_0101)
-`dout` - Output data
+- `clk` - Clock signal
+- `resetn` - Synchronous, active low, reset signal
+- `din` - Input data (initial data input value, e.g. 8'b0000_0001)
+- `tap` - Input tap (feedback polynomial, e.g. 8'b1011_0101)
+- `dout` - Output data
 
 ### Output signals during reset
 
-`dout` - 1
+- `dout` - 1
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -32,6 +32,8 @@ Configurable Linear Feedback Shift Register with runtime-programmable tap positi
 The `tap` input specifies which bit positions contribute to the feedback calculation.
 Each clock cycle computes the feedback bit as the XOR reduction of all tapped positions (`xor(tap_reg and shift_reg)`), then shifts this feedback into the LSB.
 The tap configuration and seed value are captured during reset.
+
+---
 
 ## Source
 

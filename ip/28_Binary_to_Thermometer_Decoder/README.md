@@ -10,8 +10,8 @@ In this question, implement a binary to thermometer decoder circuit using Verilo
 
 ### Input and Output Signals
 
-`din` - Binary, unsigned input word
-`dout` - Thermometer output word
+- `din` - Binary, unsigned input word
+- `dout` - Thermometer output word
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -30,6 +30,8 @@ Binary-to-thermometer code decoder that sets all bits from 0 to the binary input
 A loop iterates through all output positions, setting each bit if its index is less than or equal to the binary input.
 For example, input 5 produces output 0b00111111 (six ones).
 The loop-based approach synthesises despite the non-constant range because it evaluates all possibilities at compile time.
+
+---
 
 ## Source
 

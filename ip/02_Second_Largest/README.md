@@ -10,14 +10,14 @@ When the reset-low signal (`resetn`) goes low, all previous values seen in the i
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Synchronous reset-low signal
-`din` - Input data sequence
-`dout` - Second-largest value seen so far
+- `clk` - Clock signal
+- `resetn` - Synchronous reset-low signal
+- `din` - Input data sequence
+- `dout` - Second-largest value seen so far
 
 ### Output signals during reset
 
-`dout` - 0 when resetn is active
+- `dout` - 0 when resetn is active
 
 > [!NOTE]
 > For the complete problem description, please visit:

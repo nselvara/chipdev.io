@@ -8,8 +8,8 @@ Reverse the bits of an input value's binary representation.
 
 ### Input and Output Signals
 
-`din` - Input value
-`dout` - Bitwise reversed value
+- `din` - Input value
+- `dout` - Bitwise reversed value
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -20,6 +20,8 @@ Reverse the bits of an input value's binary representation.
 Sequential Gray code counter implemented as a binary counter with conversion output.
 Each clock cycle increments a binary counter variable, then converts it to Gray code using the standard formula: `gray = count XOR shift_right(count, 1)`.
 This produces the characteristic Gray code property where consecutive values differ by only one bit.
+
+---
 
 ## Source
 

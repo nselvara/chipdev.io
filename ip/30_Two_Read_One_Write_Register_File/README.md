@@ -14,24 +14,24 @@ RF's output port `collision = 1` when at least two out of three input addresses 
 
 ### Input and Output Signals
 
-`din` - Input data port
-`wad1` - Write input address 1
-`rad1` - Read input address 1
-`rad2` - Read input address 2
-`wen1` - Write-enable signal 1
-`ren1` - Read-enable input signal 1
-`ren2` - Read-enable input signal 2
-`clk` - Clock signal
-`resetn` - Synchronous, active-low, reset signal
-`dout1` - Output data port 1
-`dout2` - Output data port 2
-`collision` - Indicates collisions among read & write addresses
+- `din` - Input data port
+- `wad1` - Write input address 1
+- `rad1` - Read input address 1
+- `rad2` - Read input address 2
+- `wen1` - Write-enable signal 1
+- `ren1` - Read-enable input signal 1
+- `ren2` - Read-enable input signal 2
+- `clk` - Clock signal
+- `resetn` - Synchronous, active-low, reset signal
+- `dout1` - Output data port 1
+- `dout2` - Output data port 2
+- `collision` - Indicates collisions among read & write addresses
 
 ### Output signals during reset
 
-`dout1` - 0
-`dout2` - 0
-`collision` - 0
+- `dout1` - 0
+- `dout2` - 0
+- `collision` - 0
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -45,6 +45,8 @@ Dual-port read, single-port write register file with collision detection.
 Maintains `2^ADDRESS_WIDTH` registers implemented as a signal array.
 Collisions occur when: (1) both read ports target the same address, (2) write and read1 target the same address, or (3) write and read2 target the same address - all while their respective enables are active.
 When collision is detected, all operations are blocked and outputs zero.
+
+---
 
 ## Source
 

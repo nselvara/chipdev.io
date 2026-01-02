@@ -12,13 +12,13 @@ The input has an enable signal (din_en), which allows the input to be forwarded 
 
 ### Input and Output Signals
 
-`din` - Input data
-`din_en` - Enable signal for din. Forwards data from input to an output if 1, does not forward data otherwise
-`addr` - Two bit destination address. For example addr = b11 = 3 indicates din should be forwarded to output value 3 (dout3)
-`dout0` - Output 0. Corresponds to addr = b00
-`dout1` - Output 1. Corresponds to addr = b01
-`dout2` - Output 2. Corresponds to addr = b10
-`dout3` - Output 3. Corresponds to addr = b11
+- `din` - Input data
+- `din_en` - Enable signal for din. Forwards data from input to an output if 1, does not forward data otherwise
+- `addr` - Two bit destination address. For example addr = b11 = 3 indicates din should be forwarded to output value 3 (dout3)
+- `dout0` - Output 0. Corresponds to addr = b00
+- `dout1` - Output 1. Corresponds to addr = b01
+- `dout2` - Output 2. Corresponds to addr = b10
+- `dout3` - Output 3. Corresponds to addr = b11
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -26,7 +26,11 @@ The input has an enable signal (din_en), which allows the input to be forwarded 
 
 ## Description
 
-Combinational router using a `case` statement to decode the 2-bit address and route input data to one of four outputs. All outputs default to zero, then the selected output is conditionally assigned when `din_en` is high. Synthesises to a simple 4:1 demultiplexer with AND gates gating the enable signal.
+Combinational router using a `case` statement to decode the 2-bit address and route input data to one of four outputs.
+All outputs default to zero, then the selected output is conditionally assigned when `din_en` is high.
+Synthesises to a simple 4:1 demultiplexer with AND gates gating the enable signal.
+
+---
 
 ## Source
 

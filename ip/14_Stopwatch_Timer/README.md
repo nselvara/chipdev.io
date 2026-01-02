@@ -14,15 +14,15 @@ If count ever reaches `MAX`, then it restarts from `0` on the next cycle.
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`reset` - Synchronous reset signal
-`start` - Start signal
-`stop` - Stop signal
-`count` - Current count
+- `clk` - Clock signal
+- `reset` - Synchronous reset signal
+- `start` - Start signal
+- `stop` - Stop signal
+- `count` - Current count
 
 ### Output signals during reset
 
-`count` - `0` when `reset` is active
+- `count` - `0` when `reset` is active
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -34,6 +34,8 @@ Stopwatch counter that starts/stops via control signals and counts from `0 to MA
 The `start_reg` variable latches the start condition, continuing the count until `stop_in` resets it.
 When the counter reaches MAX, it wraps to zero.
 The start signal acts as a sticky enable - once asserted, counting continues autonomously until explicitly stopped.
+
+---
 
 ## Source
 

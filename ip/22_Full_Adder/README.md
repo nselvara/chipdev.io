@@ -12,11 +12,11 @@ The FA circuit has two single-bit outputs, `sum` and `cout`—the later represen
 
 ### Input and Output Signals
 
-`a` - First operand input bit
-`b` - Second operand input bit
-`cin` - Carry-in input bit from a previous adder stage
-`sum` - Sum output bit
-`cout` - Carry-out (overflow) output bit to be propagated to the next addition stage
+- `a` - First operand input bit
+- `b` - Second operand input bit
+- `cin` - Carry-in input bit from a previous adder stage
+- `sum` - Sum output bit
+- `cout` - Carry-out (overflow) output bit to be propagated to the next addition stage
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -27,6 +27,8 @@ The FA circuit has two single-bit outputs, `sum` and `cout`—the later represen
 Full adder with two architectural implementations.
 The gate-level version uses the canonical equations: `sum = a XOR b XOR cin` and `cout = (a AND b) OR (b AND cin) OR (cin AND a)`.
 The operator-based version performs unsigned addition across three separate 2-bit additions with carry propagation.
+
+---
 
 ## Source
 

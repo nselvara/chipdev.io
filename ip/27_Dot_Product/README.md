@@ -10,16 +10,16 @@ Assume the sequence is read in the following order: a1, a2, a3, b1, b2, b3. A co
 
 ### Input and Output Signals
 
-`din` - 8-bit unsigned data input word
-`clk` - Clock signal
-`resetn` - Synchronous, active low, reset signal
-`dout` - Output word corresponding to a dot b operation
-`run` - Single-bit output signal to indicate a new dot product operation
+- `din` - 8-bit unsigned data input word
+- `clk` - Clock signal
+- `resetn` - Synchronous, active low, reset signal
+- `dout` - Output word corresponding to a dot b operation
+- `run` - Single-bit output signal to indicate a new dot product operation
 
 ### Output signals during reset
 
-`dout` - 0
-`run` - 1
+- `dout` - 0
+- `run` - 1
 
 > [!NOTE]
 > Quest 27 doesn't exist on chipdev.io. This repository's Quest 27 corresponds to chipdev.io Question 28.
@@ -39,6 +39,8 @@ Sequential dot-product calculator receiving vector elements one at a time.
 Accumulates `VECTOR_SIZE * 2` inputs into an array (first `VECTOR_SIZE` elements are vector A, next `VECTOR_SIZE` are vector B), then computes the sum of element-wise products using an impure function.
 The `run_out` signal pulses high for one cycle when the calculation completes.
 Output width accounts for multiplication growth (`2 * DATA_WIDTH`) plus accumulation growth (`log2(VECTOR_SIZE)`).
+
+---
 
 ## Source
 

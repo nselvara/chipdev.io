@@ -10,14 +10,14 @@ When the reset-low signal (`resetn`) goes active, all previously seen bits on th
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Synchronous reset-low signal
-`din` - Input bits
-`dout` - `1` if a `b1010` was detected, `0` otherwise
+- `clk` - Clock signal
+- `resetn` - Synchronous reset-low signal
+- `din` - Input bits
+- `dout` - `1` if a `b1010` was detected, `0` otherwise
 
 ### Output signals during reset
 
-`dout` - `0` when `resetn` is active
+- `dout` - `0` when `resetn` is active
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -28,6 +28,8 @@ When the reset-low signal (`resetn`) goes active, all previously seen bits on th
 Parameterizable sequence detector using a shift register matched against a constant pattern.
 Each clock shifts the serial input `din` into the register, with the code handling both ascending and descending bit orderings via compile-time selection.
 Detection pulses high when the shift register contents exactly match `SEQUENCE_PATTERN`.
+
+---
 
 ## Source
 

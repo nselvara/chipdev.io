@@ -10,8 +10,8 @@ Implement a thermometer code detector. The module has two ports, `codeIn` and `i
 
 ### Input and Output Signals
 
-`codeIn` - Thermometer input word
-`isThermometer` - Output bit that indicates whether or not an input word is a thermometer code
+- `codeIn` - Thermometer input word
+- `isThermometer` - Output bit that indicates whether or not an input word is a thermometer code
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -24,6 +24,8 @@ Implement a thermometer code detector. The module has two ports, `codeIn` and `i
 Thermometer code validator ensuring the input contains contiguous ones from LSB.
 The function checks that bit 0 is set (LSB must be 1), allows all-ones as valid, then counts bit transitions.
 Valid thermometer codes have exactly one transition (from 1 to 0). Early-exit optimisation stops counting after detecting more than one transition.
+
+---
 
 ## Source
 

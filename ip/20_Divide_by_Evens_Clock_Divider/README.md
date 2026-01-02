@@ -10,17 +10,17 @@ When `resetn` is active, then all clocks are reset to `0`. When `resetn` becomes
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Synchronous reset-low signal
-`div2` - Output clock with 2x the period of `clk`
-`div4` - Output clock with 4x the period of `clk`
-`div6` - Output clock with 6x the period of `clk`
+- `clk` - Clock signal
+- `resetn` - Synchronous reset-low signal
+- `div2` - Output clock with 2x the period of `clk`
+- `div4` - Output clock with 4x the period of `clk`
+- `div6` - Output clock with 6x the period of `clk`
 
 ### Output signals during reset
 
-`div2` - `0` when `resetn` is active
-`div4` - `0` when `resetn` is active
-`div6` - `0` when `resetn` is active
+- `div2` - `0` when `resetn` is active
+- `div4` - `0` when `resetn` is active
+- `div6` - `0` when `resetn` is active
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -31,6 +31,8 @@ When `resetn` is active, then all clocks are reset to `0`. When `resetn` becomes
 Multiple clock divider generating divide-by-2, divide-by-4, and divide-by-6 outputs.
 The divide-by-2 simply toggles each clock. Divide-by-4 and divide-by-6 use counters that toggle their outputs every N/2 clocks (where N is the division factor).
 This produces 50% duty cycle divided clocks for even division ratios.
+
+---
 
 ## Source
 

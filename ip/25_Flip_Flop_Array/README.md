@@ -12,19 +12,19 @@ This is a simple RF so it should support only one operation per clock cycle, eit
 
 ### Input and Output Signals
 
-`din` - Input data port
-`addr` - Address input to the flip-flop array
-`wr` - Write-enable input signal
-`rd` - Read-enable input signal
-`clk` - Clock signal
-`resetn` - Synchronous, active-low, reset signal
-`dout` - Output data port
-`error` - Error signal - Invalid operation
+- `din` - Input data port
+- `addr` - Address input to the flip-flop array
+- `wr` - Write-enable input signal
+- `rd` - Read-enable input signal
+- `clk` - Clock signal
+- `resetn` - Synchronous, active-low, reset signal
+- `dout` - Output data port
+- `error` - Error signal - Invalid operation
 
 ### Output signals during reset
 
-`dout` - 0
-`error` - 0
+- `dout` - 0
+- `error` - 0
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -36,6 +36,8 @@ Single-port memory array using flip-flops rather than RAM primitives.
 Implements `2^ADDRESS_WIDTH` locations of DATA_WIDTH bits each using a process variable array.
 The `wr` and `rd` signals must be mutually exclusive - simultaneous assertion triggers the `error` output.
 Read operations are synchronous with registered outputs.
+
+---
 
 ## Source
 

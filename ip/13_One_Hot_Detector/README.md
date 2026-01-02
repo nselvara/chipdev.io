@@ -8,8 +8,8 @@ One-hot values have a single bit that is a `1` with all other bits being `0`. Ou
 
 ### Input and Output Signals
 
-`din` - Input value
-`onehot` - `1` if the input is a one-hot value and `0` otherwise
+- `din` - Input value
+- `onehot` - `1` if the input is a one-hot value and `0` otherwise
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -20,6 +20,8 @@ One-hot values have a single bit that is a `1` with all other bits being `0`. Ou
 Validates one-hot encoding by checking if exactly one bit is set.
 Uses the `is_one_hot()` utility function which returns true only when the input contains a single '1' bit with all others '0'.
 Common in FSM state encodings and bus arbitration where mutual exclusion is required.
+
+---
 
 ## Source
 

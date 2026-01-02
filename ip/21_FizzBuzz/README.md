@@ -12,17 +12,17 @@ As the circuit counts, output `fizz` should be asserted if the current counter v
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Synchronous, active low, reset signal
-`fizz` - Output Fizz
-`buzz` - Output Buzz
-`fizzbuzz` - Output FizzBuzz
+- `clk` - Clock signal
+- `resetn` - Synchronous, active low, reset signal
+- `fizz` - Output Fizz
+- `buzz` - Output Buzz
+- `fizzbuzz` - Output FizzBuzz
 
 ### Output signals during reset
 
-`fizz` - 1
-`buzz` - 1
-`fizzbuzz` - 1
+- `fizz` - 1
+- `buzz` - 1
+- `fizzbuzz` - 1
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -35,6 +35,8 @@ Each counter increments independently and wraps when reaching its maximum.
 The `fizz` and `buzz` outputs pulse high when their respective counters wrap.
 `fizzbuzz` is the logical AND of both, pulsing when divisible by both 3 and 5 (i.e., divisible by 15).
 A master `cycle_count` resets all counters after `MAX_CYCLES`.
+
+---
 
 ## Source
 

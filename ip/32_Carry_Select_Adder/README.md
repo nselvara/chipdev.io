@@ -10,9 +10,9 @@ In this question, implement a 24-bit Carry Select Adder (CSA) using multiple par
 
 ### Input and Output Signals
 
-`a` - First operand input word
-`b` - Second operand input word
-`result` - Output word corresponding to a plus b operation (25-bit word since both a and b are 24-bit)
+- `a` - First operand input word
+- `b` - Second operand input word
+- `result` - Output word corresponding to a plus b operation (25-bit word since both a and b are 24-bit)
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -27,6 +27,8 @@ Each stage instantiates two ripple-carry adders computing results for both carry
 A multiplexer chain selects the correct sum based on the actual carry from the previous stage.
 When `DATA_WIDTH` doesn't divide evenly by `STAGES`, remaining bits form an additional stage.
 This architecture trades area for reduced carry propagation delay compared to pure ripple-carry.
+
+---
 
 ## Source
 

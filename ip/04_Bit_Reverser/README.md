@@ -19,13 +19,13 @@ When the reset-low signal (resetn) goes to 0, the Gray code sequence should rest
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Synchronous reset-low signal
-`out` - Gray code counter value
+- `clk` - Clock signal
+- `resetn` - Synchronous reset-low signal
+- `out` - Gray code counter value
 
 ### Output signals during reset
 
-`out` - 0 when resetn is active
+- `out` - 0 when resetn is active
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -35,6 +35,8 @@ When the reset-low signal (resetn) goes to 0, the Gray code sequence should rest
 
 Combinational bit-reversal circuit using a loop that maps `dout(i) <= din(din'high - i)` to mirror the input vector.
 Synthesises to pure wiring with no logic gates required.
+
+---
 
 ## Source
 

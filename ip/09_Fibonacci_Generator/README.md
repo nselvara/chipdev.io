@@ -18,13 +18,13 @@ The sequence should be produced when the active low signal (`resetn`) becomes ac
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Synchronous reset-low signal
-`out` - Current Fibonacci number
+- `clk` - Clock signal
+- `resetn` - Synchronous reset-low signal
+- `out` - Current Fibonacci number
 
 ### Output signals during reset
 
-`out` - `1` when `resetn` is active (the first `1` of the Fibonacci sequence)
+- `out` - `1` when `resetn` is active (the first `1` of the Fibonacci sequence)
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -40,6 +40,8 @@ The sequence should be produced when the active low signal (`resetn`) becomes ac
 Fibonacci sequence generator using a 2-element pipeline holding the previous two values.
 Each clock cycle computes `sum = fib[1] + fib[0]`, then shifts the pipeline left, discarding the oldest value and inserting the new sum.
 The pipeline initialises to `[1, 1]` and produces the sequence 1, 1, 2, 3, 5, 8, 13...
+
+---
 
 ## Source
 

@@ -14,15 +14,15 @@ When reset (`resetn`) is active, the input value that is being shifted is treate
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Synchronous reset-low signal
-`din` - Input signal
-`din_en` - Enable signal for input data
-`dout` - Output signal
+- `clk` - Clock signal
+- `resetn` - Synchronous reset-low signal
+- `din` - Input signal
+- `din_en` - Enable signal for input data
+- `dout` - Output signal
 
 ### Output signals during reset
 
-`dout` - `0` when `resetn` is active
+- `dout` - `0` when `resetn` is active
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -38,6 +38,8 @@ When reset (`resetn`) is active, the input value that is being shifted is treate
 Serializer that captures a parallel input word when `din_en` asserts and shifts it out LSB-first over subsequent clock cycles.
 A `bit_index` counter tracks which bit to output, incrementing from 0 to `DATA_WIDTH-1`.
 The captured data remains in `din_reg` until the entire word is transmitted, then zeros out.
+
+---
 
 ## Source
 

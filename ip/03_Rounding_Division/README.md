@@ -8,8 +8,8 @@ Divide an input number by a power of two and round the result to the nearest int
 
 ### Input and Output Signals
 
-`din` - Input number
-`dout` - Rounded result
+- `din` - Input number
+- `dout` - Rounded result
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -21,6 +21,8 @@ Divider that performs power-of-2 division with rounding.
 The division is accomplished via right-shift by `DIV_LOG2` positions.
 The rounding logic examines the bit at position `DIV_LOG2-1` (representing the 0.5 threshold) - if this bit is set, it adds 1 to the quotient.
 The `resize()` function handles saturation when the result overflows the output width.
+
+---
 
 ## Source
 

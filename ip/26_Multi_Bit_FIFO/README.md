@@ -14,19 +14,19 @@ Important: There are at least three possible states in this design: (1) Empty; (
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Active-low, reset signal
-`din` - FIFO input data
-`wr` - Active-high, write signal
-`dout` - FIFO output data
-`full` - Full FIFO indicator
-`empty` - Empty FIFO indicator
+- `clk` - Clock signal
+- `resetn` - Active-low, reset signal
+- `din` - FIFO input data
+- `wr` - Active-high, write signal
+- `dout` - FIFO output data
+- `full` - Full FIFO indicator
+- `empty` - Empty FIFO indicator
 
 ### Output signals during reset
 
-`dout` - 0
-`full` - 0
-`empty` - 1
+- `dout` - 0
+- `full` - 0
+- `empty` - 1
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -38,6 +38,8 @@ Two-deep shift-register FIFO. Each write shifts all entries up by one position a
 The `write_count` variable tracks occupancy (0=empty, 1=one entry, 2=full).
 Output comes from `memory(write_count - 1)`, always pointing to the oldest entry.
 The array range extends to -1 to avoid indexing errors when evaluating expressions in the empty state.
+
+---
 
 ## Source
 

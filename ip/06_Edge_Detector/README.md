@@ -10,14 +10,14 @@ Bonus - can you enhance your design to pulse `dout` on the same cycle as the ris
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Synchronous reset-low signal
-`din` - Input signal
-`dout` - Output signal
+- `clk` - Clock signal
+- `resetn` - Synchronous reset-low signal
+- `din` - Input signal
+- `dout` - Output signal
 
 ### Output signals during reset
 
-`dout` - `0` when `resetn` is active
+- `dout` - `0` when `resetn` is active
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -27,6 +27,8 @@ Bonus - can you enhance your design to pulse `dout` on the same cycle as the ris
 
 Rising edge detector that registers the previous input value each clock cycle and outputs a single-cycle pulse when `din='1'` and differs from the registered value.
 The comparison `din /= din_reg` detects the transition, while the `din = '1'` check ensures it's specifically a rising edge.
+
+---
 
 ## Source
 

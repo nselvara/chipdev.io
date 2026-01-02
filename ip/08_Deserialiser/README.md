@@ -10,14 +10,14 @@ Once the number of input bits received is larger than `DATA_WIDTH`, only the `DA
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Synchronous reset-low signal
-`din` - Input signal
-`dout` - Output signal
+- `clk` - Clock signal
+- `resetn` - Synchronous reset-low signal
+- `din` - Input signal
+- `dout` - Output signal
 
 ### Output signals during reset
 
-`dout` - `0` when `resetn` is active
+- `dout` - `0` when `resetn` is active
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -33,6 +33,8 @@ Once the number of input bits received is larger than `DATA_WIDTH`, only the `DA
 Deserialiser that reconstructs a parallel word from serial input.
 Each clock cycle shifts the output register left and inserts the new `din` bit at the LSB position using the concatenation `dout <= dout(dout'high - 1 downto 0) & din`.
 After `DATA_WIDTH` clock cycles, the complete word appears at the output.
+
+---
 
 ## Source
 

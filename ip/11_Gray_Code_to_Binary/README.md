@@ -12,8 +12,8 @@ In the standard encoding the least significant bit follows a repetitive pattern 
 
 ### Input and Output Signals
 
-`gray` - Input signal, interpreted as an element of the Gray code sequence
-`bin` - Index of the Gray code sequence the input corresponds to
+- `gray` - Input signal, interpreted as an element of the Gray code sequence
+- `bin` - Index of the Gray code sequence the input corresponds to
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -25,6 +25,8 @@ Gray-to-binary decoder using iterative XOR reduction.
 Starting with the Gray code input, it repeatedly XORs the current value with itself right-shifted by 1, accumulating the result.
 The loop continues until the mask (shifted value) becomes zero.
 This implements the standard conversion where each binary bit equals the XOR of all Gray code bits from that position to the MSB.
+
+---
 
 ## Source
 

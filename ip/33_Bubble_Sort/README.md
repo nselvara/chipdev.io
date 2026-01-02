@@ -10,15 +10,15 @@ Input `sortit` is an asynchronous signal, coming from another module. Assume the
 
 ### Input and Output Signals
 
-`din` - Unsigned data input word
-`sortit` - Sort input bit
-`clk` - Clock signal
-`resetn` - Synchronous, active low, reset signal
-`dout` - Output word corresponding to the sorted, concantenated memory-stored values when sortit is asserted
+- `din` - Unsigned data input word
+- `sortit` - Sort input bit
+- `clk` - Clock signal
+- `resetn` - Synchronous, active low, reset signal
+- `dout` - Output word corresponding to the sorted, concantenated memory-stored values when sortit is asserted
 
 ### Output signals during reset
 
-`dout` - 0
+- `dout` - 0
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -33,6 +33,8 @@ During collection phase, incoming data fills a memory array via a wrapping count
 When triggered, the `bubble_sorter` function performs nested-loop comparisons, swapping adjacent elements when out of order.
 The sorted result is reformatted with the largest value in the MSBs via `get_sorted_vector`.
 `O(n^2)` time complexity executed combinationally within one clock cycle.
+
+---
 
 ## Source
 

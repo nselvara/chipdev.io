@@ -10,8 +10,8 @@ A palindrome binary representation means that the binary representation has the 
 
 ### Input and Output Signals
 
-`din` - Input value
-`dout` - `1` if the binary representation is a palindrome, `0` otherwise
+- `din` - Input value
+- `dout` - `1` if the binary representation is a palindrome, `0` otherwise
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -21,6 +21,8 @@ A palindrome binary representation means that the binary representation has the 
 
 Palindrome detector that reverses the input vector via a generate loop assigning `din_reversed(i) <= din(i)` with reversed range declaration.
 The equality comparison `din = din_reversed` then determines if the bit pattern is symmetric. Pure combinational logic.
+
+---
 
 ## Source
 

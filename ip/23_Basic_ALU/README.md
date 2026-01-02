@@ -10,14 +10,14 @@ The ALU is an important part of many modern computing systems. Conventional ALUs
 
 ### Input and Output Signals
 
-`a` - First operand input
-`b` - Second operand input
-`a_plus_b` - Output `a` plus `b`
-`a_minus_b` - Output `a` minus `b`
-`not_a` - Output not `a` (ones complement)
-`a_and_b` - Output `a` bitwise-and `b`
-`a_or_b` - Output `a` bitwise-or `b`
-`a_xor_b` - Output `a` exclusive-or `b`
+- `a` - First operand input
+- `b` - Second operand input
+- `a_plus_b` - Output `a` plus `b`
+- `a_minus_b` - Output `a` minus `b`
+- `not_a` - Output not `a` (ones complement)
+- `a_and_b` - Output `a` bitwise-and `b`
+- `a_or_b` - Output `a` bitwise-or `b`
+- `a_xor_b` - Output `a` exclusive-or `b`
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -28,6 +28,8 @@ The ALU is an important part of many modern computing systems. Conventional ALUs
 Combinational ALU providing six parallel operations: addition, subtraction, NOT, AND, OR, and XOR.
 All operations compute concurrently on the same inputs with results appearing at separate output ports.
 The `resize()` function handles overflow saturation for arithmetic operations.
+
+---
 
 ## Source
 

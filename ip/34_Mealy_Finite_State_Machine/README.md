@@ -12,17 +12,17 @@ Try to solve this question using a textbook Mealy FSM approach. Sketch the state
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Synchronous, active low, reset signal
-`cen` - Chip enable
-`din` - 1-bit input a
-`doutx` - 1-bit output x
-`douty` - 1-bit output y
+- `clk` - Clock signal
+- `resetn` - Synchronous, active low, reset signal
+- `cen` - Chip enable
+- `din` - 1-bit input a
+- `doutx` - 1-bit output x
+- `douty` - 1-bit output y
 
 ### Output signals during reset
 
-`doutx` - 0
-`douty` - 0
+- `doutx` - 0
+- `douty` - 0
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -37,6 +37,8 @@ Five states track input history: S0 (initial), S1/S2 (saw zeros), S3/S4 (saw one
 The `din_reg` and `cen_reg` signals capture inputs synchronously to avoid combinational timing issues.
 Output `doutx` pulses when receiving consecutive matching bits (00 or 11), while `douty` requires at least two previous matching bits.
 Both outputs gate through `cen_reg` for external enable control.
+
+---
 
 ## Source
 

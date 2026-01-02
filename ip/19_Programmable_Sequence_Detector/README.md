@@ -12,15 +12,15 @@ When `resetn` goes active, all previously seen bits on the input are no longer c
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Synchronous reset-low signal
-`init` - Target sequence to detect. Updated whenever `resetn` is asserted
-`din` - Input bits
-`seen` - `1` if the sequence specified by `init` was detected, `0` otherwise
+- `clk` - Clock signal
+- `resetn` - Synchronous reset-low signal
+- `init` - Target sequence to detect. Updated whenever `resetn` is asserted
+- `din` - Input bits
+- `seen` - `1` if the sequence specified by `init` was detected, `0` otherwise
 
 ### Output signals during reset
 
-`seen` - `0` when `resetn` is active
+- `seen` - `0` when `resetn` is active
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -31,6 +31,8 @@ When `resetn` goes active, all previously seen bits on the input are no longer c
 Run-time programmable sequence detector that captures the target pattern from `init` during reset.
 A shift register accumulates incoming bits while `din_count` tracks how many bits have been received.
 The `seen` output asserts only after exactly `DATA_WIDTH` bits have been collected and the shift register matches the programmed pattern.
+
+---
 
 ## Source
 

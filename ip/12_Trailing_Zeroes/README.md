@@ -8,8 +8,8 @@ Find the number of trailing `0`s in the binary representation of the input (`din
 
 ### Input and Output Signals
 
-`din` - Input value
-`dout` - Number of trailing `0`s
+- `din` - Input value
+- `dout` - Number of trailing `0`s
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -20,6 +20,8 @@ Find the number of trailing `0`s in the binary representation of the input (`din
 Counts consecutive zero bits starting from the LSB.
 Uses the `get_amount_of_trailing_state()` utility function to identify how many zeros appear before the first '1' bit.
 The output width includes an extra bit (`to_bits(DATA_WIDTH) + 1`) to represent the case where all bits are zero.
+
+---
 
 ## Source
 

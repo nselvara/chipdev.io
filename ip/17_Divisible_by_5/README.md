@@ -14,14 +14,14 @@ This problem is tricky, so it may help to think in terms of modulus and remainde
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Synchronous reset-low signal
-`din` - Input bit
-`dout` - `1` if the current value is divisible by `5`, `0` otherwise
+- `clk` - Clock signal
+- `resetn` - Synchronous reset-low signal
+- `din` - Input bit
+- `dout` - `1` if the current value is divisible by `5`, `0` otherwise
 
 ### Output signals during reset
 
-`dout` - `0` when `resetn` is active
+- `dout` - `0` when `resetn` is active
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -33,6 +33,8 @@ Bitwise divisibility-by-5 detector using modular arithmetic FSM.
 Powers of 2 modulo 5 cycle as {1,2,4,3,1...}, which the state machine tracks across five remainder states {0,1,2,3,4}.
 Each input bit transitions the state according to its positional contribution modulo 5.
 Divisible when final state is `rem_0`.
+
+---
 
 ## Source
 

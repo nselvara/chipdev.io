@@ -14,14 +14,14 @@ This problem is tricky, so it may help to think in terms of modulus and remainde
 
 ### Input and Output Signals
 
-`clk` - Clock signal
-`resetn` - Synchronous reset-low signal
-`din` - Input bit
-`dout` - `1` if the current value is divisible by `3`, `0` otherwise
+- `clk` - Clock signal
+- `resetn` - Synchronous reset-low signal
+- `din` - Input bit
+- `dout` - `1` if the current value is divisible by `3`, `0` otherwise
 
 ### Output signals during reset
 
-`dout` - `0` when `resetn` is asserted
+- `dout` - `0` when `resetn` is asserted
 
 > [!NOTE]
 > For the complete problem description, please visit:
@@ -33,6 +33,8 @@ Bitwise divisibility-by-3 detector using modular arithmetic FSM.
 Exploits the property that powers of 2 modulo 3 alternate between 1 and 2 (2^0≡1, 2^1≡2, 2^2≡1...).
 The state machine tracks remainder {0,1,2} as each bit arrives, with state transitions encoding how each bit contributes to the running modulo-3 sum.
 Divisible when final state is `rem_0`.
+
+---
 
 ## Source
 
