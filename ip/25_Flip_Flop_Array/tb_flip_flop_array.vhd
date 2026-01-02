@@ -47,9 +47,9 @@ architecture tb of tb_flip_flop_array is
 begin
     generate_clock(clk => clk, FREQ => real(1 sec / CLK_PERIOD));
 
-    ------------------------------------------------------------                                               
+    ------------------------------------------------------------
     -- VUnit
-    ------------------------------------------------------------                                        
+    ------------------------------------------------------------
     test_runner_watchdog(runner, SIM_TIMEOUT);
 
     main: process
@@ -66,7 +66,7 @@ begin
         test_runner_cleanup(runner);
         wait;
     end process;
-                                                                
+
 
     checker: process
         constant PROPAGATION_TIME: time := 1 ns;
@@ -197,13 +197,13 @@ begin
                 11 => 0,    -- Write again to address 0
                 12 => 1,    -- Read from address 1 (shouldn't change)
                 13 => 0,    -- Read from address 0 (should be changed)
-                14 => 7,    -- 
-                15 => 7,    -- 
-                16 => 255,  -- 
-                17 => 255,  -- 
-                18 => 10,   -- 
-                19 => 10,   -- 
-                20 => 0     -- 
+                14 => 7,    --
+                15 => 7,    --
+                16 => 255,  --
+                17 => 255,  --
+                18 => 10,   --
+                19 => 10,   --
+                20 => 0     --
             );
             constant DIN_SEQUENCE: integer_vector := (
                 0 => 16#00#,    -- Reset
@@ -258,7 +258,7 @@ begin
         begin
             info("2.0) test_all_combinations");
 
-            -- Initialize expected output array
+            -- Initialise expected output array
             expected_dout_array := new_1d(length => 2**ADDRESS_WIDTH, bit_width => DATA_WIDTH, is_signed => false);
 
             for i in ADDR_SEQUENCE'low to ADDR_SEQUENCE'high loop
