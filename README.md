@@ -122,10 +122,42 @@ These examples serve as a learning resource or starting point for building, simu
 34. **Mealy Finite State Machine (FSM)** – 🟢 Easy – 🏢 Google, Microsoft
     - FSM where outputs depend on both current state and input.
 
+## Implementation Notes
+
+> [!NOTE]
+> **Deviations from ChipDev.io Specifications**
+>
+> This repository makes two consistent changes across all implementations:
+>
+> 1. **Reset signal naming**: ChipDev.io uses various names (`resetn`, `reset_n`, `reset`). This repository uniformly uses **`rst_n`** for consistency.
+>
+> 2. **Generic parameters**: Some quests specify hardcoded bit widths. This repository adds **`DATA_WIDTH`** and similar generic parameters where appropriate to improve reusability.
+>
+> Some signal names from the original problems (e.g., port naming conventions) may not be optimal but were preserved to maintain alignment with the source material. Quest-specific deviations are documented in individual README files.
+
+## Testbench Methodology
+
+> [!NOTE]
+> **Professional Verification Approach**
+>
+> All testbenches follow industry-standard practices:
+>
+> - **VUnit framework**: Automated test execution with pass/fail reporting
+> - **OSVVM RandomPkg**: Constrained-random stimulus generation for better coverage than sequential patterns
+> - **Dual verification**: Checker procedures use different coding styles than the DUT to avoid systematic errors
+> - **Edge case testing**: Explicit tests for boundary conditions, resets, and corner cases
+> - **ModelSim .do files**: Pre-configured waveform views for debugging
+>
+> Test strategies typically include:
+>
+> 1. **Directed tests**: Exhaustive testing of all valid states/combinations
+> 2. **Random tests**: Hundreds of randomized inputs to catch unexpected corner cases
+> 3. **Reset testing**: Verify proper initialization and reset behavior
+
 ## Minimum System Requirements
 
 - **OS**: (Anything that can run the following)
-  * **IDE**:
+  - **IDE**:
     - [`VSCode latest`](https://code.visualstudio.com/download) with following plugins:
       - [`Python`](https://marketplace.visualstudio.com/items?itemName=ms-python.python) by Microsoft
       - [`Pylance`](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) by Microsoft
@@ -133,8 +165,8 @@ These examples serve as a learning resource or starting point for building, simu
       - [`Draw.io Integration: WaveDrom plugin`](https://marketplace.visualstudio.com/items?itemName=nopeslide.vscode-drawio-plugin-wavedrom) by nopeslide
       - [`TerosHDL`](https://marketplace.visualstudio.com/items?itemName=teros-technology.teroshdl) by Teros Technology
       - [`VHDL-LS`](https://marketplace.visualstudio.com/items?itemName=hbohlin.vhdl-ls) by Henrik Bohlin (Deactivate the one provided by TerosHDL)
-  * **VHDL Simulator**: (Anything that supports **VHDL-2008**):
-  * **Script execution environment**:
+  - **VHDL Simulator**: (Anything that supports **VHDL-2008**):
+  - **Script execution environment**:
     - `Python 3.11.4` to automatise testing via **VUnit**
 
 ## Initial Setup
@@ -260,3 +292,17 @@ run_all_testbenches_lib(
     xunit_xml="./test/res.xml"    # Output file for test results
 )
 ```
+
+## License
+
+All VHDL source code, testbenches, and scripts in this repository are licensed under the GNU General Public License v3.0 (GPLv3).
+See the [LICENSE](./LICENSE) file for full details.
+
+> [!NOTE]
+> Problem statements and task descriptions referenced from [chipdev.io](https://chipdev.io) are **not** part of this license.
+> They are © chipdev.io and are used under fair use for educational purposes only.
+> This repository is not affiliated with or endorsed by chipdev.io.
+> This file and the accompanying VHDL code are licensed under GPLv3.
+
+> [!NOTE]
+> See [LICENSE-THIRD-PARTY](./LICENSE-THIRD-PARTY.md) for more.
