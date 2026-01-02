@@ -34,6 +34,51 @@ Exploits the property that powers of 2 modulo 3 alternate between 1 and 2 (2^0�
 The state machine tracks remainder {0,1,2} as each bit arrives, with state transitions encoding how each bit contributes to the running modulo-3 sum.
 Divisible when final state is `rem_0`.
 
+### State Diagram
+
+```mermaid
+stateDiagram-v2
+    [*] --> rem_0: reset
+
+    rem_0 --> rem_0: din=0<br/>dout=1
+    rem_0 --> rem_1: din=1<br/>dout=0
+
+    rem_1 --> rem_2: din=0<br/>dout=0
+    rem_1 --> rem_0: din=1<br/>dout=1
+
+    rem_2 --> rem_1: din=0<br/>dout=0
+    rem_2 --> rem_2: din=1<br/>dout=0
+
+    note right of rem_0
+        Remainder = 0
+        Divisible by 3!
+        dout = 1
+    end note
+
+    note right of rem_1
+        Remainder = 1
+        Not divisible
+        dout = 0
+    end note
+
+    note right of rem_2
+        Remainder = 2
+        Not divisible
+        dout = 0
+    end note
+```
+
+**State Transition Logic:**
+
+- When `din=0`: Left-shift the value (multiply by 2)
+  - rem_0 → rem_0: `(0×2) mod 3 = 0`
+  - rem_1 → rem_2: `(1×2) mod 3 = 2`
+  - rem_2 → rem_1: `(2×2) mod 3 = 1`
+- When `din=1`: Left-shift and add 1 (multiply by 2, add 1)
+  - rem_0 → rem_1: `(0×2+1) mod 3 = 1`
+  - rem_1 → rem_0: `(1×2+1) mod 3 = 0`
+  - rem_2 → rem_2: `(2×2+1) mod 3 = 2`
+
 ---
 
 ## Source

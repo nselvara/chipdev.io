@@ -39,6 +39,39 @@ Serializer that captures a parallel input word when `din_en` asserts and shifts 
 A `bit_index` counter tracks which bit to output, incrementing from 0 to `DATA_WIDTH-1`.
 The captured data remains in `din_reg` until the entire word is transmitted, then zeros out.
 
+### Operation Diagram
+
+```mermaid
+flowchart TD
+    Start([Start]) --> Reset{resetn?}
+    Reset -->|active| Zero[dout = 0<br/>din_reg = 0<br/>bit_index = 0]
+    Reset -->|inactive| CheckEn{din_en?}
+
+    CheckEn -->|yes| Capture[Capture din<br/>din_reg ← din<br/>bit_index = 0]
+    CheckEn -->|no| CheckIndex{bit_index <<br/>DATA_WIDTH?}
+
+    Capture --> OutputBit[dout ← din_reg bit_index]
+
+    CheckIndex -->|yes| OutputBit
+    CheckIndex -->|no| OutputZero[dout ← 0]
+
+    OutputBit --> Increment[bit_index++]
+    OutputZero --> NextCycle([Next Clock Cycle])
+    Increment --> NextCycle
+
+    NextCycle --> Reset
+
+    style Capture fill:#e1f5ff
+    style OutputBit fill:#ffe1e1
+    style OutputZero fill:#ffe1e1
+```
+
+**Timing:**
+
+- Cycle 0: `din_en=1` captures parallel word → outputs bit 0
+- Cycle 1-N: Shifts out bits 1 through DATA_WIDTH-1
+- Cycle N+1: All bits sent, outputs 0
+
 ---
 
 ## Source

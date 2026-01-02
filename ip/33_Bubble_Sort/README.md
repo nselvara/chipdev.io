@@ -34,6 +34,50 @@ When triggered, the `bubble_sorter` function performs nested-loop comparisons, s
 The sorted result is reformatted with the largest value in the MSBs via `get_sorted_vector`.
 `O(n^2)` time complexity executed combinationally within one clock cycle.
 
+### Operation Flowchart
+
+```mermaid
+flowchart TD
+    Start([Clock Edge]) --> CheckSort{sortit?}
+
+    CheckSort -->|0<br/>COLLECT| StoreDin[Store din in<br/>memory write_count<br/>write_count++]
+    CheckSort -->|1<br/>SORT| BubbleSort[Bubble Sort<br/>Algorithm]
+
+    StoreDin --> OutputZero[dout = 0]
+
+    BubbleSort --> OuterLoop["Outer Loop<br/>(i = 0 to N-1)"]
+    OuterLoop --> InnerLoop["Inner Loop<br/>(j = 0 to N-i-2)"]
+    InnerLoop --> Compare{"memory[j] ><br/>memory[j+1]?"}
+
+    Compare -->|yes| Swap[Swap<br/>memory j and j+1]
+    Compare -->|no| NoSwap[No swap]
+
+    Swap --> NextInner{More j?}
+    NoSwap --> NextInner
+
+    NextInner -->|yes| InnerLoop
+    NextInner -->|no| NextOuter{More i?}
+
+    NextOuter -->|yes| OuterLoop
+    NextOuter -->|no| Format[Format sorted<br/>memory to dout<br/>descending order]
+
+    Format --> OutputSorted[dout = sorted vector]
+
+    OutputZero --> NextCycle([Next Clock])
+    OutputSorted --> NextCycle
+
+    style StoreDin fill:#e1f5ff
+    style BubbleSort fill:#fff4e1
+    style Swap fill:#ffe1e1
+    style OutputSorted fill:#ffe1e1
+```
+
+**Key Points:**
+
+- Collection: `sortit=0` → accumulate 8 input values
+- Sorting: `sortit=1` → perform O(n²) bubble sort in **one clock cycle** (combinational)
+- Output: Sorted in descending order (largest value in MSBs)
+
 ---
 
 ## Source

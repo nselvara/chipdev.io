@@ -28,6 +28,71 @@ A multiplexer chain selects the correct sum based on the actual carry from the p
 When `DATA_WIDTH` doesn't divide evenly by `STAGES`, remaining bits form an additional stage.
 This architecture trades area for reduced carry propagation delay compared to pure ripple-carry.
 
+### Architecture Diagram
+
+```mermaid
+flowchart TD
+    subgraph "Stage 0 (bits 0-7)"
+        a0[a 7:0] --> RCA0_0[RCA<br/>cin=0]
+        b0[b 7:0] --> RCA0_0
+        a0 --> RCA0_1[RCA<br/>cin=1]
+        b0 --> RCA0_1
+
+        RCA0_0 --> sum0_0[sum if cin=0]
+        RCA0_1 --> sum0_1[sum if cin=1]
+        RCA0_0 --> c0_0[cout if cin=0]
+        RCA0_1 --> c0_1[cout if cin=1]
+
+        sum0_0 --> MUX0[MUX]
+        sum0_1 --> MUX0
+        zero[cin=0] --> MUX0
+        MUX0 --> result0[result 7:0]
+
+        c0_0 --> CMUX0[Carry<br/>MUX]
+        c0_1 --> CMUX0
+        zero --> CMUX0
+        CMUX0 --> carry0[carry to<br/>stage 1]
+    end
+
+    subgraph "Stage 1 (bits 8-15)"
+        a1[a 15:8] --> RCA1_0[RCA<br/>cin=0]
+        b1[b 15:8] --> RCA1_0
+        a1 --> RCA1_1[RCA<br/>cin=1]
+        b1 --> RCA1_1
+
+        RCA1_0 --> sum1_0[sum if cin=0]
+        RCA1_1 --> sum1_1[sum if cin=1]
+
+        sum1_0 --> MUX1[MUX]
+        sum1_1 --> MUX1
+        carry0 --> MUX1
+        MUX1 --> result1[result 15:8]
+
+        RCA1_0 --> CMUX1[Carry<br/>MUX]
+        RCA1_1 --> CMUX1
+        carry0 --> CMUX1
+        CMUX1 --> carry1[carry to<br/>stage 2]
+    end
+
+    subgraph "Stage 2 (bits 16-23)"
+        direction LR
+        dots[... similar structure ...]
+    end
+
+    carry1 --> dots
+    dots --> finalCarry[Final Carry]
+
+    style RCA0_0 fill:#e1f5ff
+    style RCA0_1 fill:#e1f5ff
+    style RCA1_0 fill:#e1f5ff
+    style RCA1_1 fill:#e1f5ff
+    style MUX0 fill:#fff4e1
+    style MUX1 fill:#fff4e1
+```
+
+**Key Advantage:** Stages compute in parallel, then quickly select correct result based on previous carry.
+**Critical Path:** One RCA delay + (STAGES × MUX delay) vs. full ripple of DATA_WIDTH stages.
+
 ---
 
 ## Source

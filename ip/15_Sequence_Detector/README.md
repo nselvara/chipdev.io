@@ -29,6 +29,56 @@ Parameterizable sequence detector using a shift register matched against a const
 Each clock shifts the serial input `din` into the register, with the code handling both ascending and descending bit orderings via compile-time selection.
 Detection pulses high when the shift register contents exactly match `SEQUENCE_PATTERN`.
 
+### State Diagram (for pattern "1010")
+
+```mermaid
+stateDiagram-v2
+    [*] --> IDLE: reset
+
+    IDLE --> SAW_1: din=1
+    IDLE --> IDLE: din=0
+
+    SAW_1 --> SAW_10: din=0
+    SAW_1 --> SAW_1: din=1
+
+    SAW_10 --> SAW_101: din=1
+    SAW_10 --> IDLE: din=0
+
+    SAW_101 --> DETECTED: din=0<br/>dout=1 ✓
+    SAW_101 --> SAW_1: din=1
+
+    DETECTED --> SAW_10: din=0
+    DETECTED --> SAW_1: din=1
+
+    note right of IDLE
+        shift_reg = xxxx
+        No match yet
+    end note
+
+    note right of SAW_1
+        shift_reg = xxx1
+        Partial match: "1"
+    end note
+
+    note right of SAW_10
+        shift_reg = xx10
+        Partial match: "10"
+    end note
+
+    note right of SAW_101
+        shift_reg = x101
+        Partial match: "101"
+    end note
+
+    note right of DETECTED
+        shift_reg = 1010
+        FULL MATCH!
+        dout pulses high
+    end note
+```
+
+**Implementation:** Shift register continuously shifts `din` in, comparator checks if register equals `SEQUENCE_PATTERN` ("1010").
+
 ---
 
 ## Source

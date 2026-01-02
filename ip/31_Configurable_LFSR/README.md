@@ -33,6 +33,54 @@ The `tap` input specifies which bit positions contribute to the feedback calcula
 Each clock cycle computes the feedback bit as the XOR reduction of all tapped positions (`xor(tap_reg and shift_reg)`), then shifts this feedback into the LSB.
 The tap configuration and seed value are captured during reset.
 
+### Architecture Diagram
+
+```mermaid
+flowchart LR
+    subgraph "Shift Register"
+        direction LR
+        bit0[Bit 0<br/>LSB] --> bit1[Bit 1]
+        bit1 --> bit2[Bit 2]
+        bit2 --> dots[...]
+        dots --> bitN[Bit N-1<br/>MSB]
+    end
+
+    subgraph "Feedback Logic"
+        direction TB
+        bit0 -.->|if tap 0=1| xor[XOR Tree]
+        bit1 -.->|if tap 1=1| xor
+        bit2 -.->|if tap 2=1| xor
+        bitN -.->|if tap N-1=1| xor
+        xor --> fb[Feedback Bit]
+    end
+
+    fb -->|shift in| bit0
+    bitN -->|dout| output[Output]
+
+    tap[tap register] -.->|controls| xor
+
+    style fb fill:#ffe1e1
+    style output fill:#ffe1e1
+    style xor fill:#fff4e1
+    style bit0 fill:#e1f5ff
+    style bit1 fill:#e1f5ff
+    style bit2 fill:#e1f5ff
+    style bitN fill:#e1f5ff
+```
+
+**Example (8-bit):**
+
+```
+tap = 8'b1011_0101 means XOR bits [7,5,4,2,0]
+feedback = dout[7] XOR dout[5] XOR dout[4] XOR dout[2] XOR dout[0]
+```
+
+**Operation:**
+
+1. Calculate feedback = XOR of all tapped bit positions
+2. Shift register right: `{feedback, dout[N-1:1]}`
+3. Output = MSB of shift register
+
 ---
 
 ## Source

@@ -34,6 +34,62 @@ Powers of 2 modulo 5 cycle as {1,2,4,3,1...}, which the state machine tracks acr
 Each input bit transitions the state according to its positional contribution modulo 5.
 Divisible when final state is `rem_0`.
 
+### State Diagram
+
+```mermaid
+stateDiagram-v2
+    [*] --> rem_0: reset
+
+    rem_0 --> rem_0: din=0<br/>dout=1
+    rem_0 --> rem_1: din=1<br/>dout=0
+
+    rem_1 --> rem_2: din=0<br/>dout=0
+    rem_1 --> rem_3: din=1<br/>dout=0
+
+    rem_2 --> rem_4: din=0<br/>dout=0
+    rem_2 --> rem_0: din=1<br/>dout=1
+
+    rem_3 --> rem_1: din=0<br/>dout=0
+    rem_3 --> rem_2: din=1<br/>dout=0
+
+    rem_4 --> rem_3: din=0<br/>dout=0
+    rem_4 --> rem_4: din=1<br/>dout=0
+
+    note right of rem_0
+        Remainder = 0
+        Divisible by 5!
+        dout = 1
+    end note
+
+    note right of rem_1
+        Remainder = 1
+        Not divisible
+    end note
+
+    note right of rem_2
+        Remainder = 2
+        Not divisible
+    end note
+
+    note right of rem_3
+        Remainder = 3
+        Not divisible
+    end note
+
+    note right of rem_4
+        Remainder = 4
+        Not divisible
+    end note
+```
+
+**Powers of 2 mod 5 cycle:** {1, 2, 4, 3, 1, 2, 4, 3, ...}
+
+- 2^0 mod 5 = 1
+- 2^1 mod 5 = 2
+- 2^2 mod 5 = 4
+- 2^3 mod 5 = 3
+- 2^4 mod 5 = 1 (cycle repeats)
+
 ---
 
 ## Source

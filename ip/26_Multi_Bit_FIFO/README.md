@@ -39,6 +39,64 @@ The `write_count` variable tracks occupancy (0=empty, 1=one entry, 2=full).
 Output comes from `memory(write_count - 1)`, always pointing to the oldest entry.
 The array range extends to -1 to avoid indexing errors when evaluating expressions in the empty state.
 
+### State Diagram
+
+```mermaid
+stateDiagram-v2
+    [*] --> EMPTY: reset
+
+    EMPTY --> INTERMEDIATE: wr=1<br/>write_count=1
+    EMPTY --> EMPTY: wr=0
+
+    INTERMEDIATE --> FULL: wr=1<br/>write_count=2
+    INTERMEDIATE --> INTERMEDIATE: wr=0
+
+    FULL --> FULL: wr=1<br/>(shift & overwrite)
+    FULL --> FULL: wr=0
+
+    note right of EMPTY
+        write_count = 0
+        empty = 1
+        full = 0
+        dout = 0
+    end note
+
+    note right of INTERMEDIATE
+        write_count = 1
+        empty = 0
+        full = 0
+        dout = memory(0)
+    end note
+
+    note right of FULL
+        write_count = 2
+        empty = 0
+        full = 1
+        dout = memory(1)
+    end note
+```
+
+### Data Flow
+
+```mermaid
+flowchart LR
+    din[din] -->|wr=1| mem0[memory 0<br/>newest]
+    mem0 -->|shift| mem1[memory 1<br/>oldest]
+
+    mem0 -.->|write_count=1| mux[MUX]
+    mem1 -.->|write_count=2| mux
+    mux --> dout[dout]
+
+    wc[write_count] -->|select| mux
+
+    style din fill:#e1f5ff
+    style dout fill:#ffe1e1
+    style mem0 fill:#fff4e1
+    style mem1 fill:#fff4e1
+```
+
+**Zero-latency design:** Output `dout` directly reflects the oldest entry via multiplexer, not registered.
+
 ---
 
 ## Source

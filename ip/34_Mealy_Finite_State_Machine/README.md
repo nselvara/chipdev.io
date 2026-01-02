@@ -38,6 +38,55 @@ The `din_reg` and `cen_reg` signals capture inputs synchronously to avoid combin
 Output `doutx` pulses when receiving consecutive matching bits (00 or 11), while `douty` requires at least two previous matching bits.
 Both outputs gate through `cen_reg` for external enable control.
 
+### State Diagram
+
+```mermaid
+stateDiagram-v2
+    [*] --> S0: reset
+
+    S0 --> S1: din_reg=0
+    S0 --> S3: din_reg=1
+
+    S1 --> S2: din_reg=0<br/>doutx=1
+    S1 --> S3: din_reg=1
+
+    S2 --> S2: din_reg=0<br/>doutx=1, douty=1
+    S2 --> S3: din_reg=1
+
+    S3 --> S1: din_reg=0
+    S3 --> S4: din_reg=1<br/>doutx=1
+
+    S4 --> S1: din_reg=0
+    S4 --> S4: din_reg=1<br/>doutx=1, douty=1
+
+    note right of S0
+        Initial state
+        No history yet
+    end note
+
+    note right of S1
+        Saw one 0
+    end note
+
+    note right of S2
+        Saw 2+ consecutive 0s
+    end note
+
+    note right of S3
+        Saw one 1
+    end note
+
+    note right of S4
+        Saw 2+ consecutive 1s
+    end note
+```
+
+**Output Logic:**
+
+- `doutx = 1` when two consecutive matching bits (shown on transitions)
+- `douty = 1` when three consecutive matching bits (only in S2/S4)
+- Both outputs gated by `cen_reg`
+
 ---
 
 ## Source

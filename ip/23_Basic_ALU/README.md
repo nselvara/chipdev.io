@@ -29,6 +29,51 @@ Combinational ALU providing six parallel operations: addition, subtraction, NOT,
 All operations compute concurrently on the same inputs with results appearing at separate output ports.
 The `resize()` function handles overflow saturation for arithmetic operations.
 
+### Architecture Diagram
+
+```mermaid
+flowchart TD
+    a[Input: a] --> add[+ Adder]
+    b[Input: b] --> add
+    add --> a_plus_b[Output: a_plus_b]
+
+    a --> sub[- Subtractor]
+    b --> sub
+    sub --> a_minus_b[Output: a_minus_b]
+
+    a --> not[NOT Gate]
+    not --> not_a[Output: not_a]
+
+    a --> and[AND Gate]
+    b --> and
+    and --> a_and_b[Output: a_and_b]
+
+    a --> or[OR Gate]
+    b --> or
+    or --> a_or_b[Output: a_or_b]
+
+    a --> xor[XOR Gate]
+    b --> xor
+    xor --> a_xor_b[Output: a_xor_b]
+
+    style a fill:#e1f5ff
+    style b fill:#e1f5ff
+    style a_plus_b fill:#ffe1e1
+    style a_minus_b fill:#ffe1e1
+    style not_a fill:#ffe1e1
+    style a_and_b fill:#ffe1e1
+    style a_or_b fill:#ffe1e1
+    style a_xor_b fill:#ffe1e1
+    style add fill:#fff4e1
+    style sub fill:#fff4e1
+    style not fill:#fff4e1
+    style and fill:#fff4e1
+    style or fill:#fff4e1
+    style xor fill:#fff4e1
+```
+
+**Key Feature:** All operations execute in parallel (combinational logic only).
+
 ---
 
 ## Source

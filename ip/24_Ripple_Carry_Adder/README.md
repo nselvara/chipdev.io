@@ -28,6 +28,59 @@ A generate loop instantiates DATA_WIDTH full adders, with each stage's carry-out
 The first stage uses the external `cin` input.
 Exposes internal carry signals via `cout_int` for use in advanced adder topologies like carry-select adders.
 
+### Architecture Diagram
+
+```mermaid
+flowchart LR
+    subgraph "Stage 0 (LSB)"
+        a0[a 0] --> FA0[Full<br/>Adder 0]
+        b0[b 0] --> FA0
+        cin[cin] --> FA0
+        FA0 --> s0[sum 0]
+        FA0 --> c0[carry 0]
+    end
+
+    subgraph "Stage 1"
+        a1[a 1] --> FA1[Full<br/>Adder 1]
+        b1[b 1] --> FA1
+        c0 --> FA1
+        FA1 --> s1[sum 1]
+        FA1 --> c1[carry 1]
+    end
+
+    subgraph "Stage 2"
+        a2[a 2] --> FA2[Full<br/>Adder 2]
+        b2[b 2] --> FA2
+        c1 --> FA2
+        FA2 --> s2[sum 2]
+        FA2 --> c2[carry 2]
+    end
+
+    subgraph "..."
+        dots[...]
+    end
+
+    subgraph "Stage N-1 (MSB)"
+        aN[a N-1] --> FAN[Full<br/>Adder N-1]
+        bN[b N-1] --> FAN
+        cN1[carry N-2] --> FAN
+        FAN --> sN[sum N-1]
+        FAN --> cout[cout<br/>overflow]
+    end
+
+    c2 -.->|ripple| dots
+    dots -.->|ripple| cN1
+
+    style FA0 fill:#e1f5ff
+    style FA1 fill:#e1f5ff
+    style FA2 fill:#e1f5ff
+    style FAN fill:#e1f5ff
+    style cout fill:#ffe1e1
+```
+
+**Carry Propagation:** Each stage must wait for the previous stage's carry before computing its result.
+**Critical Path:** Carry ripples through all stages from LSB to MSB.
+
 ---
 
 ## Source

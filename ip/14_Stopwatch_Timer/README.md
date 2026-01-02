@@ -35,6 +35,49 @@ The `start_reg` variable latches the start condition, continuing the count until
 When the counter reaches MAX, it wraps to zero.
 The start signal acts as a sticky enable - once asserted, counting continues autonomously until explicitly stopped.
 
+### State Diagram
+
+```mermaid
+stateDiagram-v2
+    [*] --> RESET: reset=1
+
+    RESET --> STOPPED: reset=0
+
+    STOPPED --> COUNTING: start_in=1
+    STOPPED --> RESET: reset=1
+
+    COUNTING --> COUNTING: count++<br/>(wrap at MAX)
+    COUNTING --> STOPPED: stop_in=1
+    COUNTING --> RESET: reset=1
+
+    note right of RESET
+        count_out = 0
+        start_reg = 0
+        Priority: Highest
+    end note
+
+    note right of STOPPED
+        count_out = frozen
+        start_reg = 0
+        Waiting for start
+    end note
+
+    note right of COUNTING
+        count_out increments
+        each clock cycle
+        start_reg = 1
+    end note
+```
+
+**Control Priority:** `reset` > `stop_in` > `start_in`
+
+**Operation:**
+
+- `start_in` latches into `start_reg` (sticky enable)
+- Once started, counting continues automatically
+- `stop_in` clears `start_reg` to halt counting
+- Counter wraps to 0 when reaching MAX
+
 ---
 
 ## Source
