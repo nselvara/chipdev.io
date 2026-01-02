@@ -1,5 +1,6 @@
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 [![VUnit Tests](https://github.com/nselvara/chipdev.io/workflows/VUnit%20Tests/badge.svg)](https://github.com/nselvara/chipdev.io/actions)
+[![Tests](https://gist.githubusercontent.com/nselvara/cc050d27587b0722b2e41f143fa9e2d5/raw/badge.svg)](https://github.com/nselvara/chipdev.io/actions/workflows/vunit.yml)
 
 # ChipDev.io Quest Solutions – in VHDL-2008
 
