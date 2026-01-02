@@ -19,17 +19,17 @@ jobs:
     timeout-minutes: 30  # Prevent runaway jobs
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           submodules: recursive
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@7f4fc3e22c37d6ff65e88745f38bd3157c663f7c # v4.9.1
         with:
           python-version: '3.9'
 
       - name: Set up NVC simulator
-        uses: nickg/setup-nvc@v1
+        uses: nickg/setup-nvc@420b0bca758e7ebdca50d1b58771b67f719189ef # v1
         with:
           version: latest
 
@@ -56,22 +56,22 @@ jobs:
           VUNIT_CI_MODE: "true"
         timeout-minutes: 15  # Test execution timeout
 
-      - name: Generate XUnit Viewer Report  
-        uses: AutoModality/action-xunit-viewer@v1
+      - name: Generate XUnit Viewer Report
+        uses: AutoModality/action-xunit-viewer@7cb0d0fc8cc104017ac5ebd7d9082213a311d4a2 # v1
         if: always()
         with:
           results: test-reports/vunit_results.xml
           title: HDL Core Library Test Results
 
       - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
+        uses: EnricoMi/publish-unit-test-result-action@12fa20e14d449d310778f2d0af1e3b2f57dde2a7 # v2
         if: always()
         with:
           files: test-reports/vunit_results.xml
           check_name: VUnit Test Results
 
       - name: Upload test results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: always()
         with:
           name: test-results
