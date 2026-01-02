@@ -39,10 +39,13 @@ begin
 
         impure function bubble_sorter return memory_array_t is
             variable swap: boolean;
+            variable lower_idx_value, higher_idx_value: unsigned(din'range);
         begin
             for i in VECTOR_SIZE - 1 downto 0 loop
                 inner_loop: for mem_idx in 1 to VECTOR_SIZE - 1 loop
-                    swap := unsigned(memory(mem_idx - 1)) > unsigned(memory(mem_idx));
+                    lower_idx_value := unsigned(memory(mem_idx - 1));
+                    higher_idx_value := unsigned(memory(mem_idx));
+                    swap := lower_idx_value > higher_idx_value;
                     if swap then
                         temp := memory(mem_idx - 1);
                         memory(mem_idx - 1) := memory(mem_idx);

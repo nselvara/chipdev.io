@@ -128,31 +128,31 @@ begin
 
         procedure test_example_1 is
             type expected_array_t is array (0 to VECTOR_SIZE - 1) of dout'subtype;
-            constant TEST_VALUES: memory_array_t := (
+            constant DIN_SEQUENCE: memory_array_t := (
                 "010", "011", "001", "100", "101", "111", "100", "001"
             );
-            constant EXPECTED_OUTPUT: expected_array_t := (
+            constant SORTIT_SEQUENCE: std_ulogic_vector(0 to VECTOR_SIZE - 1) := "00011111";
+            constant EXPECTED_DOUT_SEQUENCE: expected_array_t := (
                 0 to 2 => (others => '0'),
                 others => std_ulogic_vector(to_unsigned(16#53#, dout'length))
             );
-            constant SORTIT_VECTOR: std_ulogic_vector(0 to VECTOR_SIZE - 1) := "00011111";
         begin
             info("1.0) test_example_1" & LF);
             reset_module;
             start_module;
 
             for i in 0 to VECTOR_SIZE - 1 loop
-                din <= TEST_VALUES(i);
-                sortit <= SORTIT_VECTOR(i);
+                din <= DIN_SEQUENCE(i);
+                sortit <= SORTIT_SEQUENCE(i);
                 wait_clk_cycles(1);
-                check_equal(got => dout, expected => EXPECTED_OUTPUT(i), msg => "dout at cycle " & to_string(i));
+                check_equal(got => dout, expected => EXPECTED_DOUT_SEQUENCE(i), msg => "dout at cycle " & to_string(i));
             end loop;
 
             info("test_example_1 passed!" & LF);
         end procedure;
 
         procedure test_wrap_around is
-            variable TEST_VALUES: memory_array_t;
+            variable DIN_SEQUENCE: memory_array_t;
         begin
             info("2.0) test_wrap_around" & LF);
             reset_module;
@@ -160,15 +160,15 @@ begin
 
             sortit <= '0';
             for i in 0 to VECTOR_SIZE - 1 loop
-                TEST_VALUES(i) := random.RandSlv(Size => BITWIDTH);
-                din <= TEST_VALUES(i);
+                DIN_SEQUENCE(i) := random.RandSlv(Size => BITWIDTH);
+                din <= DIN_SEQUENCE(i);
                 wait_clk_cycles(1);
             end loop;
 
             sortit <= '1';
             wait_clk_cycles(1);
 
-            expected_sorted := selection_sort(input_array => TEST_VALUES);
+            expected_sorted := selection_sort(input_array => DIN_SEQUENCE);
             expected_output := array_to_vector(input_array => expected_sorted);
 
             check_equal(got => dout, expected => expected_output, msg => "Output should match expected sorted values (wrap around)");
