@@ -55,7 +55,14 @@ jobs:
         env:
           VUNIT_CI_MODE: "true"
         timeout-minutes: 15  # Test execution timeout
-
+      - name: Test Report
+        uses: dorny/test-reporter@c8370352934b730bc7f9acc17180a1f5f3964ffd # v2
+        if: ${{ !cancelled() }}
+        with:
+          name: VUnit Test Results
+          path: test-reports/vunit_results.xml
+          reporter: java-junit
+          fail-on-error: false
       - name: Generate XUnit Viewer Report
         uses: AutoModality/action-xunit-viewer@7cb0d0fc8cc104017ac5ebd7d9082213a311d4a2 # v1
         if: always()
