@@ -1,0 +1,43 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "pppppppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "01........"
+      },
+      {
+        "name": "din_en",
+        "wave": "010......."
+      },
+      {
+        "name": "din",
+        "wave": "x=x.......",
+        "data": [
+          "FB"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "0..1.01..."
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Serialiser \u2014 entity: serialiser",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (din=FB, LSB-first; load cycle emits stale bit)"
+  }
+}

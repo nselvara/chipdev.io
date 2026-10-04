@@ -1,0 +1,42 @@
+{
+  "signal": [
+    [
+      "Inputs",
+      {
+        "name": "din",
+        "wave": "=====",
+        "data": [
+          "50",
+          "00",
+          "FF",
+          "01",
+          "A0"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "=====",
+        "data": [
+          "0100",
+          "1000",
+          "0000",
+          "0000",
+          "0101"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Trailing Zeroes \u2014 entity: trailing_zeroes",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (50->0100, 00->1000) + all-ones (FF->0000)"
+  }
+}

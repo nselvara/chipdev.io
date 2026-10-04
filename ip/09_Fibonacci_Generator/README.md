@@ -43,6 +43,19 @@ The pipeline initialises to `[1, 1]` and produces the sequence 1, 1, 2, 3, 5, 8,
 
 ---
 
+## Waveform
+
+![Waveform](waveforms/waveform.svg)
+
+Timing diagram reconstructed from the entity ports and the example tests in [`tb_fibonacci_generator.vhd`](tb_fibonacci_generator.vhd).
+
+> [!NOTE]
+>
+> - WaveDrom source: [`waveforms/waveform.json`](waveforms/waveform.json)
+> - Preview/edit live in VS Code with the [Waveform Render](https://marketplace.visualstudio.com/items?itemName=bmpenuelas.waveform-render) extension
+> - Re-render: `npx wavedrom-cli -i waveforms/waveform.json -s waveforms/waveform.svg`
+> - :warning: Reconstructed diagram may contain mistakes — the testbench is the source of truth
+
 ## Source
 
 This quest is from [chipdev.io](https://chipdev.io/question/9).

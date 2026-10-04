@@ -1,0 +1,42 @@
+{
+  "signal": [
+    [
+      "Inputs",
+      {
+        "name": "din",
+        "wave": "=====",
+        "data": [
+          "00000001",
+          "000000FF",
+          "12345678",
+          "80000000",
+          "0000000B"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "=====",
+        "data": [
+          "80000000",
+          "FF000000",
+          "1E6A3448",
+          "00000001",
+          "D0000000"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 3
+  },
+  "head": {
+    "text": "Bit Reverser \u2014 entity: bit_reverser",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Derived: TB is 1000 random vectors; rows match the reverse_bits checker"
+  }
+}

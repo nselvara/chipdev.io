@@ -25,5 +25,5 @@ begin
         for i in din'range loop
             dout(i) <= din(din'high - i);
         end loop;
-    end process reverser;
+    end process;
 end architecture;

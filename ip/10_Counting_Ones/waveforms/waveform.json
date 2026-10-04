@@ -1,0 +1,42 @@
+{
+  "signal": [
+    [
+      "Inputs",
+      {
+        "name": "din",
+        "wave": "=====",
+        "data": [
+          "0000000B",
+          "00000000",
+          "FFFFFFFF",
+          "000000FF",
+          "A5A5A5A5"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "=====",
+        "data": [
+          "03",
+          "00",
+          "00",
+          "08",
+          "10"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 3
+  },
+  "head": {
+    "text": "Counting Ones \u2014 entity: counting_ones",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 + all-zeroes/all-ones (dout is 5 bits, wraps mod 32)"
+  }
+}

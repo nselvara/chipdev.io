@@ -33,5 +33,5 @@ begin
         end if;
 
         dout <= count xor shift_right(count, 1);
-    end process gray_code_counter;
+    end process;
 end architecture;

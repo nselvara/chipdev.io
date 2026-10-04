@@ -1,0 +1,57 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "pppppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "1......."
+      },
+      {
+        "name": "din",
+        "wave": "========",
+        "data": [
+          "010",
+          "011",
+          "001",
+          "100",
+          "101",
+          "111",
+          "100",
+          "001"
+        ]
+      },
+      {
+        "name": "sortit",
+        "wave": "0..1...."
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "0...====",
+        "data": [
+          "0000053",
+          "0000053",
+          "0000053",
+          "0000053",
+          "0000053"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 3
+  },
+  "head": {
+    "text": "Bubble Sort \u2014 entity: bubble_sort",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (writes 2,3,1 then sortit -> packed 0x53)"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "signal": [
+    [
+      "Inputs",
+      {
+        "name": "din",
+        "wave": "======",
+        "data": [
+          "40",
+          "41",
+          "00",
+          "FF",
+          "01",
+          "80"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "one_hot",
+        "wave": "10..1."
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "One-Hot Detector \u2014 entity: one_hot_detector",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (40->1, 41->0) + all-zeroes/all-ones"
+  }
+}

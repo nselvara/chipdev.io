@@ -89,6 +89,19 @@ stateDiagram-v2
 
 ---
 
+## Waveform
+
+![Waveform](waveforms/waveform.svg)
+
+Timing diagram reconstructed from the entity ports and the example tests in [`tb_mealy_finite_state_machine.vhd`](tb_mealy_finite_state_machine.vhd).
+
+> [!NOTE]
+>
+> - WaveDrom source: [`waveforms/waveform.json`](waveforms/waveform.json)
+> - Preview/edit live in VS Code with the [Waveform Render](https://marketplace.visualstudio.com/items?itemName=bmpenuelas.waveform-render) extension
+> - Re-render: `npx wavedrom-cli -i waveforms/waveform.json -s waveforms/waveform.svg`
+> - :warning: Reconstructed diagram may contain mistakes — the testbench is the source of truth
+
 ## Source
 
 This quest is from [chipdev.io](https://chipdev.io/question/35).

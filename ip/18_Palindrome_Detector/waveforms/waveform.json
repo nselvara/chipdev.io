@@ -1,0 +1,34 @@
+{
+  "signal": [
+    [
+      "Inputs",
+      {
+        "name": "din",
+        "wave": "====",
+        "data": [
+          "1001",
+          "0101",
+          "0000",
+          "1111"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "101."
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Palindrome Detector \u2014 entity: palindrome_detector",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (4-bit instance) + 16-bit extremes"
+  }
+}

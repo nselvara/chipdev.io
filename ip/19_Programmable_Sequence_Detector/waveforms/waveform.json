@@ -1,0 +1,43 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "pppppppppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "01.........."
+      },
+      {
+        "name": "init",
+        "wave": "============",
+        "data": [
+          "11011"
+        ]
+      },
+      {
+        "name": "din",
+        "wave": "01.01...01.."
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "seen",
+        "wave": "0.....10...1"
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Programmable Sequence Detector \u2014 entity: programmable_sequence_detector",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (init=11011 held; matches at cycles 5 and 10)"
+  }
+}

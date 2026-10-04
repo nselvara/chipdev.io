@@ -1,0 +1,40 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "ppppppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "01......."
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "fizz",
+        "wave": "1.0101010"
+      },
+      {
+        "name": "buzz",
+        "wave": "1.0.10.10"
+      },
+      {
+        "name": "fizzbuzz",
+        "wave": "1.0....10"
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 1
+  },
+  "head": {
+    "text": "FizzBuzz \u2014 entity: fizzbuzz",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (FIZZ=2/BUZZ=3/MAX=8; all outputs high in reset)"
+  }
+}

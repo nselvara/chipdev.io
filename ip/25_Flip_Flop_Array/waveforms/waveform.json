@@ -1,0 +1,76 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "pppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "01...."
+      },
+      {
+        "name": "din",
+        "wave": "======",
+        "data": [
+          "00",
+          "A5",
+          "5A",
+          "00",
+          "00",
+          "21"
+        ]
+      },
+      {
+        "name": "addr",
+        "wave": "======",
+        "data": [
+          "00",
+          "00",
+          "01",
+          "00",
+          "01",
+          "03"
+        ]
+      },
+      {
+        "name": "wr",
+        "wave": "01.0.1"
+      },
+      {
+        "name": "rd",
+        "wave": "0..1.."
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "======",
+        "data": [
+          "00",
+          "00",
+          "00",
+          "00",
+          "A5",
+          "5A"
+        ]
+      },
+      {
+        "name": "error",
+        "wave": "0....."
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Flip-Flop Array \u2014 entity: flip_flop_array",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_all_combinations (wr+rd conflict -> error, dout forced 0)"
+  }
+}

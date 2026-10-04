@@ -1,0 +1,40 @@
+{
+  "signal": [
+    [
+      "Inputs",
+      {
+        "name": "a",
+        "wave": "1.010"
+      },
+      {
+        "name": "b",
+        "wave": "1.0.1"
+      },
+      {
+        "name": "cin",
+        "wave": "10..1"
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "sum",
+        "wave": "10.10"
+      },
+      {
+        "name": "cout",
+        "wave": "1.0.1"
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 1
+  },
+  "head": {
+    "text": "Full Adder \u2014 entity: full_adder",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (both architectures cross-checked)"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "ppppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "01....."
+      },
+      {
+        "name": "din",
+        "wave": "=======",
+        "data": [
+          "00",
+          "01",
+          "02",
+          "03",
+          "04",
+          "05",
+          "06"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "run_out",
+        "wave": "0......"
+      },
+      {
+        "name": "dout",
+        "wave": "=======",
+        "data": [
+          "00000",
+          "00000",
+          "00000",
+          "00000",
+          "00000",
+          "00000",
+          "00000"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 3
+  },
+  "head": {
+    "text": "Dot Product \u2014 entity: dot_product",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (A=[1,2,3], B=[4,5,6] -> 32, run_out pulses)"
+  }
+}

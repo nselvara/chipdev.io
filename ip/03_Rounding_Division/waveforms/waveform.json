@@ -1,0 +1,42 @@
+{
+  "signal": [
+    [
+      "Inputs",
+      {
+        "name": "din",
+        "wave": "=====",
+        "data": [
+          "0B",
+          "0F",
+          "04",
+          "0C",
+          "03"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "=====",
+        "data": [
+          "01",
+          "10",
+          "01",
+          "10",
+          "00"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Rounding Division \u2014 entity: rounding_division",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (0B->01, 0F->10) + checker-derived rows"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "signal": [
+    [
+      "Inputs",
+      {
+        "name": "codeIn",
+        "wave": "========",
+        "data": [
+          "01",
+          "03",
+          "07",
+          "0F",
+          "FF",
+          "00",
+          "05",
+          "81"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "isThermometer",
+        "wave": "1....0.."
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Thermometer Code Detector \u2014 entity: thermometer_code_detector",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 + all-ones/all-zeroes"
+  }
+}

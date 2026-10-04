@@ -1,0 +1,42 @@
+{
+  "signal": [
+    [
+      "Inputs",
+      {
+        "name": "din",
+        "wave": "=====",
+        "data": [
+          "00",
+          "01",
+          "02",
+          "06",
+          "0E"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "=====",
+        "data": [
+          "00",
+          "01",
+          "03",
+          "04",
+          "0B"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Gray Code to Binary \u2014 entity: gray_code_to_binary",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (06->04, 0E->0B) + exhaustive 0..255 sweep"
+  }
+}

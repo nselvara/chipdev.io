@@ -5,7 +5,13 @@
 
 # ChipDev.io Quest Solutions – in VHDL-2008
 
-This repository contains synthesizable hardware design solutions for selected [ChipDev.io](https://chipdev.io/question-list) quests.
+> [!IMPORTANT]
+> **📦 chipdev.io has been shut down.** The original website is unfortunately no longer available.
+> This repository is therefore a **self-contained archive** of the quest solutions: every problem statement, testbench, and waveform diagram below works offline.
+> The original pages are preserved via the [Wayback Machine](https://web.archive.org/web/*/https://chipdev.io/question-list) where available.
+> However, the preserved URLs don't show any content as the JS code was rendered client-side and is not captured by the Wayback Machine.
+
+This repository contains synthesizable hardware design solutions for selected [ChipDev.io](https://web.archive.org/web/*/https://chipdev.io/question-list) quests.
 Each solution is implemented in **VHDL-2008**, includes a testbench using [VUnit](https://vunit.github.io/) for automation, and can be simulated both locally and on [EDA Playground](https://edaplayground.com/).
 A `tb_xy_wave.do` file is also provided to preload signals and variables for convenient waveform inspection in ModelSim.
 
@@ -14,7 +20,7 @@ These examples serve as a learning resource or starting point for building, simu
 ## 🔍 Quests Implemented
 
 > [!NOTE]
-> All challenges are from [chipdev.io/question-list](https://chipdev.io/question-list)
+> All challenges are from [chipdev.io/question-list](https://web.archive.org/web/*/https://chipdev.io/question-list) *(site offline — archived link)*
 > Each challenge is solved in **VHDL-2008** with **VUnit** testbenches
 > *(Difficulty and companies shown for reference)*
 
@@ -155,6 +161,29 @@ These examples serve as a learning resource or starting point for building, simu
 > 2. **Random tests**: Hundreds of randomized inputs to catch unexpected corner cases
 > 3. **Reset testing**: Verify proper initialization and reset behavior
 
+## Waveform Diagrams
+
+Since chipdev.io is offline, each quest's README embeds a reconstructed timing diagram built from the entity's ports and the example tests in its testbench.
+
+Every quest folder contains a [`waveforms/`](ip/) subfolder with:
+
+- `waveform.json` – [WaveDrom](https://wavedrom.com/) source reconstructed from the entity ports and the testbench's directed tests
+- `waveform.svg` – rendered diagram, embedded in the quest's README
+
+> [!WARNING]
+> **Accuracy disclaimer:** The reconstructed waveforms went through careful checking, but they **can contain mistakes**. For authoritative verification, refer to the testbench examples and other tests — those were checked with considerably more scrutiny. If a waveform disagrees with a testbench, trust the testbench.
+
+> [!NOTE]
+> **Why WaveDrom and not Mermaid?** Mermaid has no timing/waveform diagram type, so it cannot render clocked waveforms with data buses. WaveDrom JSON is rendered to SVG with [`wavedrom-cli`](https://github.com/wavedrom/wavedrom-cli) (requires **Node.js**).
+
+To re-render a diagram after editing its JSON (run from inside the quest folder):
+
+```bash
+npx wavedrom-cli -i waveforms/waveform.json -s waveforms/waveform.svg
+```
+
+The `waveform.json` files can also be previewed and edited live in VS Code with the [`Waveform Render`](https://marketplace.visualstudio.com/items?itemName=bmpenuelas.waveform-render) extension (`bmpenuelas.waveform-render`).
+
 ## Minimum System Requirements
 
 - **OS**: (Anything that can run the following)
@@ -164,6 +193,7 @@ These examples serve as a learning resource or starting point for building, simu
       - [`Pylance`](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) by Microsoft
       - [`Draw.io`](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) by Henning Dieterichs
       - [`Draw.io Integration: WaveDrom plugin`](https://marketplace.visualstudio.com/items?itemName=nopeslide.vscode-drawio-plugin-wavedrom) by nopeslide
+      - [`Waveform Render`](https://marketplace.visualstudio.com/items?itemName=bmpenuelas.waveform-render) by bmpenuelas (preview/edit the `waveform.json` files used for the waveform diagrams)
       - [`TerosHDL`](https://marketplace.visualstudio.com/items?itemName=teros-technology.teroshdl) by Teros Technology
       - [`VHDL-LS`](https://marketplace.visualstudio.com/items?itemName=hbohlin.vhdl-ls) by Henrik Bohlin (Deactivate the one provided by TerosHDL)
   - **VHDL Simulator**: (Anything that supports **VHDL-2008**):

@@ -1,0 +1,44 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "pppppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "01.....0"
+      },
+      {
+        "name": "din",
+        "wave": "0..1...."
+      },
+      {
+        "name": "cen",
+        "wave": "1.....01"
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "doutx",
+        "wave": "0.1.01.0"
+      },
+      {
+        "name": "douty",
+        "wave": "0..10.10"
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 1
+  },
+  "head": {
+    "text": "Mealy Finite State Machine \u2014 entity: mealy_finite_state_machine",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_zeros/test_ones run rules (2-of-3 -> doutx, 3-of-3 -> douty)"
+  }
+}

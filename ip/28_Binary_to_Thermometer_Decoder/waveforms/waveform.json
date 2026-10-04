@@ -1,0 +1,44 @@
+{
+  "signal": [
+    [
+      "Inputs",
+      {
+        "name": "din",
+        "wave": "======",
+        "data": [
+          "00",
+          "01",
+          "02",
+          "04",
+          "07",
+          "08"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "======",
+        "data": [
+          "01",
+          "03",
+          "07",
+          "1F",
+          "FF",
+          "01FF"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Binary to Thermometer Decoder \u2014 entity: binary_to_thermometer_decoder",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (dout is 256 bits; only the low bits are shown)"
+  }
+}

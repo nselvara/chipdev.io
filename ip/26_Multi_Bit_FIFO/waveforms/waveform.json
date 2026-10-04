@@ -1,0 +1,62 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "ppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "01..."
+      },
+      {
+        "name": "wr",
+        "wave": "0.1.."
+      },
+      {
+        "name": "din",
+        "wave": "=====",
+        "data": [
+          "00",
+          "00",
+          "55",
+          "AA",
+          "33"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "full",
+        "wave": "0...1"
+      },
+      {
+        "name": "empty",
+        "wave": "1..0."
+      },
+      {
+        "name": "dout",
+        "wave": "=====",
+        "data": [
+          "00",
+          "00",
+          "00",
+          "55",
+          "55"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Multi-Bit FIFO \u2014 entity: multi_bit_fifo",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (FIFO_DEPTH=2; overflow write advances dout)"
+  }
+}

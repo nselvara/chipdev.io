@@ -1,0 +1,40 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "pppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "01...."
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "======",
+        "data": [
+          "0000",
+          "0000",
+          "0001",
+          "0011",
+          "0010",
+          "0110"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Gray Code Converter \u2014 entity: gray_code_converter",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_gray_counter_with_expected (Gray count 0..5)"
+  }
+}

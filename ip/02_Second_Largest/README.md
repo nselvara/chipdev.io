@@ -33,6 +33,19 @@ If the active-low reset (`resetn`) signal is asserted, any previously observed v
 
 ---
 
+## Waveform
+
+![Waveform](waveforms/waveform.svg)
+
+Timing diagram reconstructed from the entity ports and the example tests in [`tb_second_largest.vhd`](tb_second_largest.vhd).
+
+> [!NOTE]
+>
+> - WaveDrom source: [`waveforms/waveform.json`](waveforms/waveform.json)
+> - Preview/edit live in VS Code with the [Waveform Render](https://marketplace.visualstudio.com/items?itemName=bmpenuelas.waveform-render) extension
+> - Re-render: `npx wavedrom-cli -i waveforms/waveform.json -s waveforms/waveform.svg`
+> - :warning: Reconstructed diagram may contain mistakes — the testbench is the source of truth
+
 ## Source Reference
 
 This task is inspired by the "Second Largest" problem available at [chipdev.io](https://chipdev.io).

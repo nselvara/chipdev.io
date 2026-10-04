@@ -1,0 +1,74 @@
+{
+  "signal": [
+    [
+      "Inputs",
+      {
+        "name": "din",
+        "wave": "=====",
+        "data": [
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "5A"
+        ]
+      },
+      {
+        "name": "din_en",
+        "wave": "1...0"
+      },
+      {
+        "name": "addr",
+        "wave": "=====",
+        "data": [
+          "00",
+          "01",
+          "10",
+          "11",
+          "10"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout0",
+        "wave": "=0...",
+        "data": [
+          "A5"
+        ]
+      },
+      {
+        "name": "dout1",
+        "wave": "0=0..",
+        "data": [
+          "A5"
+        ]
+      },
+      {
+        "name": "dout2",
+        "wave": "0.=0.",
+        "data": [
+          "A5"
+        ]
+      },
+      {
+        "name": "dout3",
+        "wave": "0..=0",
+        "data": [
+          "A5"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Simple Router \u2014 entity: simple_router",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Derived: TB uses random stimulus; values match the checker's routing rules"
+  }
+}

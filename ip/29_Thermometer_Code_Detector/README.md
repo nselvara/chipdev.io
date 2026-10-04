@@ -27,6 +27,19 @@ Valid thermometer codes have exactly one transition (from 1 to 0). Early-exit op
 
 ---
 
+## Waveform
+
+![Waveform](waveforms/waveform.svg)
+
+Timing diagram reconstructed from the entity ports and the example tests in [`tb_thermometer_code_detector.vhd`](tb_thermometer_code_detector.vhd).
+
+> [!NOTE]
+>
+> - WaveDrom source: [`waveforms/waveform.json`](waveforms/waveform.json)
+> - Preview/edit live in VS Code with the [Waveform Render](https://marketplace.visualstudio.com/items?itemName=bmpenuelas.waveform-render) extension
+> - Re-render: `npx wavedrom-cli -i waveforms/waveform.json -s waveforms/waveform.svg`
+> - :warning: Reconstructed diagram may contain mistakes — the testbench is the source of truth
+
 ## Source
 
 This quest is from [chipdev.io](https://chipdev.io/question/30).

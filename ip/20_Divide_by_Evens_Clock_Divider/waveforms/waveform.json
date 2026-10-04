@@ -1,0 +1,40 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "pppppppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "01......01"
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "clk_div_2",
+        "wave": "0.10101010"
+      },
+      {
+        "name": "clk_div_4",
+        "wave": "0..1.0.1.0"
+      },
+      {
+        "name": "clk_div_6",
+        "wave": "0....10.10"
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 1
+  },
+  "head": {
+    "text": "Divide-by-Evens Clock Divider \u2014 entity: divide_by_evens_clock_divider",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (div2/div4/div6, mid-test reset at cycle 8)"
+  }
+}

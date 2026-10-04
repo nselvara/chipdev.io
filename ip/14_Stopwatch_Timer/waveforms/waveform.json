@@ -1,0 +1,48 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "pppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "reset",
+        "wave": "10...."
+      },
+      {
+        "name": "start_in",
+        "wave": "010.10"
+      },
+      {
+        "name": "stop_in",
+        "wave": "0...10"
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "count_out",
+        "wave": "======",
+        "data": [
+          "0000",
+          "0000",
+          "0001",
+          "0002",
+          "0003",
+          "0003"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Stopwatch Timer \u2014 entity: stopwatch_timer",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (MAX=99; stop_in wins over start_in)"
+  }
+}

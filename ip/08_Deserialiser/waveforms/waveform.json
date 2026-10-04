@@ -1,0 +1,47 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "ppppppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "01......."
+      },
+      {
+        "name": "din",
+        "wave": "x101.0.1."
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "=========",
+        "data": [
+          "00",
+          "00",
+          "01",
+          "02",
+          "05",
+          "0B",
+          "16",
+          "2C",
+          "19"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Deserialiser \u2014 entity: deserialiser",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (DIN_SEQUENCE=10110011, shift-left into LSB)"
+  }
+}

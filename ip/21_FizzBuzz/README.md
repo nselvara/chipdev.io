@@ -38,6 +38,19 @@ A master `cycle_count` resets all counters after `MAX_CYCLES`.
 
 ---
 
+## Waveform
+
+![Waveform](waveforms/waveform.svg)
+
+Timing diagram reconstructed from the entity ports and the example tests in [`tb_fizzbuzz.vhd`](tb_fizzbuzz.vhd).
+
+> [!NOTE]
+>
+> - WaveDrom source: [`waveforms/waveform.json`](waveforms/waveform.json)
+> - Preview/edit live in VS Code with the [Waveform Render](https://marketplace.visualstudio.com/items?itemName=bmpenuelas.waveform-render) extension
+> - Re-render: `npx wavedrom-cli -i waveforms/waveform.json -s waveforms/waveform.svg`
+> - :warning: Reconstructed diagram may contain mistakes — the testbench is the source of truth
+
 ## Source
 
 This quest is from [chipdev.io](https://chipdev.io/question/21).

@@ -1,0 +1,36 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "pppppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "1...01.."
+      },
+      {
+        "name": "din",
+        "wave": "10.1...."
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "0...10.1"
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 1
+  },
+  "head": {
+    "text": "Divisible by 3 \u2014 entity: divisible_by_3",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (stream 1001 = 9 -> dout=1; reset -> idle)"
+  }
+}

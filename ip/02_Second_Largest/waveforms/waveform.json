@@ -1,0 +1,38 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "pppppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "1....01."
+      },
+      {
+        "name": "din",
+        "wave": "========",
+        "data": ["02", "06", "00", "0E", "0C", "00", "01", "02"]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "========",
+        "data": ["00", "00", "02", "02", "06", "0C", "00", "00"]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Second Largest: entity second_largest",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (reset pulse mid-sequence)"
+  }
+}

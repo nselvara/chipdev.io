@@ -1,0 +1,36 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "pppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "01...."
+      },
+      {
+        "name": "din",
+        "wave": "0.101."
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "0..101"
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 1
+  },
+  "head": {
+    "text": "Edge Detector \u2014 entity: edge_detector",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_2 (rising-edge pulse; din held high -> no pulse)"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "signal": [
+    [
+      "Inputs",
+      {
+        "name": "a",
+        "wave": "=====",
+        "data": [
+          "03FC",
+          "00DE",
+          "014D",
+          "000C",
+          "005B"
+        ]
+      },
+      {
+        "name": "b",
+        "wave": "=====",
+        "data": [
+          "0028",
+          "0004",
+          "0003",
+          "03E7",
+          "0000"
+        ]
+      },
+      {
+        "name": "cin",
+        "wave": "0...."
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "sum",
+        "wave": "=====",
+        "data": [
+          "0000424",
+          "00000E2",
+          "0000150",
+          "00003F3",
+          "000005B"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 3
+  },
+  "head": {
+    "text": "Carry Select Adder \u2014 entity: carry_select_adder",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (24-bit instance; cin tied to '0')"
+  }
+}

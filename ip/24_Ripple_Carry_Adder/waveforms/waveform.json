@@ -1,0 +1,68 @@
+{
+  "signal": [
+    [
+      "Inputs",
+      {
+        "name": "a",
+        "wave": "=====",
+        "data": [
+          "0E",
+          "80",
+          "FF",
+          "00",
+          "C8"
+        ]
+      },
+      {
+        "name": "b",
+        "wave": "=====",
+        "data": [
+          "89",
+          "80",
+          "FF",
+          "64",
+          "CA"
+        ]
+      },
+      {
+        "name": "cin",
+        "wave": "0...."
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "sum",
+        "wave": "=====",
+        "data": [
+          "097",
+          "100",
+          "1FE",
+          "064",
+          "192"
+        ]
+      },
+      {
+        "name": "cout_int",
+        "wave": "=====",
+        "data": [
+          "08",
+          "80",
+          "FF",
+          "00",
+          "C8"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Ripple Carry Adder \u2014 entity: ripple_carry_adder",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (cin tied to '0' by the TB port map)"
+  }
+}

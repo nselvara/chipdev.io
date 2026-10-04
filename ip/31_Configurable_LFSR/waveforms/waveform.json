@@ -1,0 +1,56 @@
+{
+  "signal": [
+    {
+      "name": "clk",
+      "wave": "pppppppp"
+    },
+    [
+      "Inputs",
+      {
+        "name": "rst_n",
+        "wave": "01......"
+      },
+      {
+        "name": "din",
+        "wave": "========",
+        "data": [
+          "01"
+        ]
+      },
+      {
+        "name": "tap",
+        "wave": "========",
+        "data": [
+          "0E"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "dout",
+        "wave": "========",
+        "data": [
+          "01",
+          "01",
+          "02",
+          "05",
+          "0B",
+          "16",
+          "2C",
+          "58"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Configurable LFSR \u2014 entity: configurable_lfsr",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_example_1 (seed=01, taps=0E latched at reset)"
+  }
+}

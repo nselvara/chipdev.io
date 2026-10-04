@@ -1,0 +1,92 @@
+{
+  "signal": [
+    [
+      "Inputs",
+      {
+        "name": "a",
+        "wave": "===",
+        "data": [
+          "0001",
+          "1111",
+          "0001"
+        ]
+      },
+      {
+        "name": "b",
+        "wave": "===",
+        "data": [
+          "0000",
+          "0001",
+          "1111"
+        ]
+      }
+    ],
+    [
+      "Outputs",
+      {
+        "name": "a_plus_b",
+        "wave": "===",
+        "data": [
+          "0001",
+          "0000",
+          "0000"
+        ]
+      },
+      {
+        "name": "a_minus_b",
+        "wave": "===",
+        "data": [
+          "0001",
+          "1110",
+          "0010"
+        ]
+      },
+      {
+        "name": "not_a",
+        "wave": "===",
+        "data": [
+          "1110",
+          "0000",
+          "1110"
+        ]
+      },
+      {
+        "name": "a_and_b",
+        "wave": "===",
+        "data": [
+          "0000",
+          "0001",
+          "0001"
+        ]
+      },
+      {
+        "name": "a_or_b",
+        "wave": "===",
+        "data": [
+          "0001",
+          "1111",
+          "1111"
+        ]
+      },
+      {
+        "name": "a_xor_b",
+        "wave": "===",
+        "data": [
+          "0001",
+          "1110",
+          "1110"
+        ]
+      }
+    ]
+  ],
+  "config": {
+    "hscale": 2
+  },
+  "head": {
+    "text": "Basic ALU \u2014 entity: basic_alu",
+    "tick": 0
+  },
+  "foot": {
+    "text": "Directed: test_examples (3 vectors, unsigned wrap visible)"
+  }
+}
