@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Run all testbenches in the project using VUnit.
-It functions as a wrapper to not bother the user with the details of VUnit.
-Author: N. Selvarajah
+@brief      Run all testbenches in the project using VUnit.
+@details    It functions as a wrapper to not bother the user with the details of VUnit.
+
+@author:    N. Selvarajah
+@license:   GPLv3
 """
 
 import sys
