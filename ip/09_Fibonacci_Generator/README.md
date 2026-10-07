@@ -1,4 +1,4 @@
-# Quest 9 – Fibonacci Generator
+﻿# Quest 9 - Fibonacci Generator
 
 ## Original Problem Statement
 
@@ -54,7 +54,7 @@ Timing diagram reconstructed from the entity ports and the example tests in [`tb
 > - WaveDrom source: [`waveforms/waveform.json`](waveforms/waveform.json)
 > - Preview/edit live in VS Code with the [Waveform Render](https://marketplace.visualstudio.com/items?itemName=bmpenuelas.waveform-render) extension
 > - Re-render: `npx wavedrom-cli -i waveforms/waveform.json -s waveforms/waveform.svg`
-> - :warning: Reconstructed diagram may contain mistakes � the testbench is the source of truth
+> - :warning: Reconstructed diagram may contain mistakes � the testbench is the source of truth
 
 ## Source
 
